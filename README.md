@@ -7,7 +7,7 @@
 
 ## Build
 
-- Run `hugo -b $CF_PAGES_URL`
+- Run command: `hugo`
 
 ## Deploy
 

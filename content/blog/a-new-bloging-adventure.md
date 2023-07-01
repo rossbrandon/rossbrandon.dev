@@ -2,17 +2,17 @@
 author:
   name: "Ross Brandon"
 date: 2023-07-01
-linktitle: A New Adventure
+linktitle: A New Blogging Adventure?
 type:
 - blog
-title: A New Adventure
+title: A New Blogging Adventure?
 weight: 10
 series:
 - Getting Started
 ---
 
 
-## Introduction
+## What is this?
 
 _Maybe not an "adventure" per say. Or really all that new. New for me, I suppose._
 

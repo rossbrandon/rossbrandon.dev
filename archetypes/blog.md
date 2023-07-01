@@ -1,10 +1,12 @@
 ---
+author:
+  name: "Ross Brandon"
+date: {{ dateFormat .Site.Params.dateformNum .Date }}
+linktitle: "{{ replace .Name "-" " " | title }}"
+type:
+- blog
 title: "{{ replace .Name "-" " " | title }}"
-date: {{ .Date }}
-draft: true
-toc: false
-images:
-tags:
-  - untagged
+weight: 10
+series:
+- new
 ---
-

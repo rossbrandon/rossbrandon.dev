@@ -11,4 +11,4 @@
 
 ## Deploy
 
-- Deploy will trigger from `git push` to `main` branch.
+- Cloudflare pages deploy will trigger from `git push` to `main` branch.

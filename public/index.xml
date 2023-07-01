@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ross Brandon</title>
+    <link>https://rossbrandon.dev/</link>
+    <description>Recent content on Ross Brandon</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Sat, 01 Jul 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://rossbrandon.dev/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A New Adventure</title>
+      <link>https://rossbrandon.dev/blog/2023/07/a-new-adventure/</link>
+      <pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rossbrandon.dev/blog/2023/07/a-new-adventure/</guid>
+      <description>Introduction Maybe not an &amp;ldquo;adventure&amp;rdquo; per say. Or really all that new. New for me, I suppose.
+This is my first attempt at a personal/technical blog. Honestly, I don&amp;rsquo;t think anyone will care to read any of this but that isn&amp;rsquo;t the point. I want (and need) to start writing down things I do and problems I solve so that I can come back to look at them without having to go through the process again when I inevitably forget it all 😄.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://rossbrandon.dev/about/</link>
+      <pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate>
+      
+      <guid>https://rossbrandon.dev/about/</guid>
+      <description>the basics&amp;hellip; I am software architect / full-stack engineer with a passion for data-driven, privacy-centric development.
+Yes, I truly believe that both of those things can be done simultaneously 😄.
+a little history&amp;hellip; In 2011, I moved to Austin, TX freshly graduated from the University of Arkansas (Go Hogs!! 🏈) to begin my career as a full-stack developer with Hewlett-Packard. At HP, I was quickly thrown into the deep-end working with the Finance IT teams.</description>
+    </item>
+    
+  </channel>
+</rss>

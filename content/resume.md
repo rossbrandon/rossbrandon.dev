@@ -142,7 +142,7 @@ Bachelor's Degree
 
 |                          |                                                                       |
 |--------------------------|-----------------------------------------------------------------------|
-| _Languages_              | Java, JavaScript, TypeScript, HTML, CSS, PHP, Go, Shell Scripting     |
+| _Languages_              | Java, JavaScript, TypeScript, HTML, CSS, PHP, Shell Scripting, Go     |
 | _Backend Frameworks_     | Spring Boot                                                           |
 | _Frontend Frameworks_    | React, Nest                                                           |
 | _Protocols_              | gRPC/Protobuf, REST, GraphQL                                          |
@@ -155,5 +155,5 @@ Bachelor's Degree
 | _Eventing_               | Snowplow                                                              |
 | _Messaging_              | SNS, SQS, Kafka                                                       |
 | _Monitoring_             | Splunk, New Relic, Prometheus, Grafana, Sentry, Pager Duty            |
-| _Development Lifecycle_  | JIRA, Confluence                                                      |
+| _Development Lifecycle_  | Jira, Confluence                                                      |
 | _Design_                 | Lucidchart                                                            |

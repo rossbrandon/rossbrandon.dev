@@ -81,7 +81,6 @@ No, nothing is. However, it is a surprisingly easy site to manage and navigate a
 
 Things I want to add:
 
-- Blog post search and organization by series and tags
 - Blog post table of contents
 - Project demo section to show off a few things I have built over the years.
 

@@ -79,7 +79,7 @@ disableHugoGeneratorInject = false
   # This options enables the theme toggle for the theme.
   # Per default, this option is off.
   # The theme is respecting the prefers-color-scheme of the operating systeme.
-  # With this option on, the page user is able to set the scheme he wants.
+  # With this option on, the page user is able to set the scheme they want.
   enableThemeToggle = true
 
   # Sharing buttons
@@ -134,7 +134,7 @@ disableHugoGeneratorInject = false
 
   [params.logo]
     logoMark     = ">"
-    logoText     = "$ cd /home/"
+    logoText     = "$ cd /home/ross"
     logoHomeLink = "/"
     # Set true to remove the logo cursor entirely.
     # logoCursorDisabled = false
@@ -169,16 +169,16 @@ disableHugoGeneratorInject = false
     url  = "https://github.com/rossbrandon"
 
   [[params.social]]
+    name = "linkedin"
+    url  = "https://www.linkedin.com/in/ross-brandon/"
+
+  [[params.social]]
     name = "mastodon"
     url  = "https://mastodon.social/@ghostbit"
 
   [[params.social]]
     name = "email"
     url  = "mailto:contact-me.psmxi@simplelogin.com"
-
-  [[params.social]]
-    name = "linkedin"
-    url  = "https://www.linkedin.com/in/ross-brandon/"
 
 #   [[params.social]]
 #     name = "stackoverflow"
@@ -195,6 +195,10 @@ disableHugoGeneratorInject = false
     identifier = "about"
     name       = "About Me"
     url        = "about/"
+  [[menu.main]]
+    identifier = "resume"
+    name       = "Resume"
+    url        = "resume/"
   [[menu.main]]
     identifier = "blog"
     name       = "Blog"

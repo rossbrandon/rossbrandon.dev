@@ -2,13 +2,19 @@
 author:
   name: "Ross Brandon"
 date: 2023-07-01
+publishdate: 2023-07-01
 linktitle: Building a New Portfolio Site
 type:
-- blog
+  - post
 title: Building a New Portfolio Site
 weight: 10
-series:
-- Building Stuff
+categories:
+  - building-stuff
+tags:
+  - portfolio
+  - blogging
+  - cloudflare
+  - hugo
 ---
 
 ## Why?

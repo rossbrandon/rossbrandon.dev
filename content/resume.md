@@ -143,6 +143,7 @@ Bachelor's Degree
 |                          |                                                                       |
 |--------------------------|-----------------------------------------------------------------------|
 | _Languages_              | Java, JavaScript, TypeScript, HTML, CSS, PHP, Go, Shell Scripting     |
+| _Backend Frameworks_     | Spring Boot                                                           |
 | _Frontend Frameworks_    | React, Nest                                                           |
 | _Protocols_              | gRPC/Protobuf, REST, GraphQL                                          |
 | _Version Control_        | Git, GitHub, Subversion                                               |
@@ -153,6 +154,6 @@ Bachelor's Degree
 | _Search_                 | Elasticsearch, Vector Search                                          |
 | _Eventing_               | Snowplow                                                              |
 | _Messaging_              | SNS, SQS, Kafka                                                       |
-| _Monitoring_             | Splunk, Pager Duty, New Relic, Prometheus, Grafana, Sentry            |
+| _Monitoring_             | Splunk, New Relic, Prometheus, Grafana, Sentry, Pager Duty            |
 | _Development Lifecycle_  | JIRA, Confluence                                                      |
 | _Design_                 | Lucidchart                                                            |

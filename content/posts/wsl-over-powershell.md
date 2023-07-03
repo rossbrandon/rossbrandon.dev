@@ -104,7 +104,7 @@ wsl -t Ubuntu
 
 ## IDE Setup
 
-For the most part, IDEs running within Windows 11 interact smoothly with the WSL filesystem. VSCode does this seamlessly (and as mentioned above, it will even start the WSL VM if you access a project in that filesystem :smile:). GoLand required a little more setup, but mostly just to tell the IDE to use the WSL distro as a run target. JetBrains provides [easy documentation](https://www.jetbrains.com/help/go/how-to-use-wsl-development-environment-in-product.html#local_project) for how to do this.
+For the most part, IDEs running within Windows 11 interact smoothly with the WSL filesystem. VSCode does this seamlessly (and as mentioned above, it will even start the WSL VM if you access a project in that filesystem :beaming_face_with_smiling_eyes:). GoLand required a little more setup, but mostly just to tell the IDE to use the WSL distro as a run target. JetBrains provides [easy documentation](https://www.jetbrains.com/help/go/how-to-use-wsl-development-environment-in-product.html#local_project) for how to do this.
 
 ## Wrap-up
 

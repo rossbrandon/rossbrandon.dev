@@ -8,7 +8,7 @@
         {{ end }}
 
         <div class="pagination__buttons">
-            {{ if .NextInSection }}
+            {{ if and (.NextInSection) (ne .NextInSection.Date.Year 9999) }}
             <span class="button previous">
                 <a href="{{ .NextInSection.Permalink }}">
                     <span class="button__icon">←</span>
@@ -17,7 +17,7 @@
             </span>
             {{ end }}
 
-            {{ if .PrevInSection }}
+            {{ if and (.PrevInSection) (ne .PrevInSection.Date.Year 9999) }}
             <span class="button next">
                 <a href="{{ .PrevInSection.Permalink }}">
                     <span class="button__text">{{ .PrevInSection.Title }}</span>

@@ -6,6 +6,11 @@ aliases = ["resume"]
   name = "Ross Brandon"
 +++
 
+<!-- TOC -->
+- [Work Experience](#work-experience)
+- [Education](#education)
+- [Skills](#skills)
+<!-- /TOC -->
 
 ## Summary
 

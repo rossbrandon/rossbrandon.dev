@@ -1,7 +1,7 @@
 ---
 author:
   name: "Ross Brandon"
-date: 2023-07-01
+date: 2023-07-02
 publishdate: 2023-07-01
 linktitle: Building a New Portfolio Site
 type:
@@ -45,13 +45,13 @@ then finally "I MAKE ... AWESOME STUFF"
 
 This was a fun little piece to tweak (I didn't even write the original code!), but it really didn't serve any purpose other than to vomit out buzz words :melting_face: -- so out it goes!
 
-![old screenshot](/image/rossbrandon-dev-old-screenshot-top.png)
+![old screenshot](/image/rossbrandon_dev_old_screenshot_top.png "rossbrandon.dev old screenshot above the fold")
 
 The second half of the original site, is still mostly fine. It was simple, elegant, and described my experience up to that point very effectively. The problem with it is that it is just too basic. It did not provide any information that you could not get in greater detail from LinkedIn and it did not provide a way to expand it without changing its layout and losing the simplicity that was its value. So out it goes as well!
 
 The `TECH` section was neat at first, but as I grew the technologies I worked with, I was never realistically going to come back through and update these. Especially given the tedium required to find all of these logos and size/color them correctly to match the style of the others. It frankly wasn't worth it.
 
-![old screenshot](/image/rossbrandon-dev-old-screenshot-bottom.png)
+![old screenshot](/image/rossbrandon_dev_old_screenshot_bottom.png "rossbrandon.dev old screenshot below the fold")
 
 Visually, the site was nice. But at the end of the day, it just did not feel like _me_. I had originally added (and promptly removed) a section for projects that I had worked on but I found myself not even wanting to visit the site myself much less keep it up to date or add to it.
 

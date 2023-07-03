@@ -81,8 +81,9 @@ No, nothing is. However, it is a surprisingly easy site to manage and navigate a
 
 Things I want to add:
 
+- ~~Ability to pin blog posts for ones I want to keep updated (ex. reading lists)~~ :check_mark:
 - Blog post table of contents
-- Project demo section to show off a few things I have built over the years.
+- Project demo section to show off a few things I have built over the years
 
 I am still very much in the early stages of learning Hugo, but I think I will enjoy making this site a better fit for me. For additional fun, it should be easy enough to try out various themes if I feel so inclined.
 

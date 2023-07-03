@@ -268,17 +268,17 @@ pre {
     @media (prefers-color-scheme: dark) {
       color: inherit;
     }
-  
+
     @media (prefers-color-scheme: light) {
       color: #ccc;
     }
-  
+
     [data-theme=dark] & {
       color: inherit;
     }
-  
+
     [data-theme=light] & {
-      color: #ccc;
+      //color: #ccc;
     }
   }
 }

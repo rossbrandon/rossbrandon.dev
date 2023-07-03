@@ -72,14 +72,24 @@ Then, validate it by checking the version installed with `lsb_release -a` or usi
 
 ## WSL Commands to Remember
 
+- Check WSL version
+```
+wsl --version
+```
+
 - List available distros for installation
 ```
-wsl -l -o
+wsl --list --online
 ```
 
 - Install desired distro
 ```
 wsl --install Ubuntu
+```
+
+- Check VM status
+```
+wsl --status
 ```
 
 - Shutdown VM

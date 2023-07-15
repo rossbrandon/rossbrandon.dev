@@ -148,8 +148,8 @@ Bachelor's Degree
 |                          |                                                                       |
 |--------------------------|-----------------------------------------------------------------------|
 | _Languages_              | Java, JavaScript, TypeScript, HTML, CSS, PHP, Shell Scripting, Go     |
-| _Backend Frameworks_     | Spring Boot                                                           |
-| _Frontend Frameworks_    | React, Nest                                                           |
+| _Backend Frameworks_     | Spring Boot, NodeJS, Nest                                             |
+| _Frontend Frameworks_    | React                                                                 |
 | _Protocols_              | gRPC/Protobuf, REST, GraphQL                                          |
 | _Version Control_        | Git, GitHub, Subversion                                               |
 | _Continuous Integration_ | Jenkins, Github Actions                                               |
@@ -158,7 +158,7 @@ Bachelor's Degree
 | _Databases_              | MongoDB, DynamoDB, MySQL, Oracle, SQL Server, MySQL, Redis, Snowflake |
 | _Search_                 | Elasticsearch, Vector Search                                          |
 | _Eventing_               | Snowplow                                                              |
-| _Messaging_              | SNS, SQS, Kafka                                                       |
+| _Messaging_              | SNS, SQS                                                              |
 | _Monitoring_             | Splunk, New Relic, Prometheus, Grafana, Sentry, Pager Duty            |
 | _Development Lifecycle_  | Jira, Confluence                                                      |
 | _Design_                 | Lucidchart                                                            |

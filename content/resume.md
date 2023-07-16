@@ -145,20 +145,20 @@ Bachelor's Degree
 
 ## Skills
 
-|                          |                                                                       |
-|--------------------------|-----------------------------------------------------------------------|
-| _Languages_              | Java, JavaScript, TypeScript, HTML, CSS, PHP, Shell Scripting, Go     |
-| _Backend Frameworks_     | Spring Boot, NodeJS, Nest                                             |
-| _Frontend Frameworks_    | React                                                                 |
-| _Protocols_              | gRPC/Protobuf, REST, GraphQL                                          |
-| _Version Control_        | Git, GitHub, Subversion                                               |
-| _Continuous Integration_ | Jenkins, Github Actions                                               |
-| _Testing_                | JUnit, PHPUnit, Jest                                                  |
-| _Cloud_                  | Amazon Web Services, Azure                                            |
-| _Databases_              | MongoDB, DynamoDB, MySQL, Oracle, SQL Server, MySQL, Redis, Snowflake |
-| _Search_                 | Elasticsearch, Vector Search                                          |
-| _Eventing_               | Snowplow                                                              |
-| _Messaging_              | SNS, SQS                                                              |
-| _Monitoring_             | Splunk, New Relic, Prometheus, Grafana, Sentry, Pager Duty            |
-| _Development Lifecycle_  | Jira, Confluence                                                      |
-| _Design_                 | Lucidchart                                                            |
+|                          |                                                                                   |
+|--------------------------|-----------------------------------------------------------------------------------|
+| _Languages_              | Java, JavaScript, TypeScript, HTML, CSS, PHP, Shell Scripting, Go                 |
+| _Backend Frameworks_     | Spring Boot, NodeJS, Nest, Laravel                                                |
+| _Frontend Frameworks_    | React, jQuery, KnockoutJS                                                         |
+| _Protocols_              | gRPC/Protobuf, REST, GraphQL                                                      |
+| _Version Control_        | Git, GitHub, Subversion                                                           |
+| _Continuous Integration_ | Jenkins, Github Actions                                                           |
+| _Testing_                | JUnit, PHPUnit, Jest                                                              |
+| _Cloud_                  | Amazon Web Services, Azure                                                        |
+| _Databases_              | MongoDB, DynamoDB, MySQL, Oracle, SQL Server, MySQL, PostgreSQL, Redis, Snowflake |
+| _Search_                 | Elasticsearch, Vector Search                                                      |
+| _Eventing_               | Snowplow                                                                          |
+| _Messaging_              | SNS, SQS                                                                          |
+| _Monitoring_             | Splunk, New Relic, Prometheus, Grafana, Sentry, Pager Duty                        |
+| _Development Lifecycle_  | Jira, Confluence                                                                  |
+| _Design_                 | Lucidchart                                                                        |

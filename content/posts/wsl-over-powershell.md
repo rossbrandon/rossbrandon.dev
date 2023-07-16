@@ -28,15 +28,15 @@ I have used many machines over my lifetime beginning with an IBM 386 back in the
 
 #### Current Setup
 
-- Custom PC - AMD Ryzen 7 5800X3D, Nvidia 2800Ti, 32GB RAM - Windows 11
-- Macbook Pro 16" - M1 Max, 32GB RAM
-- Dell XPS 13 - Intel i7 - PopOS
+- Custom PC - AMD Ryzen 7 5800X3D - Nvidia 2080Ti - 32GB RAM - Windows 11
+- Macbook Pro 16" - M1 Max - 32GB RAM
+- Dell XPS 13 - Intel i7 (10th Gen) - 16GM RAM - [Pop!_OS](https://pop.system76.com/)
 
 I mostly use the desktop for gaming, but I occasionally find myself working on a side project with it as well. The problem arises when using this machine for these separate purposes. I like to keep it clean with a minimal amount of software installed and setting up a development environment can quickly require a lot of software packages. Originally, I viewed this as a chance to learn a little Powershell since I have been so used to Bash and ZSH. I quickly regretted this...
 
 ## Powershell to WSL 2
 
-Let's be clear, I am not knocking on Powershell in general. I am sure it is an incredibly _powerful shell_ for what it is built for and for people that are used to it. I quickly found myself having to dig through pages of documentation and googling everything to do simple tasks like create aliases and recursively work with directories. I quickly found myself missing what I knew best: my Linux and Mac terminals.
+Let's be clear: I am not knocking on Powershell in general. I am sure it is an incredibly _powerful shell_ for what it is built for and for people that are used to it. I quickly found myself having to dig through pages of documentation and googling everything to do simple tasks like create aliases and recursively work with directories. Almost immediately, I longed for what I knew best: my Linux and Mac terminals.
 
 To be fair, I did get a working development environment going for my small Go side projects. It is not as if is was not functional, I simply found working with it to be annoying. So I decided to try a very cool feature: [Windows Subsystem for Linux (WSL)](https://learn.microsoft.com/en-us/windows/wsl/). The second version of WSL (WSL2) is very well done and easy to use.
 

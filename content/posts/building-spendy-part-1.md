@@ -47,7 +47,7 @@ For reporting, all I wanted to see was my progress through the month. How much o
 
 This is the basic UX I ended up with:
 
-![spendy v1](/image/spendy.png "Spendy v1 screenshot")
+![spendy v1 dashboard](/image/spendy/v1/dashboard.png "Spendy v1 dashboard")
 
 ### Functionality
 

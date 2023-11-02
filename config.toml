@@ -36,9 +36,6 @@ disableHugoGeneratorInject = false
 [permalinks]
   blog = "/blog/:year/:month/:title/"
 
-[author]
-  name = "Ross Brandon"
-
 [blackfriday]
   hrefTargetBlank = true
 

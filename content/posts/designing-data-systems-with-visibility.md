@@ -1,12 +1,12 @@
 ---
 author:
   name: "Ross Brandon"
-date: 2023-11-02
-publishdate: 2023-11-02
-linktitle: "Designing Data Systems With Visibility & Management at the Forefront"
+date: 2023-11-29
+publishdate: 2023-11-29
+linktitle: "Designing Data Systems for Visibility & Management"
 type:
   - post
-title: "Designing Data Systems With Visibility & Management at the Forefront"
+title: "Designing Data Systems for Visibility & Management"
 weight: 10
 draft: false
 categories:
@@ -15,6 +15,7 @@ categories:
 tags:
   - software
   - dev
+  - data-flora
 ---
 
 ## What Do We Mean By Data Management?
@@ -25,7 +26,7 @@ Specifically: providing and exposing the needed visibility around system-to-syst
 
 ## Designing with Data Flow Visibility OOTB
 
-I have spent a lot of time in my professional career thus far working to ensure that data in system A is as expected in system B. Turns out, this is so critical that entire teams have been formed just to create and manage tooling to perform these reconciliations. I know because I was on one of them. Most of the tooling I have created around these efforts were an afterthought to the main business applications. The problem with this approach is that it tends to create an environment where data tracing, data visibility, and data management tools are created after the fact and from an "outside looking in" perspective instead of baked into the products we design and build.
+I have spent a lot of time in my professional career thus far working to ensure that data in system A is as expected in system B. Turns out, this is so critical that entire teams have been formed just to create and manage tooling to perform these reconciliations. I know because I was on one of them. Most of the tooling I have created around these efforts was an afterthought to the main business applications. The problem with this approach is that it tends to create an environment where data tracing, data visibility, and data management tools are created after the fact and from an "outside looking in" perspective instead of baked into the products we design and build.
 
 In this post, I intend to explore that process a little bit and address why "baking in" and designing solutions with this mindset at the forefront can help avoid future stress and improve the performance and reliablity of data systems from the onset of the project.
 
@@ -35,9 +36,9 @@ Let's face it... we won't. And when we have to, we won't want to and the level o
 
 ## Ok, Let's Get On With It
 
-### Example for Discussion Purposes
+### Illustrative Fake Scenario
 
-Below is a super basic example of a system diagram that accepts data generated from a user (uploaded or through user actions & events) and distributes it to many internal consumers to enable some sort of end-product functionality for that user -- real use cases may vary.
+To set the stage of our discussion, I have created a super basic system diagram (using the awesome [Excalidraw](https://excalidraw.com/) diagramming tool!) to lay out a fake application landscape that accepts data generated from a user (uploaded or through user actions & events) and distributes it to many internal consumers to enable some sort of end-product functionality for that user -- real use cases may vary.
 
 ![data flow example diagram](/image/data_mgmt/data_flow_example.png "data flow example diagram")
 (Diagram created with [Excalidraw](https://excalidraw.com/))
@@ -78,7 +79,7 @@ Ideally we would want to create an API, beacon, or manifest feed that provides t
 
 On the services side, this gets significantly easier because we typically have much greater control over these systems -- locked down third parties are excluded from this example as they may require more effort.
 
-In each service that we want to track as part of our system's data journey, we ideally want to create the following APIs:
+In each service that we want to track as part of our system's data journey, we ideally want to create some form of the following APIs:
 
 - Total documents received per-tenant
   - Options to filter on:
@@ -86,7 +87,7 @@ In each service that we want to track as part of our system's data journey, we i
     - Any relevant metadata that a downstream system's ingestion may filter on such as if an image is marked as public/private
 - Document detailed metadata by id
 - Error states in aggregate (and by document id if possible -- this can be expensive depending on data size)
-  - Ex. Failed to send 23581 notifications for Tenant 1 to message broker due to network error
+  - Ex. Failed to send 23581 notifications from the event collector to the message broker due to network error
 
 *Bonus*
 
@@ -124,45 +125,98 @@ External UI functionality ideas:
 
 #### Internal User View
 
-For our internal use cases we can create a multi-tenant, navigatable, and detailed view to give the power of all of this data directly to our internal support and engineering users.
+For our internal use cases we can create a multi-tenant, navigable, and detailed view to give the power of all of this data directly to our internal support and engineering users.
 
 Internal UI functionality ideas:
 
-- Tenant search - search and select a tenant to view data for
-- Aggregation view for all relevant systems for a given tenant
-- Drill down to detailed view for a given tenant and system
+- Client search - search and select a tenant to view data for
+- Aggregation view for all relevant systems for a given client
+- Drill down to detailed view for a given client and system
 - Allow for management of data
     - Deletion
-    - Re-sync between system A to X
+    - Re-sync between system A to X (ex. Content Ingestion to Image Analyzer)
 
-#### Barebones UI Example
+### Navigating Data Flows in a UI Example
 
-To exemplify this, below is a basic example UI of a data flow overview page. It represents a view of a selected tenant's data flow from the perspective of an internal support user. In this case, it follows our example system diagram describing an upstream system *A* and three downstream systems *X*, *Y*, and *Z*. This page shows three main widgets, one for each respective downstream system. Each widget shows the current status of the data flow (*In Error*, *In Progress*, or *Successful*) depending on the source vs destination document counts and various error metadata we are able to retrieve from our APIs. We also show the ID and timestamp of the last document that the downsteam system received. The donut chart shows the total count of documents as well as the count of documents for each state: *Not Sent*, *In Error*, and *Successful*. Finally, there is a *Details* link at the bottom of each card that leads to a detailed view of the data in that flow, if desired. This could be a table with a list of documents in error, more metadata about recent updates, etc.
+To exemplify this, I have created a basic concept application called [Data Flora](https://dataflora.dev). As part of this thought experiment, I like to think of data flows as living, growing entities that are expanding and thriving... like flora. And like flora, data flows need care and attention.
 
-This UI is obviously oversimplified and lacks basic navigational elements and functionality we would want for real users, but it serves to show that very basic data elements can go a long way in providing insightful information into what is going on in our data journey between systems.
+*Note:* I had a ton of fun making this app. It was a really good use case to throw together some concepts I have been thinking about for awhile as well as learn some new tech like [Svelte](https://svelte.dev/), [SvelteKit](https://kit.svelte.dev/), and [TailwindCSS](https://tailwindcss.com/). I also created a super basic [Rust](https://www.rust-lang.org/) service to make the data side of things a bit more real :smile:.
 
-![data flow example ui](/image/data_mgmt/data_flow_ui.png "data flow example ui")
-(UI prototype created with [Tremor](https://tremor.so/))
+Githubs:
+- UI code: [flora-dash](https://github.com/rossbrandon/flora-dash)
+- Rust backend: [flora-api](https://github.com/rossbrandon/flora-api)
 
-I fully conscede that donut charts are not everyone's favorite. They can easily be replaced with something like [data bars](https://www.tremor.so/docs/components/data-bars) to represent percent progress instead.
+#### Client Search
 
-![data bars example](/image/data_mgmt/data_flow_bar_chart.png "data bars example")
+![data flora example ui](/image/data_mgmt/data_flora_clients.png "data flow example ui")
+(UI prototype created with [Svelte](https://svelte.dev/) and [Skeleton UI](https://www.skeleton.dev/))
 
-Charting can also be added to track trends in error states.
+The Data Flora application example represents an internal tool that engineering/support/etc could use to trace data flow statistics and errors as they come in from various clients and flow between systems.
 
-![error state trends example](/image/data_mgmt/data_flow_error_chart.png "error state trends example")
+The landing page show above is a list of all of the clients that we have visibility into. The search bar at the top of the screen can be used to filter these clients as there may be many clients feeding us data.
 
-Drilling into a specific data flow (ex. Upstream A to Downstream X) can populate a table with per-document state information.
+![data flora client search](/image/data_mgmt/data_flora_client_search.png "data flora client search")
 
-![data flow detail table example](/image/data_mgmt/data_flow_table.png "data flow detail table example")
+As an example, we'll follow the flow of this UI from the perspective of a support engineer analyzing the data flow of an internal system-to-system pipeline. For simplicity, it will follow our example system diagram above describing an internal data pipeline: an upstream data ingestion endpoint named *Content Ingestion* that receives data feeds from clients and pushes messages to four downstream systems: an *Image Analyzer* service, a *Video Analyzer* service, a *File Storage* system, and a *Metadata Storage* system. This represents the internal side of this fake application's data flow for all users. The first *Internal* client card in the client list screen above allows us to see this view. Other cards would represent individual clients that feed our systems with their individual data rather than the system-to-system flows as a whole that we will explore here.
 
-*Reiterating Note:* Given my terrible UX skills, I am unable to effectively put together all of these pieces into a sleek UI without banging my head against my desk for hours on end, but the basic widgets demonstrate key pieces of functionality that can be combined into a cohesive experience tailored for our different user personas.
+#### Client Data Flows
+
+So, to continue, we can click the *Data Flows ->* link on the *Internal Pipelines* card and navigate into this client's first layer: the upstream data flows page.
+
+![data flora client info](/image/data_mgmt/data_flora_client_info.png "data flora client info screen")
+
+This page shows basic client information and all of the *data flows* that belong to it. In our example, we see the three main upstreams: *Content Ingestion*, *Event Collector*, and *User Manager* following our example system diagram. Each of these data flow cards show high level information about the state of each data flow including an overall and individual downstream system status: *Healthy*, *Unhealthy*, or *Investigation Needed* depending on the state the downstreams systems are reporting and the defined threseholds for status classifications (such as if data is still flowing, within acceptable error rates, etc).
+
+![data flora upstream card](/image/data_mgmt/data_flora_upstream_card.png "data flora upstream card")
+
+#### Upstream Details
+
+Clicking into the *Content Ingestion* card takes us to the upstream information page.
+
+![data flora upstream info](/image/data_mgmt/data_flora_upstream.png "data flora upstream info screen")
+
+Here, we follow a similar paradigm for showing basic upstream data flow information including a document count summary, links to system diagrams/runbooks/contact channels, and a list of downstream system flows. These cards are the keys to the data flow health analysis. Each card represents the state of a downstream system that receives data from the upstream system we are viewing, *Content Ingestion*. We can see the overall status of that data flow: *Successful*, *In Progress*, or *Failed*, the timestamp of the last document received by that system, and simple charts to show the total counts of documents received, missing, or in error depending on the source vs destination document counts and various error metadata we are able to retrieve from our APIs. Hovering over the charts will show counts of documents in each represented state.
+
+#### Downstream Status
+
+![data flora downstream card](/image/data_mgmt/data_flora_downstream_card.png "data flora downstream card")
+
+We can see that the fourth card, *Metadata Storage*, is indicating that the data flow has failed. We can see that the flow expects 1500 documents, but has only received 1035. By hovering over the parts of the donut chart, can see that 115 documents are missing and 350 documents have been found to be in error. Since the last document was received some time ago, this data flow is marked as failed.
+
+Let's drill into this data flow to see what is going on...
+
+#### Data Flow Errors
+
+![data flora downstream errors](/image/data_mgmt/data_flora_downstream.png "data flora downstream errors screen")
+![data flora downstream errors second half](/image/data_mgmt/data_flora_downstream_2.png "data flora downstream errors screen second half")
+
+The final page in this data flow example is the downstream error information page. At the top, we can see a few fields about the downstream system we are viewing followed by error detail charting and reporting as well as action buttons we can use to try to remedy issues in our data flows.
+
+![data flora downstream error chart](/image/data_mgmt/data_flora_error_chart.png "data flora downstream error chart")
+
+The Error Details section is where we can gain critical insights into what is happening in our systems. We can see the data flow totals of expected vs received and in-error documents, the breakdown of data flow error types, as well as a table representing all of the data flow errors detected by document.
+
+![data flora downstream error table](/image/data_mgmt/data_flora_error_table.png "data flora downstream error table")
+
+The error detail table is sorted by the timestamp of the document error (descending) and contains the document id in question, its type (in this example, the error type is a Network error, but it could be anything), a link to the log event of this error (could be to Splunk, New Relic, Loki, your custom unicorn log aggregator, etc), the error event message, and the timestamp of the error. Although not shown in this UI, the table would ideally be searchable by fields such as document id and type.
+
+#### Taking Action
+
+Now that we have identified potential problem areas, we can take a couple actions to attempt correction.
+
+![data flora resync action button](/image/data_mgmt/data_flora_resync_action.png "data flora resync action button")
+
+One of the actions we can take is to initate a re-syncronization of the data flowing between this upstream and downstream. This can be especially handy when the engineering teams have resolved a bug in the data flow and we simply need to get the systems back in sync after its resolution. This action calls out the appropriate warning because resyncing data typically has network and storage cost implications.
+
+![data flora delete action button](/image/data_mgmt/data_flora_delete_action.png "data flora delete action button")
+
+Another action we can take is to simply delete the data in this downstream system. This may or may not be useful in resolving an issue in the data flow, but it is very handly in exposing this functionality to authorized users (and potentially automation though APIs) to handle data cleanup tasks when a user requests that their data to be removed, deletes their account, or any other GDPR related request. Personally, I've found these simple actions to be extremely powerful when dealing with client data (and building systems on the engineering side).
 
 ## What Do We Gain?
 
 As we continue to build out this functionality through our applications, we start to reveal a "map" of how our data flows through our various upstream and downstream systems from end-to-end (client to end product). The more data we feed into this tooling, the more historical analysis we gather that can be used not only to solve immediate problems but identify trends and predict future problems with data flows.
 
-The immedate gain is less angry users. Since we have now provided the necessary visibility and action tooling to our support personal (or even the users themselves in certain cases), we can allow for faster recovery to data integrity issues and improve product performance and reliability. Less support tickets equals happier users, happier support personnel, and happier engineering teams who can spend more time building the fun stuff instead of tracking down bugs.
+The immediate benefit is fewer frustrated users. Since we have now provided the necessary visibility and action tooling to our support personal (or even the users themselves in certain cases), we can allow for faster recovery to data integrity issues and improve product performance and reliability. Less support tickets equals happier users, happier support personnel, and happier engineering teams who can spend more time building the fun stuff instead of tracking down bugs.
 
 Speaking of engineers, visibility and management of data flows plays a critical role in the development process. Putting these tools into the hands of our engineers allows for real time feedback of data flowing through QA systems and easy triggers for re-sending and moving test data through these systems while building features and troubleshooting bugs.
 
@@ -172,8 +226,12 @@ Increasing the visibility into our data journey can help us in ensuring we are c
 
 ## Isn't This Expensive?
 
-Yes. Definitely. However, I believe that designing with this mindset from the beginning will help keep costs and engineering effort within manageable limits. When working with large data sets, the querying of this data in real time becomes much more costly (both in money and time). While I do acknowledge this and suggest spending design time thinking of how to best query large datasets and weighing the pros and cons of real time reporting vs scheduled aggregations that this tooling can read for less load on crictical systems, I truly believe that the value of this visibility and management tooling speaks for itself. Especially when we have large customers feeding us millions of documents every day and expecting that updates are reflected in real time in our products and services.
+Yes. Definitely. However, I believe that designing with this mindset from the beginning will help keep costs and engineering effort within manageable limits. When working with large data sets, the querying of this data in real time becomes much more costly (both in money and time). While I do acknowledge this and suggest spending design time thinking of how to best query large datasets and weighing the pros and cons of real time reporting vs scheduled aggregations that this tooling can read for less load on critical systems, I truly believe that the value of this visibility and management tooling speaks for itself. Especially when we have large customers feeding us millions of documents every day and expecting that updates are reflected in real time in our products and services.
 
 The ideas discussed here require more effort up front to build but aim to save much more time later on. The "fail fast and iterate" approach may want to write this off at first, but I would argue that this tooling *assists* in that iterative approach by giving teams visibility in the behavior of the solutions they are rapidly building and allow for more confidence in iterations and further product MVPs.
+
+## Give Me the Takeaway
+
+To put it simply... by taking steps to integrate standardized, robust, and cohesive visibility and management tools into the foundational design of data systems, we not only enhance real-time problem-solving capabilities for our teams but also empower our users, reduce support overhead, and fortify our commitment to data integrity, compliance, and seamless user experiences. All of this ultimately paving the way for more efficient and resilient data-driven systems. And what kind of data nerd doesn't want that?
 
 *Data nerds unite!*

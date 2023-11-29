@@ -206,6 +206,8 @@ Using this tool we can see that the 350 documents in error were caused by networ
 
 #### Taking Action
 
+![data flora action buttons](/image/data_mgmt/data_flora_action_buttons.png "data flora action buttons")
+
 Now that we have identified potential problem areas, we can take a couple actions directly from this screen.
 
 ![data flora resync action button](/image/data_mgmt/data_flora_resync_action.png "data flora resync action button")

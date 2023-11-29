@@ -36,7 +36,7 @@ Let's face it... we won't. And when we have to, we won't want to and the level o
 
 ## Ok, Let's Get On With It
 
-### Illustrative Fake Scenario
+### A (Potentially) Real World Example?
 
 To set the stage of our discussion, I have created a super basic system diagram (using the awesome [Excalidraw](https://excalidraw.com/) diagramming tool!) to lay out a fake application landscape that accepts data generated from a user (uploaded or through user actions & events) and distributes it to many internal consumers to enable some sort of end-product functionality for that user -- real use cases may vary.
 
@@ -200,13 +200,17 @@ The Error Details section is where we can gain critical insights into what is ha
 
 The error detail table is sorted by the timestamp of the document error (descending) and contains the document id in question, its type (in this example, the error type is a Network error, but it could be anything), a link to the log event of this error (could be to Splunk, New Relic, Loki, your custom unicorn log aggregator, etc), the error event message, and the timestamp of the error. Although not shown in this UI, the table would ideally be searchable by fields such as document id and type.
 
+#### Ok, so. What does this tell us?
+
+Using this tool we can see that the 350 documents in error were caused by network issues. Specifically, a timeout to the "metadataStorage service" meaning that the upsteam system could not connect to our downstream metadata service and failed to deliver the message. Using this information, we can contact the metadata team and then initiate a *Re-sync Data* action from this tool directly once the issue is resolved.
+
 #### Taking Action
 
-Now that we have identified potential problem areas, we can take a couple actions to attempt correction.
+Now that we have identified potential problem areas, we can take a couple actions directly from this screen.
 
 ![data flora resync action button](/image/data_mgmt/data_flora_resync_action.png "data flora resync action button")
 
-One of the actions we can take is to initate a re-syncronization of the data flowing between this upstream and downstream. This can be especially handy when the engineering teams have resolved a bug in the data flow and we simply need to get the systems back in sync after its resolution. This action calls out the appropriate warning because resyncing data typically has network and storage cost implications.
+One of the actions is the one we just spoke of in our example: to initate a re-syncronization of the data flowing between this upstream and downstream. This can be especially handy when the engineering teams have resolved a bug in the data flow and we simply need to get the systems back in sync after its resolution. This action calls out the appropriate warning because resyncing data typically has network and storage cost implications.
 
 ![data flora delete action button](/image/data_mgmt/data_flora_delete_action.png "data flora delete action button")
 

@@ -2,7 +2,6 @@
   "name": "rossbrandon-dev",
   "compatibility_date": "2025-10-31",
   "assets": {
-    "binding": "ASSETS",
     "directory": "./dist"
   }
 }

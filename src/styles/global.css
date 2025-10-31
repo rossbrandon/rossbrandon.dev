@@ -434,6 +434,11 @@ table {
   min-width: 400px;
   max-width: 100%;
   border: 1px solid var(--table-color);
+
+  @media (max-width: 684px) {
+    min-width: 100%;
+    font-size: 0.8em;
+  }
 }
 
 table th,

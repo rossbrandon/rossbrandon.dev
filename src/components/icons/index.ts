@@ -1,0 +1,9 @@
+export { default as CalendarIcon } from './calendar-icon.astro';
+export { default as ClockIcon } from './clock-icon.astro';
+export { default as FileTextIcon } from './file-text-icon.astro';
+export { default as FolderIcon } from './folder-icon.astro';
+export { default as GitHubIcon } from './github-icon.astro';
+export { default as LinkedInIcon } from './linkedin-icon.astro';
+export { default as MailIcon } from './mail-icon.astro';
+export { default as RssIcon } from './rss-icon.astro';
+export { default as TagIcon } from './tag-icon.astro';

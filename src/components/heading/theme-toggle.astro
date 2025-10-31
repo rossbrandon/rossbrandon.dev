@@ -1,0 +1,56 @@
+---
+
+---
+
+<svg
+  id="themeToggle"
+  class="theme-toggler"
+  width="24"
+  height="24"
+  viewBox="0 0 48 48"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path
+    d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"
+  ></path>
+</svg>
+
+<style>
+  .theme-toggler {
+    fill: currentColor;
+  }
+</style>
+
+<script is:inline>
+  // Only set data-theme if user has explicitly chosen a theme
+  const localStorageTheme = localStorage?.getItem('theme') ?? '';
+  if (['dark', 'light'].includes(localStorageTheme)) {
+    document.documentElement.setAttribute('data-theme', localStorageTheme);
+  }
+  // Otherwise, let CSS media queries handle it based on system preference
+
+  const handleToggleClick = () => {
+    const element = document.documentElement;
+
+    // Determine current theme (from attribute or system preference)
+    let currentTheme = element.getAttribute('data-theme');
+    if (!currentTheme) {
+      currentTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
+    }
+
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+    // Set the attribute to override system preference
+    element.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
+
+  document
+    .getElementById('themeToggle')
+    ?.addEventListener('click', handleToggleClick);
+</script>

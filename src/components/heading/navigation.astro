@@ -1,0 +1,228 @@
+---
+const navItems = [
+  { href: '/about', label: 'About Me' },
+  { href: '/posts', label: 'Blog' },
+  { href: '/resume', label: 'Resume' },
+];
+---
+
+<button
+  id="nav-toggle"
+  class="nav-toggle"
+  aria-label="Toggle navigation"
+  aria-expanded="false"
+  aria-controls="main-nav"
+>
+  <span class="hamburger">
+    <span class="line"></span>
+    <span class="line"></span>
+    <span class="line"></span>
+  </span>
+</button>
+
+<nav id="main-nav" class="nav" aria-label="Main navigation">
+  <ul class="nav-inner">
+    {
+      navItems.map((item) => (
+        <li>
+          <a href={item.href}>{item.label}</a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  :root {
+    --z-drawer: 1200;
+  }
+
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    position: relative;
+
+    @media (max-width: 684px) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: var(--z-drawer);
+    }
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 24px;
+    height: 18px;
+    position: relative;
+  }
+
+  .line {
+    width: 100%;
+    height: 2px;
+    background: var(--color);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+
+  .nav-toggle[aria-expanded='true'] .line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .nav-toggle[aria-expanded='true'] .line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle[aria-expanded='true'] .line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .nav {
+    @media (max-width: 684px) {
+      position: fixed;
+      top: 60px;
+      right: 0;
+      width: 100%;
+      max-width: 300px;
+      background: var(--background-header);
+      border-left: 1px solid var(--border-color);
+      box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      opacity: 0;
+      visibility: hidden;
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+      z-index: var(--z-drawer);
+    }
+
+    &.nav-open {
+      @media (max-width: 684px) {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 0 7px;
+    font-size: 1rem;
+    list-style: none;
+    gap: 1rem;
+
+    @media (max-width: 684px) {
+      flex-direction: column;
+      align-items: stretch;
+      padding: 20px;
+      gap: 0;
+    }
+
+    li {
+      margin: 0 4px;
+
+      @media (max-width: 684px) {
+        margin: 0;
+        border-bottom: 1px solid var(--border-color);
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+
+    a {
+      display: inline-block;
+      margin-right: 15px;
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      @media (max-width: 684px) {
+        display: block;
+        margin: 0;
+        padding: 16px 12px;
+        font-size: 1.1rem;
+      }
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+
+      &:hover {
+        text-decoration: underline;
+
+        @media (max-width: 684px) {
+          text-decoration: none;
+          color: var(--color-variant);
+        }
+      }
+    }
+  }
+</style>
+
+<script lang="ts">
+  const navToggle = document.getElementById('nav-toggle');
+  const mainNav = document.getElementById('main-nav');
+
+  if (navToggle && mainNav) {
+    navToggle.addEventListener('click', () => {
+      const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+
+      navToggle.setAttribute('aria-expanded', !isExpanded ? 'true' : 'false');
+      mainNav.classList.toggle('nav-open');
+
+      document.body.style.overflow = !isExpanded ? 'hidden' : '';
+    });
+
+    // Close on click outside
+    document.addEventListener('click', (event) => {
+      const isClickInside =
+        navToggle.contains(event.target) || mainNav.contains(event.target);
+
+      if (!isClickInside && mainNav.classList.contains('nav-open')) {
+        navToggle.setAttribute('aria-expanded', 'false');
+        mainNav.classList.remove('nav-open');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Close on Escape key and return focus to toggle button
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && mainNav.classList.contains('nav-open')) {
+        navToggle.setAttribute('aria-expanded', 'false');
+        mainNav.classList.remove('nav-open');
+        document.body.style.overflow = '';
+        navToggle.focus();
+      }
+    });
+
+    // Close on link click
+    const navLinks = mainNav.querySelectorAll('a');
+    navLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        navToggle.setAttribute('aria-expanded', 'false');
+        mainNav.classList.remove('nav-open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Close on resize to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 684 && mainNav.classList.contains('nav-open')) {
+        navToggle.setAttribute('aria-expanded', 'false');
+        mainNav.classList.remove('nav-open');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+</script>

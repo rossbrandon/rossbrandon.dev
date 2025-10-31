@@ -1,0 +1,45 @@
+---
+import { Footer } from '@components/footer';
+import { Heading } from '@components/heading';
+
+import '@styles/global.css';
+
+const { pageTitle: propPageTitle } = Astro.props;
+const pageTitle = propPageTitle ?? 'Ross Brandon';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Ross Brandon" />
+    <meta name="description" content="Ross Brandon's personal website" />
+    <meta
+      name="keywords"
+      content="Ross Brandon, software engineer, architect, portfolio, blog, reading list, resume"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <div class="container">
+      <Heading />
+      <div class="content">
+        <slot />
+      </div>
+      <Footer />
+    </div>
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>

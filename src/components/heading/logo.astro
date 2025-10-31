@@ -1,0 +1,61 @@
+---
+
+---
+
+<a href="/" title="Home" aria-label="Home">
+  <div class="wrapper">
+    <span class="mark">&gt;</span>
+    <span class="text">$ cd /home/ross</span>
+    <span class="cursor"></span>
+  </div>
+</a>
+
+<style>
+  a {
+    text-decoration: none;
+  }
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-display: auto;
+    font-family: monospace, monospace;
+
+    .mark {
+      margin-right: 5px;
+    }
+
+    .text {
+      font-size: 1.125rem;
+      white-space: nowrap;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 1rem;
+      background: #fe5186;
+      margin-left: 5px;
+      border-radius: 1px;
+      animation: cursor 1s infinite;
+
+      @media (prefers-reduced-motion: reduce) {
+        animation: none;
+      }
+    }
+  }
+
+  @keyframes cursor {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+</style>

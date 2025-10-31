@@ -1,0 +1,70 @@
+---
+import { ReadingTime } from '@components/posts';
+
+import Base from './base.astro';
+
+const {
+  frontmatter,
+  title: propTitle,
+  pageTitle: propPageTitle,
+  readingTime,
+} = Astro.props;
+const title = propTitle ?? frontmatter?.title;
+const pageTitle = propPageTitle ?? frontmatter?.pageTitle ?? title;
+---
+
+<Base pageTitle={pageTitle} readingTime={readingTime}>
+  <main class="page-content">
+    <header>
+      {
+        readingTime && (
+          <p class="reading-time">
+            <ReadingTime readingTime={readingTime} />
+          </p>
+        )
+      }
+      <h1>{title}</h1>
+    </header>
+    <article>
+      <slot />
+    </article>
+  </main>
+</Base>
+
+<style>
+  .page-content {
+    width: var(--content-width);
+    margin: 0 auto;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    text-align: left;
+  }
+
+  article {
+    line-height: 1.6;
+  }
+
+  header {
+    margin-bottom: 2rem;
+    text-align: left;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  time {
+    color: var(--color-secondary);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 684px) {
+    .content {
+      padding: 1rem 0.5rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+  }
+</style>

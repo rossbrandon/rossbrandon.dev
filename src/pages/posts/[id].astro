@@ -1,0 +1,223 @@
+---
+import { render } from 'astro:content';
+import {
+  CalendarIcon,
+  FileTextIcon,
+  FolderIcon,
+  TagIcon,
+} from '@components/icons';
+import { ImageModal, ReadingTime } from '@components/posts';
+import Page from '@layouts/page.astro';
+import { getSortedPosts, separatePosts } from '@utils/content';
+import { formatDate } from '@utils/date';
+
+export const getStaticPaths = async () => {
+  const allPosts = await getSortedPosts();
+  const { regularPosts } = separatePosts(allPosts);
+
+  return allPosts.map((post) => {
+    // If this is a pinned post, don't show prev/next links
+    if (post.data.pinned) {
+      return {
+        params: { id: post.id },
+        props: { post, prevPost: null, nextPost: null },
+      };
+    }
+
+    // For regular posts, find prev/next only among regular posts
+    const index = regularPosts.findIndex((p) => p.id === post.id);
+    const prevPost = index > 0 ? regularPosts[index - 1] : null;
+    const nextPost =
+      index < regularPosts.length - 1 ? regularPosts[index + 1] : null;
+
+    return {
+      params: { id: post.id },
+      props: { post, prevPost, nextPost },
+    };
+  });
+};
+
+const { post, prevPost, nextPost } = Astro.props;
+const title = post.data.title;
+const { Content, remarkPluginFrontmatter } = await render(post);
+---
+
+<Page
+  title={title}
+  pageTitle={title}
+  readingTime={remarkPluginFrontmatter.minutesRead}
+>
+  <Content />
+  <ImageModal />
+  <hr />
+
+  <div class="post-info">
+    {
+      post.data.tags && post.data.tags.length > 0 && (
+        <p>
+          <TagIcon />
+          {post.data.tags.map((tag) => (
+            <span class="tag">
+              <a href={`/tags/${tag}`}>{tag}</a>
+            </span>
+          ))}
+        </p>
+      )
+    }
+
+    {
+      post.data.categories && post.data.categories.length > 0 && (
+        <p>
+          <FolderIcon />
+          {post.data.categories.map((category) => (
+            <span class="tag">
+              <a href={`/categories/${category}`}>{category}</a>
+            </span>
+          ))}
+        </p>
+      )
+    }
+
+    <p>
+      <FileTextIcon />
+      {remarkPluginFrontmatter.wordCount} Words
+    </p>
+
+    <p>
+      <CalendarIcon />
+      {formatDate(post.data.date)}
+    </p>
+  </div>
+
+  {
+    (prevPost || nextPost) && (
+      <div class="pagination">
+        <div class="pagination__buttons">
+          {prevPost && (
+            <span class="button previous">
+              <a href={`/posts/${prevPost.id}`}>
+                <span class="button__icon">←</span>
+                <span class="button__text">{prevPost.data.title}</span>
+              </a>
+            </span>
+          )}
+          {nextPost && (
+            <span class="button next">
+              <a href={`/posts/${nextPost.id}`}>
+                <span class="button__text">{nextPost.data.title}</span>
+                <span class="button__icon">→</span>
+              </a>
+            </span>
+          )}
+        </div>
+      </div>
+    )
+  }
+</Page>
+
+<style>
+  hr {
+    margin: 2rem 0;
+  }
+
+  .post-info {
+    margin-top: 30px;
+    font-size: 0.8rem;
+    line-height: normal;
+    opacity: 0.5;
+  }
+
+  .post-info p {
+    margin: 0.8em 0;
+  }
+
+  .post-info a {
+    text-decoration: none;
+  }
+
+  .post-info a:hover {
+    border-bottom: 1px solid currentColor;
+  }
+
+  .post-info svg {
+    margin-right: 0.8em;
+  }
+
+  .post-info .tag {
+    margin-right: 0.5em;
+  }
+
+  .post-info .tag::before {
+    content: '#';
+  }
+
+  .post-info .feather {
+    display: inline-block;
+    vertical-align: -0.125em;
+    width: 1em;
+    height: 1em;
+  }
+
+  .pagination {
+    margin-top: 20px;
+  }
+
+  .pagination__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pagination__buttons a {
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    max-width: 40%;
+    padding: 0;
+    cursor: pointer;
+    appearance: none;
+    background: var(--background-secondary);
+  }
+
+  .button + .button {
+    margin-left: 10px;
+  }
+
+  .button a {
+    display: flex;
+    padding: 8px 16px;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .button__text {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .button.next .button__icon {
+    margin-left: 8px;
+  }
+
+  .button.previous .button__icon {
+    margin-right: 8px;
+  }
+
+  @media (max-width: 684px) {
+    .button {
+      max-width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,25 @@
+---
+import ClockIcon from '@components/icons/clock-icon.astro';
+const { readingTime } = Astro.props;
+---
+
+<p class="reading-time">
+  <ClockIcon />
+  <span>{readingTime}</span>
+</p>
+
+<style>
+  .reading-time {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-secondary);
+  }
+
+  .clock-icon {
+    display: inline-block;
+    vertical-align: middle;
+  }
+</style>

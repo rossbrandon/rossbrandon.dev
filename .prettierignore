@@ -1,0 +1,6 @@
+.astro
+.pnpm-store
+context
+dist
+node_modules
+pnpm-lock.yaml

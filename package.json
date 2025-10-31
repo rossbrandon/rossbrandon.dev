@@ -1,14 +1,41 @@
 {
-  "name": "rossbrandon-astro",
+  "name": "rossbrandon.dev",
+  "description": "Ross Brandon's personal website",
   "type": "module",
   "version": "0.0.1",
+  "author": "Ross Brandon",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rosstafarian/rossbrandon.dev"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format:check": "prettier --check .",
+    "format": "prettier --write .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "engines": {
+    "node": "^22.0.0"
   },
   "dependencies": {
-    "astro": "^5.15.2"
+    "@astrojs/sitemap": "^3.6.0",
+    "@fontsource/inter": "^5.2.8",
+    "astro": "^5.15.2",
+    "mdast-util-to-string": "^4.0.0",
+    "reading-time": "^1.5.0",
+    "sharp": "^0.34.4"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^8.46.2",
+    "eslint": "^9.38.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-astro": "^1.4.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "prettier": "3.6.2",
+    "prettier-plugin-astro": "0.14.1"
   }
 }

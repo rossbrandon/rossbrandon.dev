@@ -1,0 +1,131 @@
+---
+import Page from '@layouts/page.astro';
+import {
+  getSortedPosts,
+  getSortedYears,
+  groupPostsByYear,
+  separatePosts,
+} from '@utils/content';
+import { getDayFromDate } from '@utils/date';
+
+import '@styles/posts.css';
+
+const allPosts = await getSortedPosts();
+const { pinnedPosts, regularPosts } = separatePosts(allPosts);
+const postsByYear = groupPostsByYear(regularPosts);
+const sortedYears = getSortedYears(postsByYear);
+
+const title = 'Posts';
+const pageTitle = 'Posts :: Ross Brandon';
+---
+
+<Page title={title} pageTitle={pageTitle}>
+  <section class="posts">
+    {
+      pinnedPosts.length > 0 && (
+        <div class="posts-group">
+          <div class="post-year">Pinned</div>
+          <ul class="posts-list">
+            {pinnedPosts.map((post) => (
+              <li class="post-item">
+                <a
+                  href={`/posts/${post.id}`}
+                  title={post.data.title}
+                  class="post-item-inner"
+                  aria-label={post.data.title}
+                >
+                  <span class="post-title">{post.data.title}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+    {
+      sortedYears.map((year) => (
+        <div class="posts-group">
+          <div class="post-year">{year}</div>
+          <ul class="posts-list">
+            {postsByYear[year].map((post) => (
+              <li class="post-item">
+                <a
+                  href={`/posts/${post.id}`}
+                  title={post.data.title}
+                  class="post-item-inner"
+                  aria-label={post.data.title}
+                >
+                  <span class="post-title">{post.data.title}</span>
+                  <span class="post-day">{getDayFromDate(post.data.date)}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </section>
+</Page>
+<style>
+  .posts {
+    text-align: left;
+
+    @media (max-width: 900px) {
+      max-width: 660px;
+    }
+  }
+
+  .posts-group {
+    display: flex;
+    margin-bottom: 1.9em;
+    line-height: normal;
+
+    @media (max-width: 900px) {
+      display: block;
+    }
+  }
+
+  .posts-list {
+    flex-grow: 1;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .post-title {
+    font-size: 1rem;
+    margin: 5px 0 5px 0;
+  }
+
+  .post-year {
+    flex: 0 0 6.5rem;
+    padding-top: 6px;
+    margin-right: 1.8em;
+    font-size: 1.6em;
+    opacity: 0.5;
+    white-space: nowrap;
+
+    @media (max-width: 900px) {
+      flex: none;
+      margin: -6px 0 4px;
+    }
+  }
+
+  .post-item {
+    border-bottom: 1px grey dashed;
+  }
+
+  .post-item-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 12px 0;
+    text-decoration: none;
+  }
+
+  .post-day {
+    flex-shrink: 0;
+    margin-left: 1em;
+    opacity: 0.5;
+  }
+</style>

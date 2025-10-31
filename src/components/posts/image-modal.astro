@@ -1,0 +1,173 @@
+<div id="image-modal" class="image-modal" aria-hidden="true">
+  <div class="modal-backdrop"></div>
+  <div class="modal-content">
+    <button class="modal-close" aria-label="Close modal">&times;</button>
+    <img src="" alt="" class="modal-image" />
+    <div class="modal-caption"></div>
+  </div>
+</div>
+
+<script>
+  function initImageModal() {
+    const modal = document.getElementById('image-modal');
+    const modalImage = modal?.querySelector('.modal-image') as HTMLImageElement;
+    const modalCaption = modal?.querySelector('.modal-caption');
+    const closeButton = modal?.querySelector('.modal-close');
+    const backdrop = modal?.querySelector('.modal-backdrop');
+
+    if (!modal || !modalImage || !modalCaption || !closeButton || !backdrop) {
+      return;
+    }
+
+    // Find all images in article content
+    const articleImages = document.querySelectorAll('article img');
+
+    articleImages.forEach((img) => {
+      const imageElement = img as HTMLImageElement;
+      imageElement.style.cursor = 'pointer';
+      imageElement.addEventListener('click', () => {
+        modalImage.src = imageElement.src;
+        modalImage.alt = imageElement.alt;
+        modalCaption.textContent = imageElement.alt || '';
+        modal.setAttribute('aria-hidden', 'false');
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    // Close modal function
+    const closeModal = () => {
+      modal.setAttribute('aria-hidden', 'true');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+      modalImage.src = '';
+      modalCaption.textContent = '';
+    };
+
+    // Close button click
+    closeButton.addEventListener('click', closeModal);
+
+    // Backdrop click
+    backdrop.addEventListener('click', closeModal);
+
+    // ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModal();
+      }
+    });
+  }
+
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initImageModal);
+  } else {
+    initImageModal();
+  }
+</script>
+
+<style>
+  .image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .image-modal.active {
+    display: flex;
+  }
+
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    cursor: pointer;
+  }
+
+  .modal-content {
+    position: relative;
+    z-index: 10000;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: -2.5rem;
+    right: 0;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2.5rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+    opacity: 0.8;
+  }
+
+  .modal-close:hover {
+    opacity: 1;
+  }
+
+  .modal-image {
+    max-width: 100%;
+    max-height: calc(90vh - 3rem);
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-caption {
+    color: white;
+    text-align: center;
+    font-size: 0.9rem;
+    max-width: 100%;
+    padding: 0.5rem 1rem;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 4px;
+  }
+
+  @media (max-width: 684px) {
+    .modal-content {
+      max-width: 95vw;
+      max-height: 95vh;
+    }
+
+    .modal-close {
+      top: -2rem;
+      font-size: 2rem;
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .modal-image {
+      max-height: calc(95vh - 2rem);
+    }
+
+    .modal-caption {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.8rem;
+    }
+  }
+</style>

@@ -1,0 +1,89 @@
+---
+import { GitHubIcon, LinkedInIcon, MailIcon } from '@components/icons';
+---
+
+<main>
+  <h1>Ross Brandon</h1>
+  <p>Software Engineer // Architect</p>
+
+  <div class="social-icons">
+    <a
+      href="https://github.com/rossbrandon"
+      target="_blank"
+      rel="me noopener"
+      title="GitHub"
+      aria-label="GitHub"
+    >
+      <GitHubIcon />
+    </a>
+
+    <a
+      href="https://www.linkedin.com/in/ross-brandon/"
+      target="_blank"
+      rel="me noopener"
+      title="LinkedIn"
+      aria-label="LinkedIn"
+    >
+      <LinkedInIcon />
+    </a>
+
+    <a
+      href="mailto:contact-me.psmxi@simplelogin.com"
+      target="_blank"
+      rel="me noopener"
+      title="Email"
+      aria-label="Email"
+    >
+      <MailIcon />
+    </a>
+  </div>
+</main>
+
+<style>
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+
+    @media (max-width: 684px) {
+      padding: 20px 30px;
+    }
+  }
+
+  h1 {
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .social-icons a {
+    display: inline-flex;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+  }
+
+  .social-icons a:hover {
+    transform: translateY(-2px);
+  }
+
+  .social-icons svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  @media (max-width: 684px) {
+    h1 {
+      font-size: 2rem;
+    }
+  }
+</style>

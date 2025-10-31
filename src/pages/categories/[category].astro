@@ -1,0 +1,84 @@
+---
+import Page from '@layouts/page.astro';
+import {
+  getAllCategories,
+  getSortedPosts,
+  getSortedYears,
+  groupPostsByYear,
+  separatePosts,
+} from '@utils/content';
+import { getDayFromDate } from '@utils/date';
+
+import '@styles/posts.css';
+
+export const getStaticPaths = async () => {
+  const allPosts = await getSortedPosts();
+  const allCategories = getAllCategories(allPosts);
+
+  return Array.from(allCategories).map((category) => ({
+    params: { category },
+    props: {
+      posts: allPosts.filter((post) =>
+        post.data.categories?.includes(category)
+      ),
+      category,
+    },
+  }));
+};
+
+const { posts, category } = Astro.props;
+const { pinnedPosts, regularPosts } = separatePosts(posts);
+const postsByYear = groupPostsByYear(regularPosts);
+const sortedYears = getSortedYears(postsByYear);
+
+const title = `Category: ${category}`;
+const pageTitle = `Category: ${category} :: Ross Brandon`;
+---
+
+<Page title={title} pageTitle={pageTitle}>
+  <section class="posts">
+    {
+      pinnedPosts.length > 0 && (
+        <div class="posts-group">
+          <div class="post-year">Pinned</div>
+          <ul class="posts-list">
+            {pinnedPosts.map((post) => (
+              <li class="post-item">
+                <a
+                  href={`/posts/${post.id}`}
+                  title={post.data.title}
+                  class="post-item-inner"
+                  aria-label={post.data.title}
+                >
+                  <span class="post-title">{post.data.title}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+    {
+      sortedYears.map((year) => (
+        <div class="posts-group">
+          <div class="post-year">{year}</div>
+          <ul class="posts-list">
+            {postsByYear[year].map((post) => (
+              <li class="post-item">
+                <a
+                  href={`/posts/${post.id}`}
+                  title={post.data.title}
+                  class="post-item-inner"
+                  aria-label={post.data.title}
+                >
+                  <span class="post-title">{post.data.title}</span>
+                  <span class="post-day">{getDayFromDate(post.data.date)}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </section>
+</Page>

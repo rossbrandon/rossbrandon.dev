@@ -1,6 +1,6 @@
 {
-  "name": "my-astro-app",
-  "compatibility_date": "YYYY-MM-DD", // Update to the day you deploy
+  "name": "rossbrandon-dev",
+  "compatibility_date": "2025-10-31",
   "assets": {
     "binding": "ASSETS",
     "directory": "./dist"

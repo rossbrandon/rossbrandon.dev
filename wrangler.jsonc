@@ -3,5 +3,15 @@
   "compatibility_date": "2025-10-31",
   "assets": {
     "directory": "./dist"
-  }
+  },
+  "routes": [
+    {
+      "pattern": "rossbrandon.dev",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.rossbrandon.dev",
+      "custom_domain": true
+    }
+  ]
 }

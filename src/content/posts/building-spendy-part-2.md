@@ -137,4 +137,4 @@ Sadly, no. I no longer use `Spendy`. I had accomplished the goal I set out to of
 
 What do I use now? [Copilot](https://copilot.money/). Copilot is one of the sleekest apps I have ever used. It does have the limitation of only being available as an iOS (iPhone only) or Mac OS application, but I have hopes that they will expand to an iPad and web version in the future as they grow. I highly recommend giving Copilot a try if you want an intelligent money management application that goes far beyond simple budgeting.
 
-And no, I am not associated with Copilot in any way, I am just really impressed by their product :smile:.
+And no, I am not associated with Copilot in any way, I am just really impressed by their product 😄.

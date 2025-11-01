@@ -134,7 +134,7 @@ Internal UI functionality ideas:
 
 To exemplify this, I have created a basic concept application called [Data Flora](https://dataflora.dev). As part of this thought experiment, I like to think of data flows as living, growing entities that are expanding and thriving... like flora. And like flora, data flows need care and attention.
 
-_Note:_ I had a ton of fun making this app. It was a really good use case to throw together some concepts I have been thinking about for awhile as well as learn some new tech like [Svelte](https://svelte.dev/), [SvelteKit](https://kit.svelte.dev/), and [TailwindCSS](https://tailwindcss.com/). I also created a super basic [Rust](https://www.rust-lang.org/) service to make the data side of things a bit more real :smile:.
+_Note:_ I had a ton of fun making this app. It was a really good use case to throw together some concepts I have been thinking about for awhile as well as learn some new tech like [Svelte](https://svelte.dev/), [SvelteKit](https://kit.svelte.dev/), and [TailwindCSS](https://tailwindcss.com/). I also created a super basic [Rust](https://www.rust-lang.org/) service to make the data side of things a bit more real 😄.
 
 Githubs:
 

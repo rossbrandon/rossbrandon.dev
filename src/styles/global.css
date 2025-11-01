@@ -9,6 +9,7 @@
   --light-color: #222;
   --light-color-variant: black;
   --light-color-secondary: #999;
+  --light-color-footer: #757575;
   --light-border-color: #dcdcdc;
   --light-table-color: #dcdcdc;
 
@@ -19,6 +20,7 @@
   --dark-color: #a9a9b3;
   --dark-color-variant: white;
   --dark-color-secondary: #b3b3bd;
+  --dark-color-footer: #b3b3bd;
   --dark-border-color: #4e4e57;
   --dark-table-color: #4e4e57;
 
@@ -42,6 +44,7 @@
   --color: var(--light-color);
   --color-variant: var(--light-color-variant);
   --color-secondary: var(--light-color-secondary);
+  --color-footer: var(--light-color-footer);
   --border-color: var(--light-border-color);
   --table-color: var(--light-table-color);
 }
@@ -54,6 +57,7 @@
     --color: var(--dark-color);
     --color-variant: var(--dark-color-variant);
     --color-secondary: var(--dark-color-secondary);
+    --color-footer: var(--dark-color-footer);
     --border-color: var(--dark-border-color);
     --table-color: var(--dark-table-color);
   }
@@ -66,6 +70,7 @@
   --color: var(--dark-color);
   --color-variant: var(--dark-color-variant);
   --color-secondary: var(--dark-color-secondary);
+  --color-footer: var(--dark-color-footer);
   --border-color: var(--dark-border-color);
   --table-color: var(--dark-table-color);
 }
@@ -77,6 +82,7 @@
   --color: var(--light-color);
   --color-variant: var(--light-color-variant);
   --color-secondary: var(--light-color-secondary);
+  --color-footer: var(--light-color-footer);
   --border-color: var(--light-border-color);
   --table-color: var(--light-table-color);
 }

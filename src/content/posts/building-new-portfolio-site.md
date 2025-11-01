@@ -16,13 +16,13 @@ tags:
 
 That is always a good first question... Why? Why do I need a portfolio site? Can't I just use LinkedIn like everyone else?
 
-First off, I'm trying to do more things for me and not for recognition or attention. I am not under any impression that what I put on this site will be read by anyone. Anyone looking to work with me will probably go to LinkedIn and contact me via that process or maybe they will dig through my GitHub account (both linked on the home page of this site :check_mark:) and go from there. Either way, this is the less likely avenue.
+First off, I'm trying to do more things for me and not for recognition or attention. I am not under any impression that what I put on this site will be read by anyone. Anyone looking to work with me will probably go to LinkedIn and contact me via that process or maybe they will dig through my GitHub account (both linked on the home page of this site ✅) and go from there. Either way, this is the less likely avenue.
 
 So... why do all of this?
 
 ## ...because
 
-For one, building sites like this (and my previous version) help keep my lesser-used skills sharp. I started my career off by focusing mainly on front end development. I was never all that great at it, but it was something I enjoyed and I have kept up with learning from my very first site built with [Dreamweaver](https://en.wikipedia.org/wiki/Adobe_Dreamweaver) hosted on [GeoCities](https://en.wikipedia.org/wiki/GeoCities) through the moving trends of jQuery -> Angular -> React -> _insert weekly new framework here_ -- I'm not sure what the hotness is now, maybe Svelte? I haven't touched that one yet. I may do a weekend project in that one day because I am getting frustrated with how difficult React is to work with lately (but that's a topic for another day :sweat_smile:).
+For one, building sites like this (and my previous version) help keep my lesser-used skills sharp. I started my career off by focusing mainly on front end development. I was never all that great at it, but it was something I enjoyed and I have kept up with learning from my very first site built with [Dreamweaver](https://en.wikipedia.org/wiki/Adobe_Dreamweaver) hosted on [GeoCities](https://en.wikipedia.org/wiki/GeoCities) through the moving trends of jQuery -> Angular -> React -> _insert weekly new framework here_ -- I'm not sure what the hotness is now, maybe Svelte? I haven't touched that one yet. I may do a weekend project in that one day because I am getting frustrated with how difficult React is to work with lately (but that's a topic for another day 😅).
 
 ## Old Site
 
@@ -39,7 +39,7 @@ For further context, the text in the screenshot below typed out character-by-cha
 then finally "I MAKE ... AWESOME STUFF"
 ```
 
-This was a fun little piece to tweak (I didn't even write the original code!), but it really didn't serve any purpose other than to vomit out buzz words :melting_face: -- so out it goes!
+This was a fun little piece to tweak (I didn't even write the original code!), but it really didn't serve any purpose other than to vomit out buzz words 🫠 -- so out it goes!
 
 ![old screenshot top](@assets/images/rossbrandon_dev_old_screenshot_top.png 'rossbrandon.dev old screenshot above the fold')
 
@@ -55,7 +55,7 @@ Visually, the site was nice. But at the end of the day, it just did not feel lik
 
 Here we are in mid 2023 (1st of July to be exact) and I have finally mustered up the energy to try this again. This time a bit differently...
 
-I had a few goals in mind when going about this, but it does take a lot of time and there are many things I want to do with my week off (including non-project related activities like simply playing [Final Fantasy XVI](https://na.finalfantasyxvi.com/) or [Diablo 4](https://diablo4.blizzard.com/en-us/) :upside_down_face:).
+I had a few goals in mind when going about this, but it does take a lot of time and there are many things I want to do with my week off (including non-project related activities like simply playing [Final Fantasy XVI](https://na.finalfantasyxvi.com/) or [Diablo 4](https://diablo4.blizzard.com/en-us/) 🙃).
 
 Here were my main requirements:
 
@@ -77,10 +77,10 @@ No, nothing is. However, it is a surprisingly easy site to manage and navigate a
 
 Things I want to add:
 
-- ~~Ability to pin blog posts for ones I want to keep updated (ex. reading lists)~~ :check_mark:
+- ~~Ability to pin blog posts for ones I want to keep updated (ex. reading lists)~~ ✅
 - Blog post table of contents
 - Project demo section to show off a few things I have built over the years
 
 I am still very much in the early stages of learning Hugo, but I think I will enjoy making this site a better fit for me. For additional fun, it should be easy enough to try out various themes if I feel so inclined.
 
-And this site is _still served from Cloudflare_, so... some things never change. :high_voltage:
+And this site is _still served from Cloudflare_, so... some things never change. 🚀

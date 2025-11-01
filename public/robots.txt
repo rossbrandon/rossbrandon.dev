@@ -1,4 +1,30 @@
 User-agent: *
 Allow: /
 
+# Opt out of model training
+User-agent: Google-Extended
+Disallow: /
+User-agent: GPTBot
+Disallow: /
+User-agent: Applebot-Extended
+Disallow: /
+User-agent: CCBot
+Disallow: /
+User-agent: Meta-ExternalAgent
+Disallow: /
+User-agent: Meta-ExternalFetcher
+Disallow: /
+User-agent: ClaudeBot
+Disallow: /
+
+# Keep discovery in AI search/answers (ChatGPT, Perplexity, Claude, Amazon)
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Claude-Web
+Allow: /
+User-agent: Amazonbot
+Allow: /
+
 Sitemap: https://rossbrandon.dev/sitemap-index.xml

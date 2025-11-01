@@ -18,7 +18,7 @@ tags:
 
 Most of the time, when writing code, I can be found with my MacBook. I prefer Mac OS for development work as it is, in my opinion, the perfect balance between performance and usability. Mac OS does a great job of providing the power of Linux with the simplicity and elegance expected when using an Apple product. I know that statement is blasphemous to some, but it is what works for me.
 
-I have used many machines over my lifetime beginning with an IBM 386 back in the 1990's :old_man:. I have had a Dell desktop, many Apple laptops, an IBM laptop (when Thinkpad was an IBM brand and not a Lenovo one), and have built two different desktop PCs for gaming (both Intel and AMD based).
+I have used many machines over my lifetime beginning with an IBM 386 back in the 1990's 👴. I have had a Dell desktop, many Apple laptops, an IBM laptop (when Thinkpad was an IBM brand and not a Lenovo one), and have built two different desktop PCs for gaming (both Intel and AMD based).
 
 #### Current Setup
 
@@ -104,7 +104,7 @@ wsl -t Ubuntu
 
 ## IDE Setup
 
-For the most part, IDEs running within Windows 11 interact smoothly with the WSL filesystem. VSCode does this seamlessly (and as mentioned above, it will even start the WSL VM if you access a project in that filesystem :beaming_face_with_smiling_eyes:). GoLand required a little more setup, but mostly just to tell the IDE to use the WSL distro as a run target. JetBrains provides [easy documentation](https://www.jetbrains.com/help/go/how-to-use-wsl-development-environment-in-product.html#local_project) for how to do this.
+For the most part, IDEs running within Windows 11 interact smoothly with the WSL filesystem. VSCode does this seamlessly (and as mentioned above, it will even start the WSL VM if you access a project in that filesystem 😃). GoLand required a little more setup, but mostly just to tell the IDE to use the WSL distro as a run target. JetBrains provides [easy documentation](https://www.jetbrains.com/help/go/how-to-use-wsl-development-environment-in-product.html#local_project) for how to do this.
 
 ## Wrap-up
 

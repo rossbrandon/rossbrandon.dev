@@ -72,8 +72,14 @@ import { RssIcon } from '@components/icons';
   }
 
   .footer-content > *:not(:last-child)::after {
-    content: '•';
-    padding: 0 5px;
+    content: '';
+    display: inline-block;
+    width: 0.35em;
+    height: 0.35em;
+    margin: 0 0.5em;
+    border-radius: 50%;
+    background: currentColor;
+    vertical-align: middle;
   }
 
   .footer-content > *:last-child {
@@ -100,7 +106,7 @@ import { RssIcon } from '@components/icons';
 
     .footer-content > *:not(:last-child)::after {
       content: '';
-      padding: 0;
+      display: none;
     }
   }
 </style>

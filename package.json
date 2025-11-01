@@ -13,6 +13,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "clean": "rm -rf dist node_modules .astro .pnpm-store",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
     "lint": "eslint .",

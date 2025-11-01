@@ -112,7 +112,7 @@ body {
     Helvetica,
     Arial,
     sans-serif;
-  font-display: auto;
+  font-display: swap;
   font-size: 1rem;
   line-height: 1.54;
   text-rendering: optimizeLegibility;
@@ -277,7 +277,7 @@ code {
     Andale Mono,
     Ubuntu Mono,
     monospace;
-  font-display: auto;
+  font-display: swap;
   font-feature-settings: normal;
   padding: 1px 6px;
   margin: 0 2px;
@@ -329,7 +329,7 @@ blockquote {
   &:before {
     content: '"';
     font-family: Georgia, serif;
-    font-display: auto;
+    font-display: swap;
     font-size: 3.875rem;
     position: absolute;
     left: -40px;

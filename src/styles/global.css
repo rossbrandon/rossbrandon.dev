@@ -1,5 +1,5 @@
-@import '@fontsource/inter/400.css';
-@import '@fontsource/inter/700.css';
+/* Import Inter fonts with font-display: optional to prevent layout shift */
+@import './fonts.css';
 
 :root {
   /* Light theme color */
@@ -107,12 +107,10 @@ body {
     Inter,
     -apple-system,
     BlinkMacSystemFont,
-    'Roboto',
     'Segoe UI',
     Helvetica,
     Arial,
     sans-serif;
-  font-display: swap;
   font-size: 1rem;
   line-height: 1.54;
   text-rendering: optimizeLegibility;

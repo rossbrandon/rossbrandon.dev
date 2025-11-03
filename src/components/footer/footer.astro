@@ -9,6 +9,7 @@ import { RssIcon } from '@components/icons';
       <span>
         <a
           href="/sitemap-index.xml"
+          class="rss-icon"
           target="_blank"
           title="RSS"
           aria-label="RSS"
@@ -99,14 +100,21 @@ import { RssIcon } from '@components/icons';
       flex-direction: column;
     }
 
-    .footer-content {
+    .footer-inner:first-child .footer-content {
+      margin-top: 0;
+    }
+
+    .footer-inner:not(:first-child) .footer-content {
       flex-direction: column;
-      margin-top: 10px;
     }
 
     .footer-content > *:not(:last-child)::after {
       content: '';
       display: none;
+    }
+
+    .rss-icon {
+      margin-left: 0.5em;
     }
   }
 </style>

@@ -108,13 +108,11 @@ import { RssIcon } from '@components/icons';
       flex-direction: column;
     }
 
-    .footer-content > *:not(:last-child)::after {
+    .footer-inner:not(:first-child)
+      .footer-content
+      > *:not(:last-child)::after {
       content: '';
       display: none;
-    }
-
-    .rss-icon {
-      margin-left: 0.5em;
     }
   }
 </style>

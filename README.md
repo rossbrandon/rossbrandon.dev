@@ -2,23 +2,36 @@
 
 ## 🚀 Project Structure
 
-The Astro docs (which are incredible, btw) have a [reference project structure](https://docs.astro.build/en/basics/project-structure/). It is defintely worth checking out.
+The Astro docs (which are incredible, btw) have a [reference project structure](https://docs.astro.build/en/basics/project-structure/).
 
-Inside of the project, you'll see the following folders and files:
+Inside of the project, you'll see the following structure:
 
 ```text
 /
 ├── public/
-│   └── favicon.svg
+|   ├── favicon.svg
+│   └── robots.txt
 ├── src
 │   ├── assets
-│   │   └── astro.svg
+│   │   └── images
+│   ├── content
+│   │   └── posts
 │   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
+|   |   ├── heading
+│   │   └── etc
+│   │ layouts
+|   |   ├── base.astro
+│   │   └── layout.astro
+│   ├── pages
+│   │   ├── posts
+│   │   └── etc
+│   ├── styles
+│   │   ├── global.css
+│   │   └── etc
+│   ├── utils
+│   │   ├── content.ts
+│   │   └── etc
+|   └── content.config.ts
 └── package.json
 ```
 
@@ -34,6 +47,10 @@ All commands are run from the root of the project, from a terminal:
 | `pnpm preview`         | Preview your build locally, before deploying     |
 | `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `pnpm astro -- --help` | Get help using the Astro CLI                     |
+| `pnpm format:check`    | Check file formatting with Prettier              |
+| `pnpm format`          | Fix file formatting with Prettier                |
+| `pnpm lint`            | Check for linting errors with ESLint             |
+| `pnpm lint:fix`        | Fix linting errors with ESLint                   |
 
 ## MCP
 

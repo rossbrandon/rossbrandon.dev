@@ -35,12 +35,12 @@ After about a year and a half with Magento, Adobe acquired and officially transf
 
 Enter the return of Java! After my brief stint as a PHP developer, I was presented with the amazing opportunity to work on a new _Data Solutions_ team building a shiny feature being developed for Adobe Commerce in order to catch up with the e-commerce market: [Product Recommendations](https://experienceleague.adobe.com/docs/commerce-merchant-services/product-recommendations/overview.html?lang=en). This was the first step in moderizing the monolith stack into a multi-tenant SaaS offering with a very key feature: [personalization](https://experienceleague.adobe.com/docs/commerce-operations/operational-playbook/product/personalization.html?lang=en).
 
-From there, I asked to stay on the Data Solutions team permanently and became the Product Recommendations team lead, designing and developing many of our SaaS microservices that are in high use today thoughout Adobe Commerce.
+From there, I asked to stay on the Data Solutions team permanently and became the Product Recommendations team lead, designing and developing many of our SaaS microservices that are in high use today throughout Adobe Commerce. We grew from a small, scrappy greenfield team into a large organization: #corporate-life.
 
 #### currently...
 
-I currently reside as a software architect for two teams within the Data Solutions organization (we grew from a small, scrappy greenfield team into a large organization -> #corporate-life). My primary focus is delivering service oriented architecture transformation though our _Core SaaS_ team as well as driving innovation in our unified data indexing and ranking platform powering our [live search](https://experienceleague.adobe.com/docs/commerce-merchant-services/live-search/overview.html?lang=en) and recommender services with more to come!
+I currently reside as a software architect (who is still heavily involved in writing code 🤓) for Adobe [Commerce Optimizer](https://business.adobe.com/products/commerce/commerce-optimizer.html). My primary focus is designing and delivering incredibly powerful, [personalized](https://business.adobe.com/products/commerce/commerce-personalization.html), and [fast](https://business.adobe.com/products/commerce/digital-storefront-experiences.html) e-commerce solutions to our customers (especially with complex businesses and use cases) and their shoppers.
 
-Technologies I frequently use at Adobe Commerce: Java, Spring Boot, DynamoDB, MongoDB, gRPC/REST/GraphQL, Snowplow, Snowflake, Elasticsearch, Kubernetes, SQS/Kafka, and I still dabble in frontend occasionally (SaaS hosted Javascript in React).
+Technologies I frequently use at Adobe Commerce: Java, Typescript, Python, Go, MongoDB, DynamoDB, gRPC/REST/GraphQL, Snowflake, Elasticsearch, SQS/Kafka, and Argo/Kubernetes.
 
-Overall, I absolutely love what I do and I am proud to be a part of building the next generation e-commerce platform at Adobe. Check back for updates on other exiting initiatives my teams will be a part of in the future!
+Overall, I absolutely love what I do and I am proud to be a part of building the next generation e-commerce platform at Adobe. Check back for updates on other exiting initiatives my team will be a part of in the future!

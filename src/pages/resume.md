@@ -29,7 +29,8 @@ building scalable multi-tenant saas solutions.
 
 _Feb 2022 - Present_
 
-- Continuously delivering service oriented architecture transformation though our Core SaaS team as well as driving innovation in our unified data indexing and ranking platform powering our live search and recommender services.
+- Designing and delivering next-generation e-commerce scale and performance with Adobe Commerce Optimizer.
+- Continuously transforming service oriented architecture though our core services teams as well as driving innovation in our AI, machine learning, and intelligent data pipelines powering product discovery and recommendation services.
 
 #### Senior Software Engineer
 
@@ -151,20 +152,18 @@ Bachelor's Degree
 
 ## Skills
 
-|                          |                                                                                   |
-| ------------------------ | --------------------------------------------------------------------------------- |
-| _Languages_              | Java, JavaScript, TypeScript, HTML, CSS, PHP, Shell Scripting, Go                 |
-| _Backend Frameworks_     | Spring Boot, NodeJS, Nest, Laravel                                                |
-| _Frontend Frameworks_    | React, jQuery, KnockoutJS                                                         |
-| _Protocols_              | gRPC/Protobuf, REST, GraphQL                                                      |
-| _Version Control_        | Git, GitHub, Subversion                                                           |
-| _Continuous Integration_ | Jenkins, Github Actions                                                           |
-| _Testing_                | JUnit, PHPUnit, Jest                                                              |
-| _Cloud_                  | Amazon Web Services, Azure                                                        |
-| _Databases_              | MongoDB, DynamoDB, MySQL, Oracle, SQL Server, MySQL, PostgreSQL, Redis, Snowflake |
-| _Search_                 | Elasticsearch, Vector Search                                                      |
-| _Eventing_               | Snowplow                                                                          |
-| _Messaging_              | SNS, SQS                                                                          |
-| _Monitoring_             | Splunk, New Relic, Prometheus, Grafana, Sentry, Pager Duty                        |
-| _Development Lifecycle_  | Jira, Confluence                                                                  |
-| _Design_                 | Lucidchart                                                                        |
+|                         |                                                                        |
+| ----------------------- | ---------------------------------------------------------------------- |
+| _Languages_             | Java, TypeScript, Go, Python, PHP                                      |
+| _Backend Frameworks_    | Spring Boot, NodeJS, Laravel                                           |
+| _Frontend Frameworks_   | React, Next.js, Solid, Astro                                           |
+| _Protocols_             | gRPC/Protobuf, REST, GraphQL                                           |
+| _Version Control_       | Git, GitHub, Subversion                                                |
+| _Deployment_            | Kubernetes, Argo, Gihub Actions, Jenkins                               |
+| _Cloud_                 | Amazon Web Services, Azure, Google Cloud                               |
+| _Databases_             | MongoDB, DynamoDB, MySQL, Oracle, SQL Server, MySQL, PostgreSQL, Redis |
+| _Search_                | Elasticsearch, Vector Search                                           |
+| _Machine Learning_      | Recommender systems, Behavioral event collection/analysis              |
+| _Messaging_             | SNS, SQS, Kafka                                                        |
+| _Monitoring_            | Splunk, New Relic, Prometheus, Grafana, Sentry, Pager Duty             |
+| _Development Lifecycle_ | Jira, Confluence, Miro, Lucidchart                                     |

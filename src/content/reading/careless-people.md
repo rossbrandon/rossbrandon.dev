@@ -7,5 +7,5 @@ tags:
   - business
   - life
 status: Finished
-finishedDate: 2025-05-18T00:00:00-05:00
+finishedDate: 2025-05-18T12:00:00-06:00
 ---

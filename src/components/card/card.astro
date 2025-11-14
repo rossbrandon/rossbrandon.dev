@@ -1,8 +1,19 @@
 ---
 import { Image } from 'astro:assets';
 import { ArrowIcon } from '@components/icons';
+import { getYearFromDate } from '@utils/date';
 
-const { title, author, cover, link, status, tags } = Astro.props;
+const { title, author, cover, link, status, tags, finishedDate } = Astro.props;
+const statusText = () => {
+  switch (status) {
+    case 'Finished':
+      return `Read in ${getYearFromDate(finishedDate)}`;
+    case 'Reading':
+      return 'Currently Reading';
+    case 'To Read':
+      return 'To Read';
+  }
+};
 ---
 
 <div class="card">
@@ -20,6 +31,13 @@ const { title, author, cover, link, status, tags } = Astro.props;
         <h2>{title}</h2>
       </a>
       <p class="author">{author}</p>
+      {
+        status && (
+          <p class={`status status-${status.toLowerCase().replace(' ', '-')}`}>
+            {statusText()}
+          </p>
+        )
+      }
     </div>
     <div class="card-meta">
       <div class="tags">
@@ -71,6 +89,9 @@ const { title, author, cover, link, status, tags } = Astro.props;
       --tag-border: #3b5c8a;
       --tag-color: #bdd4f7;
       --tag-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      --status-finished: #34d399;
+      --status-reading: #60a5fa;
+      --status-to-read: #94a3b8;
     }
   }
 
@@ -88,6 +109,9 @@ const { title, author, cover, link, status, tags } = Astro.props;
     --tag-border: #3b5c8a;
     --tag-color: #bdd4f7;
     --tag-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    --status-finished: #34d399;
+    --status-reading: #60a5fa;
+    --status-to-read: #94a3b8;
   }
 
   :root[data-theme='light'] {
@@ -105,6 +129,9 @@ const { title, author, cover, link, status, tags } = Astro.props;
     --tag-border: #b4c8ff;
     --tag-color: #1c3faa;
     --tag-shadow: inset 0 1px 0 #ffffffcc;
+    --status-finished: #059669;
+    --status-reading: #2563eb;
+    --status-to-read: #64748b;
   }
 
   .card {
@@ -183,6 +210,27 @@ const { title, author, cover, link, status, tags } = Astro.props;
     text-align: left;
   }
 
+  .status {
+    font-size: 0.75rem;
+    font-weight: 800;
+    font-style: italic;
+    margin: 0.25rem 0 0 0;
+    text-align: left;
+    letter-spacing: 0.025em;
+  }
+
+  .status-finished {
+    color: var(--status-finished);
+  }
+
+  .status-reading {
+    color: var(--status-reading);
+  }
+
+  .status-to-read {
+    color: var(--status-to-read);
+  }
+
   .description {
     margin: 0 0 1rem 0;
     color: var(--color-secondary);
@@ -208,7 +256,7 @@ const { title, author, cover, link, status, tags } = Astro.props;
   .tag {
     background-color: var(--tag-bg);
     color: var(--tag-color);
-    padding: 0.3rem 0.75rem;
+    padding: 0.25rem 0.5rem;
     border-radius: 0.5rem;
     border: 1px solid var(--tag-border);
     font-size: 0.75rem;

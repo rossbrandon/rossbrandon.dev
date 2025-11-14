@@ -9,7 +9,7 @@ tags:
   - architecture
   - uncle bob
 status: Finished
-finishedDate: 2022-01-01T00:00:00-05:00
+finishedDate: 2022-01-01T12:00:00-06:00
 ---
 
 Another one of Robert Martin's classics. Clean Architecture is similar to Clean Code but focuses more on the design aspects of programming. It not only addresses clean code design, but clean architecture practicies when designing end to end systems. Expanding on concepts brought up in Clean Code, this book takes them to the next level and applies them at higher levels.

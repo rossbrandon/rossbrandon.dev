@@ -7,5 +7,5 @@ tags:
   - business
   - productivity
 status: Finished
-finishedDate: 2025-08-23T00:00:00-05:00
+finishedDate: 2025-08-23T12:00:00-06:00
 ---

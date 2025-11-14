@@ -7,5 +7,4 @@ tags:
   - programming
   - software
 status: To Read
-hidden: true
 ---

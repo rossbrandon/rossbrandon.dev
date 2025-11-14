@@ -13,4 +13,10 @@ const getDayFromDate = (date: Date) => {
   });
 };
 
-export { formatDate, getDayFromDate };
+const getYearFromDate = (date: Date) => {
+  return date.toLocaleDateString(undefined, {
+    year: 'numeric',
+  });
+};
+
+export { formatDate, getDayFromDate, getYearFromDate };

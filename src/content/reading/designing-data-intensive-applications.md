@@ -8,5 +8,5 @@ tags:
   - software
   - architecture
 status: Finished
-finishedDate: 2024-01-01T00:00:00-05:00
+finishedDate: 2024-01-01T12:00:00-06:00
 ---

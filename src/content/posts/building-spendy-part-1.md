@@ -1,7 +1,7 @@
 ---
 layout: ../layouts/page.astro
 title: Building Spendy Part 1
-date: 2023-07-15T00:00:00-05:00
+date: 2023-07-15T12:00:00-06:00
 author: Ross Brandon
 categories:
   - building-stuff

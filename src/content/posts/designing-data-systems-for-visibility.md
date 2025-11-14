@@ -1,7 +1,7 @@
 ---
 layout: ../layouts/page.astro
 title: Designing Data Systems for Visibility & Management
-date: 2023-11-29T00:00:00-05:00
+date: 2023-11-29T12:00:00-06:00
 author: Ross Brandon
 categories:
   - building-stuff

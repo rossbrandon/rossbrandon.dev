@@ -1,7 +1,7 @@
 ---
 layout: ../layouts/page.astro
 title: Reading List
-date: 2023-07-02T00:00:00-05:00
+date: 2023-07-02T12:00:00-06:00
 author: Ross Brandon
 pinned: true
 tags:

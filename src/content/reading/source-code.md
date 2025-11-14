@@ -7,5 +7,5 @@ tags:
   - business
   - software
 status: Finished
-finishedDate: 2025-06-12T00:00:00-05:00
+finishedDate: 2025-06-12T12:00:00-06:00
 ---

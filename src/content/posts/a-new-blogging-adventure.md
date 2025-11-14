@@ -1,7 +1,7 @@
 ---
 layout: ../layouts/page.astro
 title: A New Blogging Adventure?
-date: 2023-07-01T00:00:00-05:00
+date: 2023-07-01T12:00:00-06:00
 author: Ross Brandon
 categories:
   - getting-started

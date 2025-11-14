@@ -1,9 +1,5 @@
 ---
-const navItems = [
-  { href: '/about', label: 'About Me' },
-  { href: '/posts', label: 'Blog' },
-  { href: '/resume', label: 'Resume' },
-];
+
 ---
 
 <button
@@ -22,13 +18,19 @@ const navItems = [
 
 <nav id="main-nav" class="nav" aria-label="Main navigation">
   <ul class="nav-inner">
-    {
-      navItems.map((item) => (
-        <li>
-          <a href={item.href}>{item.label}</a>
-        </li>
-      ))
-    }
+    <li>
+      <a href="/about">About Me</a>
+    </li>
+    <li>
+      <div class="read-write-group">
+        <a href="/reading">Read</a>
+        <span>/</span>
+        <a href="/posts">Write</a>
+      </div>
+    </li>
+    <li>
+      <a href="/resume">Resume</a>
+    </li>
   </ul>
 </nav>
 
@@ -165,6 +167,24 @@ const navItems = [
           text-decoration: none;
           color: var(--color-variant);
         }
+      }
+    }
+
+    .read-write-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      @media (max-width: 684px) {
+        flex-direction: row;
+      }
+
+      a {
+        margin-right: 0;
+      }
+
+      span {
+        color: var(--color);
       }
     }
   }

@@ -76,9 +76,16 @@ const getAllCategories = (posts: CollectionEntry<'posts'>[]): Set<string> => {
   return allCategories;
 };
 
+/**
+ * Gets all reading data sorted by id
+ */
+const getReadingData = async (): Promise<CollectionEntry<'reading'>[]> =>
+  (await getCollection('reading')).sort((a, b) => a.data.order - b.data.order);
+
 export {
   getAllCategories,
   getAllTags,
+  getReadingData,
   getSortedPosts,
   getSortedYears,
   groupPostsByYear,

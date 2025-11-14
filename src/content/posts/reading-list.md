@@ -8,6 +8,7 @@ tags:
   - reading
   - learning
   - tech
+hidden: true
 ---
 
 ## Things I've been reading

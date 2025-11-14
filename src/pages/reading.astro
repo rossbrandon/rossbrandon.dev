@@ -1,0 +1,61 @@
+---
+import { Card } from '@components/card';
+import Base from '@layouts/base.astro';
+import { getReadingData } from '@utils/content';
+
+const readingData = await getReadingData();
+---
+
+<Base>
+  <main>
+    <h1>Reading</h1>
+    <div class="reading-cards">
+      {readingData.map((reading) => <Card {...reading.data} />)}
+    </div>
+  </main>
+</Base>
+
+<style>
+  main {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  .reading-cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    justify-content: center;
+    align-items: stretch;
+    grid-auto-rows: 1fr;
+  }
+
+  @media (max-width: 1024px) {
+    .reading-cards {
+      grid-template-columns: repeat(2, minmax(280px, 1fr));
+      gap: 1.75rem;
+    }
+  }
+
+  @media (max-width: 684px) {
+    main {
+      padding: 2rem 1rem;
+    }
+
+    .reading-cards {
+      grid-template-columns: minmax(0, min(100%, 28rem));
+      justify-content: center;
+      gap: 1.25rem;
+    }
+  }
+</style>

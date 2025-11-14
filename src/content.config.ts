@@ -1,4 +1,4 @@
-import { glob } from 'astro/loaders';
+import { file, glob } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
 
 const pages = defineCollection({
@@ -29,4 +29,23 @@ const posts = defineCollection({
   }),
 });
 
-export const collections = { pages, posts };
+const reading = defineCollection({
+  loader: glob({
+    pattern: '*.md',
+    base: './src/content/reading',
+  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      author: z.string(),
+      cover: image(),
+      link: z.string(),
+      tags: z.array(z.string()).optional(),
+      order: z.number(),
+      status: z.enum(['To Read', 'Reading', 'Finished']),
+      finishedDate: z.date().optional(),
+      notes: z.string().optional(),
+    }),
+});
+
+export const collections = { pages, posts, reading };

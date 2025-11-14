@@ -1,3 +1,4 @@
+export { default as ArrowIcon } from './arrow-icon.astro';
 export { default as CalendarIcon } from './calendar-icon.astro';
 export { default as ClockIcon } from './clock-icon.astro';
 export { default as FileTextIcon } from './file-text-icon.astro';

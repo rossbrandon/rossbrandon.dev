@@ -41,10 +41,10 @@ const reading = defineCollection({
       cover: image(),
       link: z.string(),
       tags: z.array(z.string()).optional(),
-      order: z.number(),
       status: z.enum(['To Read', 'Reading', 'Finished']),
       finishedDate: z.date().optional(),
       notes: z.string().optional(),
+      hidden: z.boolean().optional().default(false),
     }),
 });
 

@@ -1,7 +1,8 @@
 ---
 import { Image } from 'astro:assets';
+import { ArrowIcon } from '@components/icons';
 
-const { title, author, cover, description, link, tags } = Astro.props;
+const { title, author, cover, link, status, tags } = Astro.props;
 ---
 
 <div class="card">
@@ -10,10 +11,16 @@ const { title, author, cover, description, link, tags } = Astro.props;
   </div>
   <div class="card-content">
     <div>
-      <h2>{title}</h2>
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="title-link"
+      >
+        <h2>{title}</h2>
+      </a>
       <p class="author">{author}</p>
     </div>
-    <p class="description">{description}</p>
     <div class="card-meta">
       <div class="tags">
         {tags.map((tag: string[]) => <span class="tag">{tag}</span>)}
@@ -25,21 +32,7 @@ const { title, author, cover, description, link, tags } = Astro.props;
         class="read-more-btn"
       >
         Read more
-        <svg
-          class="arrow-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M19 12H5m14 0-4 4m4-4-4-4"></path>
-        </svg>
+        <ArrowIcon />
       </a>
     </div>
   </div>
@@ -57,10 +50,10 @@ const { title, author, cover, description, link, tags } = Astro.props;
     --button-color: #666;
     --button-hover-background: #efefef;
     --button-hover-color: #0f172a;
-    --tag-pill-bg: #eff4ff;
-    --tag-pill-border: #b4c8ff;
-    --tag-pill-color: #1c3faa;
-    --tag-pill-shadow: inset 0 1px 0 #ffffffcc;
+    --tag-bg: #eff4ff;
+    --tag-border: #b4c8ff;
+    --tag-color: #1c3faa;
+    --tag-shadow: inset 0 1px 0 #ffffffcc;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -74,10 +67,10 @@ const { title, author, cover, description, link, tags } = Astro.props;
       --button-color: #94a3b8;
       --button-hover-background: #95979b;
       --button-hover-color: #f8fafc;
-      --tag-pill-bg: #1e3a5f;
-      --tag-pill-border: #3b5c8a;
-      --tag-pill-color: #bdd4f7;
-      --tag-pill-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      --tag-bg: #1e3a5f;
+      --tag-border: #3b5c8a;
+      --tag-color: #bdd4f7;
+      --tag-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
     }
   }
 
@@ -91,10 +84,10 @@ const { title, author, cover, description, link, tags } = Astro.props;
     --button-color: #94a3b8;
     --button-hover-background: #4a5060;
     --button-hover-color: #f8fafc;
-    --tag-pill-bg: #1e3a5f;
-    --tag-pill-border: #3b5c8a;
-    --tag-pill-color: #bdd4f7;
-    --tag-pill-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    --tag-bg: #1e3a5f;
+    --tag-border: #3b5c8a;
+    --tag-color: #bdd4f7;
+    --tag-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
 
   :root[data-theme='light'] {
@@ -108,10 +101,10 @@ const { title, author, cover, description, link, tags } = Astro.props;
     --button-color: #666;
     --button-hover-background: #efefef;
     --button-hover-color: #0f172a;
-    --tag-pill-bg: #eff4ff;
-    --tag-pill-border: #b4c8ff;
-    --tag-pill-color: #1c3faa;
-    --tag-pill-shadow: inset 0 1px 0 #ffffffcc;
+    --tag-bg: #eff4ff;
+    --tag-border: #b4c8ff;
+    --tag-color: #1c3faa;
+    --tag-shadow: inset 0 1px 0 #ffffffcc;
   }
 
   .card {
@@ -174,6 +167,14 @@ const { title, author, cover, description, link, tags } = Astro.props;
     color: var(--color);
   }
 
+  .title-link {
+    text-decoration: none;
+  }
+
+  .title-link:hover {
+    text-decoration: underline;
+  }
+
   .author {
     font-size: 0.875rem;
     color: var(--color-secondary);
@@ -205,30 +206,30 @@ const { title, author, cover, description, link, tags } = Astro.props;
   }
 
   .tag {
-    background-color: var(--tag-pill-bg);
-    color: var(--tag-pill-color);
+    background-color: var(--tag-bg);
+    color: var(--tag-color);
     padding: 0.3rem 0.75rem;
-    border-radius: 999px;
-    border: 1px solid var(--tag-pill-border);
+    border-radius: 0.5rem;
+    border: 1px solid var(--tag-border);
     font-size: 0.75rem;
     font-weight: 500;
     letter-spacing: 0.01em;
-    box-shadow: var(--tag-pill-shadow);
+    box-shadow: var(--tag-shadow);
   }
 
   .read-more-btn {
     display: inline-flex;
     align-items: center;
     align-self: flex-start;
-    gap: 0.35rem;
+    gap: 0.25rem;
     color: var(--button-color);
     background-color: var(--button-background);
     border: 1px solid var(--button-border);
     font-weight: 500;
     line-height: 1.25rem;
-    border-radius: 0.75rem;
+    border-radius: 0.5rem;
     font-size: 0.875rem;
-    padding: 0.55rem 1.2rem;
+    padding: 0.5rem 1rem;
     text-decoration: none;
     box-shadow: var(--button-shadow);
   }

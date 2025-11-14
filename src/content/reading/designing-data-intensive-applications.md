@@ -7,6 +7,6 @@ tags:
   - programming
   - software
   - architecture
-status: Reading
-order: 5
+status: Finished
+finishedDate: 2024-01-01T00:00:00-05:00
 ---

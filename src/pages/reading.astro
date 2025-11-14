@@ -8,7 +8,7 @@ const readingData = await getReadingData();
 
 <Base>
   <main>
-    <h1>Reading</h1>
+    <h1>Things I've been reading</h1>
     <div class="reading-cards">
       {readingData.map((reading) => <Card {...reading.data} />)}
     </div>
@@ -17,7 +17,7 @@ const readingData = await getReadingData();
 
 <style>
   main {
-    max-width: 1200px;
+    max-width: 1024px;
     width: 100%;
     margin: 0 auto;
     padding: 3rem 1.5rem;
@@ -27,7 +27,8 @@ const readingData = await getReadingData();
   }
 
   h1 {
-    margin: 0;
+    margin: 0.5rem;
+    text-align: left;
   }
 
   .reading-cards {
@@ -38,13 +39,6 @@ const readingData = await getReadingData();
     justify-content: center;
     align-items: stretch;
     grid-auto-rows: 1fr;
-  }
-
-  @media (max-width: 1024px) {
-    .reading-cards {
-      grid-template-columns: repeat(2, minmax(280px, 1fr));
-      gap: 1.75rem;
-    }
   }
 
   @media (max-width: 684px) {

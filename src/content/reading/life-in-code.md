@@ -7,6 +7,5 @@ tags:
   - programming
   - software
   - life
-status: To Read
-order: 8
+status: Reading
 ---

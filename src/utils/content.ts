@@ -6,11 +6,11 @@ import { getCollection } from 'astro:content';
  */
 const getSortedPosts = async (): Promise<CollectionEntry<'posts'>[]> =>
   (await getCollection('posts'))
+    .filter((post) => !post.data.hidden)
     .sort(
       (a, b) =>
         new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
-    )
-    .filter((post) => !post.data.hidden);
+    );
 
 /**
  * Separates posts into pinned and regular posts
@@ -77,10 +77,41 @@ const getAllCategories = (posts: CollectionEntry<'posts'>[]): Set<string> => {
 };
 
 /**
- * Gets all reading data sorted by id
+ * Gets all reading data sorted by finishedDate (desc) then title
  */
-const getReadingData = async (): Promise<CollectionEntry<'reading'>[]> =>
-  (await getCollection('reading')).sort((a, b) => a.data.order - b.data.order);
+const getReadingData = async (): Promise<CollectionEntry<'reading'>[]> => {
+  const collection = await getCollection('reading');
+  return collection
+    .filter((item) => !item.data.hidden)
+    .sort((a, b) => {
+      // Items being read come first
+      if (a.data.status === 'Reading') {
+        return -1;
+      }
+
+      const aFinished = a.data.finishedDate;
+      const bFinished = b.data.finishedDate;
+
+      // Both have finishedDate - sort by date descending
+      if (aFinished && bFinished) {
+        return new Date(bFinished).getTime() - new Date(aFinished).getTime();
+      }
+
+      // Only a has finishedDate - a comes first
+      if (aFinished && !bFinished) {
+        return -1;
+      }
+
+      // Only b has finishedDate - b comes first
+      if (!aFinished && bFinished) {
+        return 1;
+      }
+
+      // If nothing else matches, sort by title
+      return a.data.title.localeCompare(b.data.title);
+    });
+  return collection;
+};
 
 export {
   getAllCategories,

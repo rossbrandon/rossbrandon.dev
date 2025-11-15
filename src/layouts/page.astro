@@ -38,6 +38,11 @@ const pageTitle = propPageTitle ?? frontmatter?.pageTitle ?? title;
     padding-top: 2rem;
     padding-bottom: 3rem;
     text-align: left;
+
+    @media (max-width: 684px) {
+      width: 100%;
+      padding: 1rem 2rem;
+    }
   }
 
   article {
@@ -51,21 +56,14 @@ const pageTitle = propPageTitle ?? frontmatter?.pageTitle ?? title;
 
   h1 {
     font-size: 2.5rem;
+
+    @media (max-width: 684px) {
+      font-size: 2rem;
+    }
   }
 
   time {
     color: var(--color-secondary);
     font-size: 0.9rem;
-  }
-
-  @media (max-width: 684px) {
-    .page-content {
-      width: 100%;
-      padding: 1rem 2rem;
-    }
-
-    h1 {
-      font-size: 2rem;
-    }
   }
 </style>

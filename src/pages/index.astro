@@ -60,6 +60,10 @@ import Base from '@layouts/base.astro';
   h1 {
     margin-bottom: 1rem;
     font-weight: 700;
+
+    @media (max-width: 684px) {
+      font-size: 2rem;
+    }
   }
 
   .social-icons {
@@ -82,11 +86,5 @@ import Base from '@layouts/base.astro';
   .social-icons svg {
     width: 24px;
     height: 24px;
-  }
-
-  @media (max-width: 684px) {
-    h1 {
-      font-size: 2rem;
-    }
   }
 </style>

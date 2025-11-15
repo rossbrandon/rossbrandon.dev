@@ -166,6 +166,11 @@ const { Content, remarkPluginFrontmatter } = await render(post);
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 684px) {
+      flex-direction: column;
+      gap: 10px;
+    }
   }
 
   .pagination__buttons a {
@@ -186,10 +191,18 @@ const { Content, remarkPluginFrontmatter } = await render(post);
     cursor: pointer;
     appearance: none;
     background: var(--background-secondary);
+
+    @media (max-width: 684px) {
+      max-width: 100%;
+    }
   }
 
   .button + .button {
     margin-left: 10px;
+
+    @media (max-width: 684px) {
+      margin-left: 0;
+    }
   }
 
   .button a {
@@ -213,20 +226,5 @@ const { Content, remarkPluginFrontmatter } = await render(post);
 
   .button.previous .button__icon {
     margin-right: 8px;
-  }
-
-  @media (max-width: 684px) {
-    .pagination__buttons {
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .button {
-      max-width: 100%;
-    }
-
-    .button + .button {
-      margin-left: 0;
-    }
   }
 </style>

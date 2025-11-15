@@ -24,11 +24,20 @@ const readingData = await getReadingData();
     display: flex;
     flex-direction: column;
     gap: 2rem;
+
+    @media (max-width: 684px) {
+      padding: 2rem 1rem;
+    }
   }
 
   h1 {
     margin: 0.5rem;
     text-align: left;
+    font-size: 2.5rem;
+
+    @media (max-width: 684px) {
+      font-size: 2rem;
+    }
   }
 
   .reading-cards {
@@ -39,14 +48,8 @@ const readingData = await getReadingData();
     justify-content: center;
     align-items: stretch;
     grid-auto-rows: 1fr;
-  }
 
-  @media (max-width: 684px) {
-    main {
-      padding: 2rem 1rem;
-    }
-
-    .reading-cards {
+    @media (max-width: 684px) {
       grid-template-columns: minmax(0, min(100%, 28rem));
       justify-content: center;
       gap: 1.25rem;

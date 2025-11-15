@@ -100,8 +100,6 @@ An awesome next step is to build in delete patterns for our notifications/messag
 
 ### UI Tooling
 
-_Note:_ I am not an UX designer and the examples shown here are poorly constructed widgets that I threw together using [The Tremor React Library](https://tremor.so). Don't judge me... I'm a data guy.
-
 While the solutions we are discussing here should be API first to enable internal consumers to build their own tooling off of a centralized data management platform (think event based data deletion tiggers, automation on data reconciliation analysis, etc), I do not want to discount the value of having good UX around this data. We have the ability to create powerful interfaces for both internal teams and our users themselves if we see fit.
 
 #### External User Facing View

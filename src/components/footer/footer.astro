@@ -95,24 +95,26 @@ import { RssIcon } from '@components/icons';
     vertical-align: middle;
   }
 
-  @media (max-width: 900px) {
-    .footer-inner {
-      flex-direction: column;
-    }
-
-    .footer-inner:first-child .footer-content {
+  .footer-inner:first-child .footer-content {
+    @media (max-width: 900px) {
       margin-top: 0;
     }
+  }
 
-    .footer-inner:not(:first-child) .footer-content {
+  .footer-inner:not(:first-child) .footer-content {
+    @media (max-width: 900px) {
       flex-direction: column;
-    }
 
-    .footer-inner:not(:first-child)
-      .footer-content
       > *:not(:last-child)::after {
-      content: '';
-      display: none;
+        content: '';
+        display: none;
+      }
+    }
+  }
+
+  .footer-inner {
+    @media (max-width: 900px) {
+      flex-direction: column;
     }
   }
 </style>

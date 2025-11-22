@@ -8,4 +8,5 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkReadingTime],
   },
+  prefetch: true,
 });

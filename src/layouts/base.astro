@@ -1,4 +1,5 @@
 ---
+import { Font } from 'astro:assets';
 import { Footer } from '@components/footer';
 import { Heading } from '@components/heading';
 
@@ -21,6 +22,7 @@ const pageTitle = propPageTitle ?? 'Ross Brandon';
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+    <Font cssVariable="--font-inter" preload />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
   </head>

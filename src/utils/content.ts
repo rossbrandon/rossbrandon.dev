@@ -85,8 +85,11 @@ const getReadingData = async (): Promise<CollectionEntry<'reading'>[]> => {
     .filter((item) => !item.data.hidden)
     .sort((a, b) => {
       // Items being read come first
-      if (a.data.status === 'Reading') {
+      if (a.data.status === 'Reading' && b.data.status !== 'Reading') {
         return -1;
+      }
+      if (b.data.status === 'Reading' && a.data.status !== 'Reading') {
+        return 1;
       }
 
       const aFinished = a.data.finishedDate;
@@ -110,7 +113,6 @@ const getReadingData = async (): Promise<CollectionEntry<'reading'>[]> => {
       // If nothing else matches, sort by title
       return a.data.title.localeCompare(b.data.title);
     });
-  return collection;
 };
 
 export {

@@ -7,5 +7,6 @@ tags:
   - business
   - productivity
   - software
-status: Reading
+status: Finished
+finishedDate: 2026-04-07T08:00:00-06:00
 ---

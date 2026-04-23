@@ -2,6 +2,7 @@
 layout: ../layouts/page.astro
 title: 'Resume'
 pageTitle: 'Resume :: Ross Brandon'
+description: 'Professional resume of Ross Brandon — Software Architect at Adobe Commerce.'
 date: 2023-07-01T00:00:00-05:00
 author: 'Ross Brandon'
 tags: ['resume']

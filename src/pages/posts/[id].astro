@@ -40,18 +40,42 @@ export const getStaticPaths = async () => {
 const { post, prevPost, nextPost } = Astro.props;
 const title = post.data.title;
 const { Content, remarkPluginFrontmatter } = await render(post);
+const postUrl = new URL(`/posts/${post.id}`, Astro.site).href;
+
+const blogPostingJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  datePublished: post.data.date.toISOString(),
+  author: {
+    '@type': 'Person',
+    name: 'Ross Brandon',
+    url: 'https://rossbrandon.dev',
+  },
+  url: postUrl,
+  wordCount: remarkPluginFrontmatter.wordCount,
+  ...(post.data.tags && { keywords: post.data.tags }),
+};
 ---
 
 <Page
   title={title}
   pageTitle={title}
+  description={post.data.description}
+  ogType="article"
+  publishedDate={post.data.date.toISOString()}
   readingTime={remarkPluginFrontmatter.minutesRead}
 >
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(blogPostingJsonLd)}
+  />
   <Content />
   <ImageModal />
   <hr />
 
-  <div class="post-info">
+  <footer class="post-info">
     {
       post.data.tags && post.data.tags.length > 0 && (
         <p>
@@ -85,13 +109,15 @@ const { Content, remarkPluginFrontmatter } = await render(post);
 
     <p>
       <CalendarIcon />
-      {formatDate(post.data.date)}
+      <time datetime={post.data.date.toISOString()}>
+        {formatDate(post.data.date)}
+      </time>
     </p>
-  </div>
+  </footer>
 
   {
     (prevPost || nextPost) && (
-      <div class="pagination">
+      <nav class="pagination" aria-label="Post navigation">
         <div class="pagination__buttons">
           {prevPost && (
             <span class="button previous">
@@ -110,7 +136,7 @@ const { Content, remarkPluginFrontmatter } = await render(post);
             </span>
           )}
         </div>
-      </div>
+      </nav>
     )
   }
 </Page>

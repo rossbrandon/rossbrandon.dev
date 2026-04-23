@@ -2,6 +2,7 @@
 layout: ../layouts/page.astro
 title: 'About Me'
 pageTitle: 'About :: Ross Brandon'
+description: 'About Ross Brandon — Software Architect at Adobe Commerce with a passion for data-driven development.'
 date: 2023-07-01T00:00:00-05:00
 author: 'Ross Brandon'
 tags: ['about-us', 'about-me', 'contact']

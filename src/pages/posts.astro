@@ -17,9 +17,24 @@ const sortedYears = getSortedYears(postsByYear);
 
 const title = 'Posts';
 const pageTitle = 'Posts :: Ross Brandon';
+const description =
+  'Blog posts by Ross Brandon on software engineering, architecture, and development.';
+
+const collectionJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: title,
+  description,
+  url: new URL('/posts', Astro.site).href,
+};
 ---
 
-<Page title={title} pageTitle={pageTitle}>
+<Page title={title} pageTitle={pageTitle} description={description}>
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(collectionJsonLd)}
+  />
   <section class="posts">
     {
       pinnedPosts.length > 0 && (
@@ -56,7 +71,7 @@ const pageTitle = 'Posts :: Ross Brandon';
                   aria-label={post.data.title}
                 >
                   <span class="post-title">{post.data.title}</span>
-                  <span class="post-day">{getDayFromDate(post.data.date)}</span>
+                  <time class="post-day" datetime={post.data.date.toISOString()}>{getDayFromDate(post.data.date)}</time>
                 </a>
               </li>
             ))}

@@ -72,7 +72,7 @@ const pageTitle = `Category: ${category} :: Ross Brandon`;
                   aria-label={post.data.title}
                 >
                   <span class="post-title">{post.data.title}</span>
-                  <span class="post-day">{getDayFromDate(post.data.date)}</span>
+                  <time class="post-day" datetime={post.data.date.toISOString()}>{getDayFromDate(post.data.date)}</time>
                 </a>
               </li>
             ))}

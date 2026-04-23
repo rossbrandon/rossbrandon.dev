@@ -1,9 +1,30 @@
 ---
 import { GitHubIcon, LinkedInIcon, MailIcon } from '@components/icons';
 import Base from '@layouts/base.astro';
+
+const pageTitle = 'Ross Brandon — Software Engineer and Architect';
+const description = 'Ross Brandon — Software Engineer and Architect.';
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Ross Brandon',
+  url: 'https://rossbrandon.dev',
+  jobTitle: 'Software Architect',
+  worksFor: { '@type': 'Organization', name: 'Adobe' },
+  sameAs: [
+    'https://github.com/rossbrandon',
+    'https://www.linkedin.com/in/ross-brandon/',
+  ],
+};
 ---
 
-<Base>
+<Base pageTitle={pageTitle} description={description}>
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(personJsonLd)}
+  />
   <main>
     <h1>Ross Brandon</h1>
     <p>Software Engineer // Architect</p>

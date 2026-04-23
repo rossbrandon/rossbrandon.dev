@@ -7,6 +7,7 @@ const pages = defineCollection({
   schema: z.object({
     title: z.string(),
     pageTitle: z.string(),
+    description: z.string().optional(),
     date: z.date(),
     author: z.string(),
     tags: z.array(z.string()).optional(),
@@ -20,6 +21,7 @@ const posts = defineCollection({
   }),
   schema: z.object({
     title: z.string(),
+    description: z.string().optional(),
     date: z.date(),
     author: z.string(),
     pageTitle: z.string().optional(),

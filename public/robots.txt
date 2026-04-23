@@ -16,8 +16,14 @@ User-agent: Meta-ExternalFetcher
 Disallow: /
 User-agent: ClaudeBot
 Disallow: /
+User-agent: anthropic-ai
+Disallow: /
+User-agent: Bytespider
+Disallow: /
+User-agent: cohere-ai
+Disallow: /
 
-# Keep discovery in AI search/answers (ChatGPT, Perplexity, Claude, Amazon)
+# Keep discovery in AI search/answers (ChatGPT, Perplexity, Claude, Amazon, Google)
 User-agent: OAI-SearchBot
 Allow: /
 User-agent: PerplexityBot
@@ -25,6 +31,8 @@ Allow: /
 User-agent: Claude-Web
 Allow: /
 User-agent: Amazonbot
+Allow: /
+User-agent: Google-CloudVertexBot
 Allow: /
 
 Sitemap: https://rossbrandon.dev/sitemap-index.xml

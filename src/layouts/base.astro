@@ -5,8 +5,19 @@ import { Heading } from '@components/heading';
 
 import '@styles/global.css';
 
-const { pageTitle: propPageTitle } = Astro.props;
+const defaultDescription = 'Ross Brandon — Software Engineer and Architect.';
+
+const {
+  pageTitle: propPageTitle,
+  description: propDescription,
+  ogType = 'website',
+  ogImage,
+  publishedDate,
+} = Astro.props;
+
 const pageTitle = propPageTitle ?? 'Ross Brandon';
+const description = propDescription ?? defaultDescription;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <!doctype html>
@@ -15,16 +26,44 @@ const pageTitle = propPageTitle ?? 'Ross Brandon';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="author" content="Ross Brandon" />
-    <meta name="description" content="Ross Brandon's personal website" />
-    <meta
-      name="keywords"
-      content="Ross Brandon, software engineer, architect, portfolio, blog, reading list, resume"
-    />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
     <Font cssVariable="--font-inter" preload />
     <meta name="generator" content={Astro.generator} />
+
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content="Ross Brandon" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content="en_US" />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    {
+      publishedDate && (
+        <meta property="article:published_time" content={publishedDate} />
+      )
+    }
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+
     <title>{pageTitle}</title>
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'Ross Brandon',
+        url: 'https://rossbrandon.dev',
+      })}
+    />
+
+    <slot name="head" />
   </head>
   <body>
     <div class="container">

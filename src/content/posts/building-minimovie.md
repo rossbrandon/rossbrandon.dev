@@ -75,7 +75,7 @@ The UI is an SSR Astro application. All heavy and critical rendering happens on 
 
 The Go API and Postgres database both live on Railway's hobby plan which gives me 8GB RAM, 8 vCPUs, and 5GB of storage. More than enough for what I need with the exception of a small issue with shared disk I/O constraints during heavy Postgres read operations. Honestly, the Railway experience has been fantastic. The UI is simple and easy to deploy your desired architecture and the management/logging capabilities are enough for a hobby project like this one.
 
-![A screenshot of the Railway UI's architecture view.](@assets/images/minimovie/railway_architecture.png "A screenshot of the Railway UI's architecture view.")
+![The Railway UI architecture view.](@assets/images/minimovie/railway_architecture.png "The Railway UI architecture view.")
 
 The frontend is deployed on Cloudflare Workers using the [@astrojs/cloudflare](https://docs.astro.build/en/guides/integrations-guide/cloudflare/) adapter. As always, Cloudflare makes deployments easy and the Astro integration is dead simple. All I really had to do was configure a `wrangler.toml` file, link my repo to my Cloudflare owned domain, and let Cloudflare build and deploy on merge to `main`.
 
@@ -120,20 +120,27 @@ The majority of the data shown on MiniMovie is directly from or derived from the
 
 The landing page is intentionally minimal: a centered search box with basic branding and a dark/light theme toggle. I wanted this to set the stage for the application to be no frills and just content presented in an elegant way. _What are you watching?_
 
-![A screenshot of the MiniMovie landing page.](@assets/images/minimovie/landing.png 'A screenshot of the MiniMovie landing page.')
+<div style="display: flex; gap: 1rem; align-items: start;">
+
+![The MiniMovie landing page.](@assets/images/minimovie/landing.png 'The MiniMovie landing page.')
+
+![The MiniMovie landing page in dark mode.](@assets/images/minimovie/landing_dark.png 'The MiniMovie landing page in dark mode.')
+
+</div>
 
 ### Search
 
 Discovery is always the most important part of an application like this. Users want to find what they are looking for as fast as possible. Luckily, TMDB has a `multi_search` endpoint which lets us discover movies, TV shows, and people _at the same time_. When typing a term and hitting enter (or navigating directly to the `https://minimovie.info/search?q=frozen`) the search results page is SSR'd as usual. When entering a search term, results are dynamically retrieved by calling the worker endpoint to trigger SSR and then live swapped into the DOM via a client island.
 
-Desktop:
-![A screenshot of the MiniMovie search results page](@assets/images/minimovie/search.jpg 'A screenshot of the MiniMovie search results page')
+<div style="display: flex; gap: 1rem; align-items: start;">
 
-Mobile:
+![The MiniMovie search results page.](@assets/images/minimovie/search.png 'The MiniMovie search results page.')
 
 <div style="max-width: 350px; margin: 0 auto;">
 
-![A screenshot of the MiniMovie search results page in a mobile view](@assets/images/minimovie/search_mobile.png 'A screenshot of the MiniMovie search results page in a mobile view')
+![The MiniMovie search results page in a mobile view.](@assets/images/minimovie/search_mobile.png 'The MiniMovie search results page in a mobile view.')
+
+</div>
 
 </div>
 
@@ -151,23 +158,23 @@ Key crew members such as the creator, writer, director, and producer are shown r
 
 On mobile views these tabs respond to touch gestures so you can swipe left and right between them. The URL also tracks the state of the open tab for deep linking via a `?tab=where-to-watch` search param.
 
-![A screenshot of the series detail page for the TV Show "Mr. Robot".](@assets/images/minimovie/tv_series.jpg 'A screenshot of the series detail page for the TV Show "Mr. Robot".')
+![The series detail page for the TV show Mr. Robot.](@assets/images/minimovie/tv_series.png "The series detail page for the TV show Mr. Robot.")
 
-![A screenshot of the movie detail page for "Star Wars" showing the "Where to Watch" tab.](@assets/images/minimovie/wheretowatch.jpg 'A screenshot of the movie detail page for "Star Wars" showing the "Where to Watch" tab.')
+![The movie detail page for Star Wars showing the Where to Watch tab.](@assets/images/minimovie/where_to_watch.png "The movie detail page for Star Wars showing the Where to Watch tab.")
 
 ### People
 
 People pages show a combined filmography across movies and series highlighting the top eight things they are known for (using a custom algorithm based on TMDB rating, relevancy scores, and calculated role significance). If the person is part of a series, you can click through to see their episode-level appearance breakdown across all seasons. The _Interesting Info_ section provides data found on the web for the person's estimated net worth, family tree, and an interesting fact about them.
 
-![A screenshot of the person detail page for actress Natalie Portman.](@assets/images/minimovie/person.jpg 'A screenshot of the person detail page for actress Natalie Portman.')
+![The person detail page for actress Natalie Portman.](@assets/images/minimovie/person.png 'The person detail page for actress Natalie Portman.')
 
-![A screenshot of the person episodes page showing the episodes of "Mr. Robot" that Rami Malek appeared in.](@assets/images/minimovie/person_episodes.jpg 'A screenshot of the person episodes page showing the episodes of "Mr. Robot" that Rami Malek appeared in.')
+![The person episodes page showing Rami Malek in Mr. Robot.](@assets/images/minimovie/person_episodes.png "The person episodes page showing Rami Malek in Mr. Robot.")
 
 #### The Age Enrichment
 
 One of the key features I wanted MiniMovie to have was the ability to show the age an actor was when a film was released vs how old they are today. When you look up a movie or show, the API fetches credits from TMDB and then enriches each cast and crew member with their age at the time of release, comparing it to their current age (or age at their time of death) to display a simple line of text: _"Age 34 (now 83)"_. For me, this is such a common question I ask while watching basically anything and developing this feature was surprisingly complex.
 
-![A screenshot of Mark Hamill, Harrison Ford, and Carrie Fisher's person cards demonstrating the age enrichment display.](@assets/images/minimovie/age_enrichment.png "A screenshot of Mark Hamill, Harrison Ford, and Carrie Fisher's person cards demonstrating the age enrichment display.")
+![Mark Hamill, Harrison Ford, and Carrie Fisher person cards demonstrating the age enrichment display.](@assets/images/minimovie/age_enrichment.png "Mark Hamill, Harrison Ford, and Carrie Fisher person cards demonstrating the age enrichment display.")
 
 The data required to display this information in various views (for example, for every cast member of a movie or for every credit a person has) could potentially involve thousands of API calls to TMDB and expensive lookups. To account for this, I needed to cache key pieces of this information on my end.
 
@@ -259,7 +266,11 @@ The API is configured with a minimum confidence (default 0.65) and any field tha
 
 _I am still a data nerd_ so designing Augur to produce structured, source-cited data that I can confidently display in a UI is awesome 😄. I wouldn't rely on anything LLM generated if lives are at stake, but this use case is completely fine for "best effort" data retrieved from automated (and cited) web sources.
 
-![A screenshot of the "Interesting Info" tab for actress Natalie Portman in a mobile view.](@assets/images/minimovie/interesting_info_mobile.jpg 'A screenshot of the "Interesting Info" tab for actress Natalie Portman in a mobile view.')
+<div style="max-width: 350px; margin: 0 auto;">
+
+![The Interesting Info tab for actress Natalie Portman in a mobile view.](@assets/images/minimovie/interesting_info_mobile.png "The Interesting Info tab for actress Natalie Portman in a mobile view.")
+
+</div>
 
 ## What's Next?
 

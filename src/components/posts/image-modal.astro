@@ -1,9 +1,16 @@
-<div id="image-modal" class="image-modal" aria-hidden="true">
+<div
+  id="image-modal"
+  class="image-modal"
+  aria-hidden="true"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="image-modal-caption"
+>
   <div class="modal-backdrop"></div>
   <div class="modal-content">
-    <button class="modal-close" aria-label="Close modal">&times;</button>
+    <button type="button" class="modal-close" aria-label="Close image modal">&times;</button>
     <img src="" alt="" class="modal-image" />
-    <div class="modal-caption"></div>
+    <div id="image-modal-caption" class="modal-caption"></div>
   </div>
 </div>
 
@@ -12,12 +19,67 @@
     const modal = document.getElementById('image-modal');
     const modalImage = modal?.querySelector('.modal-image') as HTMLImageElement;
     const modalCaption = modal?.querySelector('.modal-caption');
-    const closeButton = modal?.querySelector('.modal-close');
-    const backdrop = modal?.querySelector('.modal-backdrop');
+    const closeButton = modal?.querySelector('.modal-close') as HTMLButtonElement | null;
+    const backdrop = modal?.querySelector('.modal-backdrop') as HTMLDivElement | null;
 
     if (!modal || !modalImage || !modalCaption || !closeButton || !backdrop) {
       return;
     }
+
+    let scrollY = 0;
+    let lastFocusedElement: HTMLElement | null = null;
+    let shouldRestoreFocus = false;
+    const lockBodyScroll = () => {
+      scrollY = window.scrollY;
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+    };
+
+    const unlockBodyScroll = () => {
+      const html = document.documentElement;
+      const previousScrollBehavior = html.style.scrollBehavior;
+      html.style.scrollBehavior = 'auto';
+
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      window.scrollTo({ top: scrollY, left: 0, behavior: 'auto' });
+
+      requestAnimationFrame(() => {
+        html.style.scrollBehavior = previousScrollBehavior;
+      });
+    };
+
+    const getFocusableElements = () => {
+      const focusableSelectors = [
+        'a[href]',
+        'button:not([disabled])',
+        'input:not([disabled])',
+        'select:not([disabled])',
+        'textarea:not([disabled])',
+        '[tabindex]:not([tabindex="-1"])'
+      ].join(', ');
+      return Array.from(modal.querySelectorAll(focusableSelectors)) as HTMLElement[];
+    };
+
+    const openModal = (imageElement: HTMLImageElement, restoreFocusOnClose: boolean) => {
+      shouldRestoreFocus = restoreFocusOnClose;
+      lastFocusedElement = restoreFocusOnClose ? (document.activeElement as HTMLElement) : null;
+      modalImage.src = imageElement.src;
+      modalImage.alt = imageElement.alt;
+      modalCaption.textContent = imageElement.alt || '';
+      modal.setAttribute('aria-hidden', 'false');
+      modal.classList.add('active');
+      lockBodyScroll();
+      closeButton.focus({ preventScroll: true });
+    };
 
     // Find all images in article content
     const articleImages = document.querySelectorAll('article img');
@@ -25,13 +87,14 @@
     articleImages.forEach((img) => {
       const imageElement = img as HTMLImageElement;
       imageElement.style.cursor = 'pointer';
-      imageElement.addEventListener('click', () => {
-        modalImage.src = imageElement.src;
-        modalImage.alt = imageElement.alt;
-        modalCaption.textContent = imageElement.alt || '';
-        modal.setAttribute('aria-hidden', 'false');
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+      imageElement.tabIndex = 0;
+      imageElement.setAttribute('aria-haspopup', 'dialog');
+      imageElement.addEventListener('click', () => openModal(imageElement, false));
+      imageElement.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openModal(imageElement, true);
+        }
       });
     });
 
@@ -39,9 +102,14 @@
     const closeModal = () => {
       modal.setAttribute('aria-hidden', 'true');
       modal.classList.remove('active');
-      document.body.style.overflow = '';
+      unlockBodyScroll();
       modalImage.src = '';
       modalCaption.textContent = '';
+      if (shouldRestoreFocus && lastFocusedElement) {
+        lastFocusedElement.focus({ preventScroll: true });
+      }
+      shouldRestoreFocus = false;
+      lastFocusedElement = null;
     };
 
     // Close button click
@@ -50,10 +118,39 @@
     // Backdrop click
     backdrop.addEventListener('click', closeModal);
 
-    // ESC key
+    // Keyboard interaction
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('active')) {
+      if (!modal.classList.contains('active')) {
+        return;
+      }
+
+      if (e.key === 'Escape') {
         closeModal();
+        return;
+      }
+
+      if (e.key === 'Tab') {
+        const focusableElements = getFocusableElements();
+        if (focusableElements.length === 0) {
+          e.preventDefault();
+          closeButton.focus({ preventScroll: true });
+          return;
+        }
+
+        const firstFocusable = focusableElements[0];
+        const lastFocusable = focusableElements[focusableElements.length - 1];
+        const activeElement = document.activeElement;
+
+        if (e.shiftKey && activeElement === firstFocusable) {
+          e.preventDefault();
+          lastFocusable.focus({ preventScroll: true });
+          return;
+        }
+
+        if (!e.shiftKey && activeElement === lastFocusable) {
+          e.preventDefault();
+          firstFocusable.focus({ preventScroll: true });
+        }
       }
     });
   }
@@ -69,15 +166,20 @@
 <style>
   .image-modal {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    height: 100lvh;
     z-index: 9999;
     display: none;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
+    overscroll-behavior: contain;
+    padding: max(1rem, env(safe-area-inset-top, 0px))
+      max(1rem, env(safe-area-inset-right, 0px))
+      max(1rem, env(safe-area-inset-bottom, 0px))
+      max(1rem, env(safe-area-inset-left, 0px));
   }
 
   .image-modal.active {
@@ -85,11 +187,8 @@
   }
 
   .modal-backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    inset: 0;
     background-color: rgba(0, 0, 0, 0.9);
     cursor: pointer;
   }
@@ -99,6 +198,8 @@
     z-index: 10000;
     max-width: 90vw;
     max-height: 90vh;
+    max-height: 90dvh;
+    max-height: 90lvh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -106,14 +207,16 @@
 
     @media (max-width: 684px) {
       max-width: 95vw;
-      max-height: 95vh;
+      max-height: 90vh;
+      max-height: 90dvh;
+      max-height: 90lvh;
     }
   }
 
   .modal-close {
-    position: absolute;
-    top: -2.5rem;
-    right: 0;
+    position: fixed;
+    top: max(0.75rem, env(safe-area-inset-top, 0px));
+    right: max(0.75rem, env(safe-area-inset-right, 0px));
     background: none;
     border: none;
     color: white;
@@ -121,8 +224,8 @@
     line-height: 1;
     cursor: pointer;
     padding: 0;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -130,10 +233,9 @@
     opacity: 0.8;
 
     @media (max-width: 684px) {
-      top: -2rem;
       font-size: 2rem;
-      width: 2rem;
-      height: 2rem;
+      width: 44px;
+      height: 44px;
     }
   }
 
@@ -141,16 +243,26 @@
     opacity: 1;
   }
 
+  .modal-close:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
+  }
+
   .modal-image {
     max-width: 100%;
     max-height: calc(90vh - 5rem);
+    max-height: calc(90dvh - 5rem);
+    max-height: calc(90lvh - 5rem);
+    margin: 0;
     height: auto;
     object-fit: contain;
     border-radius: 4px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 
     @media (max-width: 684px) {
-      max-height: calc(95vh - 4rem);
+      max-height: calc(90vh - 5rem);
+      max-height: calc(90dvh - 5rem);
+      max-height: calc(90lvh - 5rem);
     }
   }
 

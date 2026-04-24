@@ -8,7 +8,23 @@
 >
   <div class="modal-backdrop"></div>
   <div class="modal-content">
-    <button type="button" class="modal-close" aria-label="Close image modal">&times;</button>
+    <button type="button" class="modal-close" aria-label="Close image modal"
+      >&times;</button
+    >
+    <button
+      type="button"
+      class="modal-nav modal-nav-prev"
+      aria-label="Previous image"
+    >
+      &#8249;
+    </button>
+    <button
+      type="button"
+      class="modal-nav modal-nav-next"
+      aria-label="Next image"
+    >
+      &#8250;
+    </button>
     <img src="" alt="" class="modal-image" />
     <div id="image-modal-caption" class="modal-caption"></div>
   </div>
@@ -17,18 +33,50 @@
 <script>
   function initImageModal() {
     const modal = document.getElementById('image-modal');
-    const modalImage = modal?.querySelector('.modal-image') as HTMLImageElement;
-    const modalCaption = modal?.querySelector('.modal-caption');
-    const closeButton = modal?.querySelector('.modal-close') as HTMLButtonElement | null;
-    const backdrop = modal?.querySelector('.modal-backdrop') as HTMLDivElement | null;
+    if (
+      !(modal instanceof HTMLElement) ||
+      modal.dataset.initialized === 'true'
+    ) {
+      return;
+    }
 
-    if (!modal || !modalImage || !modalCaption || !closeButton || !backdrop) {
+    const modalImage = modal.querySelector<HTMLImageElement>('.modal-image');
+    const modalCaption = modal.querySelector<HTMLElement>('.modal-caption');
+    const closeButton = modal.querySelector<HTMLButtonElement>('.modal-close');
+    const prevButton =
+      modal.querySelector<HTMLButtonElement>('.modal-nav-prev');
+    const nextButton =
+      modal.querySelector<HTMLButtonElement>('.modal-nav-next');
+    const backdrop = modal.querySelector<HTMLDivElement>('.modal-backdrop');
+
+    if (
+      !modalImage ||
+      !modalCaption ||
+      !closeButton ||
+      !prevButton ||
+      !nextButton ||
+      !backdrop
+    ) {
+      return;
+    }
+
+    modal.dataset.initialized = 'true';
+
+    const articleImages = Array.from(
+      document.querySelectorAll<HTMLImageElement>('article img')
+    ).filter((img) => !img.closest('#image-modal'));
+
+    if (articleImages.length === 0) {
       return;
     }
 
     let scrollY = 0;
+    let currentImageIndex = 0;
     let lastFocusedElement: HTMLElement | null = null;
     let shouldRestoreFocus = false;
+
+    const isModalOpen = () => modal.classList.contains('active');
+
     const lockBodyScroll = () => {
       scrollY = window.scrollY;
       document.body.style.overflow = 'hidden';
@@ -64,32 +112,79 @@
         'input:not([disabled])',
         'select:not([disabled])',
         'textarea:not([disabled])',
-        '[tabindex]:not([tabindex="-1"])'
+        '[tabindex]:not([tabindex="-1"])',
       ].join(', ');
-      return Array.from(modal.querySelectorAll(focusableSelectors)) as HTMLElement[];
+
+      return Array.from(
+        modal.querySelectorAll<HTMLElement>(focusableSelectors)
+      ).filter(
+        (element) =>
+          !element.hasAttribute('hidden') && element.getClientRects().length > 0
+      );
     };
 
-    const openModal = (imageElement: HTMLImageElement, restoreFocusOnClose: boolean) => {
-      shouldRestoreFocus = restoreFocusOnClose;
-      lastFocusedElement = restoreFocusOnClose ? (document.activeElement as HTMLElement) : null;
-      modalImage.src = imageElement.src;
+    const updateNavVisibility = () => {
+      const hasMultipleImages = articleImages.length > 1;
+      prevButton.hidden = !hasMultipleImages;
+      nextButton.hidden = !hasMultipleImages;
+    };
+
+    const setModalImage = (imageElement: HTMLImageElement) => {
+      modalImage.src = imageElement.currentSrc || imageElement.src;
       modalImage.alt = imageElement.alt;
       modalCaption.textContent = imageElement.alt || '';
+    };
+
+    const showImageAtIndex = (index: number) => {
+      currentImageIndex = (index + articleImages.length) % articleImages.length;
+      setModalImage(articleImages[currentImageIndex]);
+    };
+
+    const openModal = (
+      imageElement: HTMLImageElement,
+      restoreFocusOnClose: boolean
+    ) => {
+      const imageIndex = articleImages.indexOf(imageElement);
+      if (imageIndex < 0) {
+        return;
+      }
+
+      shouldRestoreFocus = restoreFocusOnClose;
+      lastFocusedElement = restoreFocusOnClose
+        ? (document.activeElement as HTMLElement)
+        : null;
+
+      updateNavVisibility();
+      showImageAtIndex(imageIndex);
+
       modal.setAttribute('aria-hidden', 'false');
       modal.classList.add('active');
       lockBodyScroll();
       closeButton.focus({ preventScroll: true });
     };
 
-    // Find all images in article content
-    const articleImages = document.querySelectorAll('article img');
+    const closeModal = () => {
+      modal.setAttribute('aria-hidden', 'true');
+      modal.classList.remove('active');
+      unlockBodyScroll();
+      modalImage.removeAttribute('src');
+      modalCaption.textContent = '';
 
-    articleImages.forEach((img) => {
-      const imageElement = img as HTMLImageElement;
-      imageElement.style.cursor = 'pointer';
+      if (shouldRestoreFocus && lastFocusedElement) {
+        lastFocusedElement.focus({ preventScroll: true });
+      }
+
+      shouldRestoreFocus = false;
+      lastFocusedElement = null;
+    };
+
+    articleImages.forEach((imageElement) => {
+      imageElement.classList.add('modal-enabled-image');
       imageElement.tabIndex = 0;
       imageElement.setAttribute('aria-haspopup', 'dialog');
-      imageElement.addEventListener('click', () => openModal(imageElement, false));
+      imageElement.addEventListener('click', () =>
+        openModal(imageElement, false)
+      );
       imageElement.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
@@ -98,29 +193,17 @@
       });
     });
 
-    // Close modal function
-    const closeModal = () => {
-      modal.setAttribute('aria-hidden', 'true');
-      modal.classList.remove('active');
-      unlockBodyScroll();
-      modalImage.src = '';
-      modalCaption.textContent = '';
-      if (shouldRestoreFocus && lastFocusedElement) {
-        lastFocusedElement.focus({ preventScroll: true });
-      }
-      shouldRestoreFocus = false;
-      lastFocusedElement = null;
-    };
-
-    // Close button click
     closeButton.addEventListener('click', closeModal);
-
-    // Backdrop click
+    prevButton.addEventListener('click', () =>
+      showImageAtIndex(currentImageIndex - 1)
+    );
+    nextButton.addEventListener('click', () =>
+      showImageAtIndex(currentImageIndex + 1)
+    );
     backdrop.addEventListener('click', closeModal);
 
-    // Keyboard interaction
-    document.addEventListener('keydown', (e) => {
-      if (!modal.classList.contains('active')) {
+    const handleDocumentKeydown = (e: KeyboardEvent) => {
+      if (!isModalOpen()) {
         return;
       }
 
@@ -129,30 +212,46 @@
         return;
       }
 
-      if (e.key === 'Tab') {
-        const focusableElements = getFocusableElements();
-        if (focusableElements.length === 0) {
-          e.preventDefault();
-          closeButton.focus({ preventScroll: true });
-          return;
-        }
-
-        const firstFocusable = focusableElements[0];
-        const lastFocusable = focusableElements[focusableElements.length - 1];
-        const activeElement = document.activeElement;
-
-        if (e.shiftKey && activeElement === firstFocusable) {
-          e.preventDefault();
-          lastFocusable.focus({ preventScroll: true });
-          return;
-        }
-
-        if (!e.shiftKey && activeElement === lastFocusable) {
-          e.preventDefault();
-          firstFocusable.focus({ preventScroll: true });
-        }
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        showImageAtIndex(currentImageIndex - 1);
+        return;
       }
-    });
+
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        showImageAtIndex(currentImageIndex + 1);
+        return;
+      }
+
+      if (e.key !== 'Tab') {
+        return;
+      }
+
+      const focusableElements = getFocusableElements();
+      if (focusableElements.length === 0) {
+        e.preventDefault();
+        closeButton.focus({ preventScroll: true });
+        return;
+      }
+
+      const firstFocusable = focusableElements[0];
+      const lastFocusable = focusableElements[focusableElements.length - 1];
+      const activeElement = document.activeElement;
+
+      if (e.shiftKey && activeElement === firstFocusable) {
+        e.preventDefault();
+        lastFocusable.focus({ preventScroll: true });
+        return;
+      }
+
+      if (!e.shiftKey && activeElement === lastFocusable) {
+        e.preventDefault();
+        firstFocusable.focus({ preventScroll: true });
+      }
+    };
+
+    document.addEventListener('keydown', handleDocumentKeydown);
   }
 
   // Initialize on page load
@@ -191,6 +290,10 @@
     inset: 0;
     background-color: rgba(0, 0, 0, 0.9);
     cursor: pointer;
+  }
+
+  :root[data-theme='light'] .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.82);
   }
 
   .modal-content {
@@ -239,6 +342,49 @@
     }
   }
 
+  .modal-nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    width: auto;
+    height: auto;
+    padding: 0.25rem 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.25rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 10001;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  }
+
+  .modal-nav:hover {
+    opacity: 1;
+  }
+
+  .modal-nav:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
+  }
+
+  .modal-nav[hidden] {
+    display: none;
+  }
+
+  .modal-nav-prev {
+    left: max(0.75rem, env(safe-area-inset-left, 0px));
+  }
+
+  .modal-nav-next {
+    right: max(0.75rem, env(safe-area-inset-right, 0px));
+  }
+
   .modal-close:hover {
     opacity: 1;
   }
@@ -246,6 +392,10 @@
   .modal-close:focus-visible {
     outline: 2px solid white;
     outline-offset: 2px;
+  }
+
+  article img.modal-enabled-image {
+    cursor: zoom-in;
   }
 
   .modal-image {

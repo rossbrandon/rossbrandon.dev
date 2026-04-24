@@ -1,6 +1,6 @@
 ---
 layout: ../layouts/page.astro
-title: MiniMovie - A Simple Twist On An Unoriginal Idea
+title: 'MiniMovie: A Simple Twist On An Unoriginal Idea'
 description: 'How I built MiniMovie, a Go and Astro side project deployed on Railway and Cloudflare.'
 date: 2026-04-23T00:00:00-06:00
 author: Ross Brandon
@@ -18,14 +18,12 @@ tags:
 
 ## Minimal, Yet Interesting
 
-Let’s face it: we all watch a lot of movies and TV shows. When I am not building software, reading about software, or otherwise interacting with something software-engineering-adjacent, I’m usually taking breaks inside some sort of story\*. I love a good sci-fi adventure, crime thriller, or comedy to take my mind off of the world. But no matter how engaging the film is, I inevitably end up on my phone looking stuff up:
+Let’s face it: we all watch a lot of movies and TV shows. When I am not building software, reading about software, or otherwise interacting with something software-engineering-adjacent, I’m usually taking breaks inside some sort of story[^time]. I love a good sci-fi adventure, crime thriller, or comedy to take my mind off of the world. But no matter how engaging the film is, I inevitably end up on my phone looking stuff up:
 
 - “How old was that actor when they filmed this?”
 - ”What else have I seen them in?”
 - “What's their net worth? Who are their parents? Are they related to that other actor I'm thinking of?”
 - ”Where can I stream the sequel?“
-
-_\*Time usage is hyperbole. Between kids and obligations, free time is pretty limited._
 
 The answers are all out there, it’s just that getting to them can be distracting. _But wait… this is a solved problem! IMDB exists!_ Yes. Yes, it does… and I hate it. IMDB, at least in the last few years, has been completely taken over by ads and bloat. Half of the time I'm scrolling past full-page banners and sponsored content just to find a birthday or _that one actor’s name I can never remember_. And for the more random questions (net worth, family tree, fun facts, etc), I'm bouncing between Google, Wikipedia, and whatever (even more ad-covered) celebrity gossip site happens to rank first 😬.
 
@@ -132,15 +130,15 @@ The landing page is intentionally minimal: a centered search box with basic bran
 
 Discovery is always the most important part of an application like this. Users want to find what they are looking for as fast as possible. Luckily, TMDB has a `multi_search` endpoint which lets us discover movies, TV shows, and people _at the same time_. When typing a term and hitting enter (or navigating directly to the `https://minimovie.info/search?q=frozen`) the search results page is SSR'd as usual. When entering a search term, results are dynamically retrieved by calling the worker endpoint to trigger SSR and then live swapped into the DOM via a client island.
 
-<div style="display: flex; gap: 1rem; align-items: start;">
+**Desktop**
 
 ![The MiniMovie search results page.](@assets/images/minimovie/search.png 'The MiniMovie search results page.')
+
+**Mobile**
 
 <div style="max-width: 350px; margin: 0 auto;">
 
 ![The MiniMovie search results page in a mobile view.](@assets/images/minimovie/search_mobile.png 'The MiniMovie search results page in a mobile view.')
-
-</div>
 
 </div>
 
@@ -288,3 +286,5 @@ MiniMovie has turned into one of my favorite side projects. I'm really happy wit
 If any of this sounded interesting, feel free to poke around at [minimovie.info](https://minimovie.info). And if you are interested in the structured LLM enrichment side of things, [augur-go](https://github.com/rossbrandon/augur-go) is open source and I'd love feedback on it.
 
 🚀
+
+[^time]: Slight hyperbole; free time is pretty limited between kids and other life-y things.

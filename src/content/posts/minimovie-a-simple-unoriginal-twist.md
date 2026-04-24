@@ -1,8 +1,8 @@
 ---
 layout: ../layouts/page.astro
-title: Building MiniMovie
+title: MiniMovie - A Simple Twist On An Unoriginal Idea
 description: 'How I built MiniMovie, a Go and Astro side project deployed on Railway and Cloudflare.'
-date: 2026-04-23T18:00:00-06:00
+date: 2026-04-23T00:00:00-06:00
 author: Ross Brandon
 categories:
   - building-stuff
@@ -16,7 +16,7 @@ tags:
   - railway
 ---
 
-## What?
+## Minimal, Yet Interesting
 
 Let’s face it: we all watch a lot of movies and TV shows. When I am not building software, reading about software, or otherwise interacting with something software-engineering-adjacent, I’m usually taking breaks inside some sort of story\*. I love a good sci-fi adventure, crime thriller, or comedy to take my mind off of the world. But no matter how engaging the film is, I inevitably end up on my phone looking stuff up:
 
@@ -33,7 +33,7 @@ So, I built [MiniMovie](https://minimovie.info). The idea is simple: a clean, mi
 
 Like pretty much all of my side projects, the real motivation was part _"I want this thing that I probably only care about to exist"_ and part _"I want to learn some new things."_ This time I wanted to learn Astro, improve my Go skills, and find some clever ways to use generative AI to provide something actually useful to me.
 
-## Why?
+## But Why?
 
 Beyond wanting a better movie watching experience, I had a few technical goals:
 
@@ -75,7 +75,7 @@ The UI is an SSR Astro application. All heavy and critical rendering happens on 
 
 The Go API and Postgres database both live on Railway's hobby plan which gives me 8GB RAM, 8 vCPUs, and 5GB of storage. More than enough for what I need with the exception of a small issue with shared disk I/O constraints during heavy Postgres read operations. Honestly, the Railway experience has been fantastic. The UI is simple and easy to deploy your desired architecture and the management/logging capabilities are enough for a hobby project like this one.
 
-![The Railway UI architecture view.](@assets/images/minimovie/railway_architecture.png "The Railway UI architecture view.")
+![The Railway UI architecture view.](@assets/images/minimovie/railway_architecture.png 'The Railway UI architecture view.')
 
 The frontend is deployed on Cloudflare Workers using the [@astrojs/cloudflare](https://docs.astro.build/en/guides/integrations-guide/cloudflare/) adapter. As always, Cloudflare makes deployments easy and the Astro integration is dead simple. All I really had to do was configure a `wrangler.toml` file, link my repo to my Cloudflare owned domain, and let Cloudflare build and deploy on merge to `main`.
 
@@ -158,9 +158,9 @@ Key crew members such as the creator, writer, director, and producer are shown r
 
 On mobile views these tabs respond to touch gestures so you can swipe left and right between them. The URL also tracks the state of the open tab for deep linking via a `?tab=where-to-watch` search param.
 
-![The series detail page for the TV show Mr. Robot.](@assets/images/minimovie/tv_series.png "The series detail page for the TV show Mr. Robot.")
+![The series detail page for the TV show Mr. Robot.](@assets/images/minimovie/tv_series.png 'The series detail page for the TV show Mr. Robot.')
 
-![The movie detail page for Star Wars showing the Where to Watch tab.](@assets/images/minimovie/where_to_watch.png "The movie detail page for Star Wars showing the Where to Watch tab.")
+![The movie detail page for Star Wars showing the Where to Watch tab.](@assets/images/minimovie/where_to_watch.png 'The movie detail page for Star Wars showing the Where to Watch tab.')
 
 ### People
 
@@ -168,13 +168,13 @@ People pages show a combined filmography across movies and series highlighting t
 
 ![The person detail page for actress Natalie Portman.](@assets/images/minimovie/person.png 'The person detail page for actress Natalie Portman.')
 
-![The person episodes page showing Rami Malek in Mr. Robot.](@assets/images/minimovie/person_episodes.png "The person episodes page showing Rami Malek in Mr. Robot.")
+![The person episodes page showing Rami Malek in Mr. Robot.](@assets/images/minimovie/person_episodes.png 'The person episodes page showing Rami Malek in Mr. Robot.')
 
 #### The Age Enrichment
 
 One of the key features I wanted MiniMovie to have was the ability to show the age an actor was when a film was released vs how old they are today. When you look up a movie or show, the API fetches credits from TMDB and then enriches each cast and crew member with their age at the time of release, comparing it to their current age (or age at their time of death) to display a simple line of text: _"Age 34 (now 83)"_. For me, this is such a common question I ask while watching basically anything and developing this feature was surprisingly complex.
 
-![Mark Hamill, Harrison Ford, and Carrie Fisher person cards demonstrating the age enrichment display.](@assets/images/minimovie/age_enrichment.png "Mark Hamill, Harrison Ford, and Carrie Fisher person cards demonstrating the age enrichment display.")
+![Mark Hamill, Harrison Ford, and Carrie Fisher person cards demonstrating the age enrichment display.](@assets/images/minimovie/age_enrichment.png 'Mark Hamill, Harrison Ford, and Carrie Fisher person cards demonstrating the age enrichment display.')
 
 The data required to display this information in various views (for example, for every cast member of a movie or for every credit a person has) could potentially involve thousands of API calls to TMDB and expensive lookups. To account for this, I needed to cache key pieces of this information on my end.
 
@@ -268,7 +268,7 @@ _I am still a data nerd_ so designing Augur to produce structured, source-cited 
 
 <div style="max-width: 350px; margin: 0 auto;">
 
-![The Interesting Info tab for actress Natalie Portman in a mobile view.](@assets/images/minimovie/interesting_info_mobile.png "The Interesting Info tab for actress Natalie Portman in a mobile view.")
+![The Interesting Info tab for actress Natalie Portman in a mobile view.](@assets/images/minimovie/interesting_info_mobile.png 'The Interesting Info tab for actress Natalie Portman in a mobile view.')
 
 </div>
 

@@ -14,6 +14,11 @@ const {
 } = Astro.props;
 const title = propTitle ?? frontmatter?.title;
 const pageTitle = propPageTitle ?? frontmatter?.pageTitle ?? title;
+const imageAlign =
+  frontmatter?.imageAlign === 'left' || frontmatter?.imageAlign === 'right'
+    ? frontmatter.imageAlign
+    : 'center';
+const mainClass = `page-content image-align-${imageAlign}`;
 const description = propDescription ?? frontmatter?.description;
 ---
 
@@ -24,7 +29,7 @@ const description = propDescription ?? frontmatter?.description;
   publishedDate={publishedDate}
 >
   <slot name="head" slot="head" />
-  <main class="page-content">
+  <main class={mainClass}>
     <article>
       <header>
         {

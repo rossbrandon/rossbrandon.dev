@@ -199,6 +199,16 @@ img {
   }
 }
 
+.page-content.image-align-left img:not(.left):not(.center):not(.right) {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.page-content.image-align-right img:not(.left):not(.center):not(.right) {
+  margin-left: auto;
+  margin-right: 0;
+}
+
 figure {
   display: table;
   max-width: 100%;

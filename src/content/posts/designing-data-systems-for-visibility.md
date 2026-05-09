@@ -34,7 +34,7 @@ Let's face it... we won't. And when we have to, we won't want to and the level o
 
 To set the stage of our discussion, I have created a super basic system diagram (using the awesome [Excalidraw](https://excalidraw.com/) diagramming tool!) to lay out a fake application landscape that accepts data generated from a user (uploaded or through user actions & events) and distributes it to many internal consumers to enable some sort of end-product functionality for that user -- real use cases may vary.
 
-![data flow example diagram](@assets/images/data_mgmt/data_flow_example.png 'data flow example diagram')
+![data flow example diagram](./images/designing-data-systems-for-visibility/data-flow-example.png 'data flow example diagram')
 (Diagram created with [Excalidraw](https://excalidraw.com/))
 
 - On the left side, we have the _data producers_. Or, more simply put, our user generated data.
@@ -141,14 +141,14 @@ Githubs:
 
 #### Client Search
 
-![data flora example ui](@assets/images/data_mgmt/data_flora_clients.png 'data flow example ui')
+![data flora example ui](./images/designing-data-systems-for-visibility/data-flora-clients.png 'data flow example ui')
 (UI prototype created with [Svelte](https://svelte.dev/) and [Skeleton UI](https://www.skeleton.dev/))
 
 The Data Flora application example represents an internal tool that engineering/support/etc could use to trace data flow statistics and errors as they come in from various clients and flow between systems.
 
 The landing page show above is a list of all of the clients that we have visibility into. The search bar at the top of the screen can be used to filter these clients as there may be many clients feeding us data.
 
-![data flora client search](@assets/images/data_mgmt/data_flora_client_search.png 'data flora client search')
+![data flora client search](./images/designing-data-systems-for-visibility/data-flora-client-search.png 'data flora client search')
 
 As an example, we'll follow the flow of this UI from the perspective of a support engineer analyzing the data flow of an internal system-to-system pipeline. For simplicity, it will follow our example system diagram above describing an internal data pipeline: an upstream data ingestion endpoint named _Content Ingestion_ that receives data feeds from clients and pushes messages to four downstream systems: an _Image Analyzer_ service, a _Video Analyzer_ service, a _File Storage_ system, and a _Metadata Storage_ system. This represents the internal side of this fake application's data flow for all users. The first _Internal_ client card in the client list screen above allows us to see this view. Other cards would represent individual clients that feed our systems with their individual data rather than the system-to-system flows as a whole that we will explore here.
 
@@ -156,23 +156,23 @@ As an example, we'll follow the flow of this UI from the perspective of a suppor
 
 So, to continue, we can click the _Data Flows ->_ link on the _Internal Pipelines_ card and navigate into this client's first layer: the upstream data flows page.
 
-![data flora client info](@assets/images/data_mgmt/data_flora_client_info.png 'data flora client info screen')
+![data flora client info](./images/designing-data-systems-for-visibility/data-flora-client-info.png 'data flora client info screen')
 
 This page shows basic client information and all of the _data flows_ that belong to it. In our example, we see the three main upstreams: _Content Ingestion_, _Event Collector_, and _User Manager_ following our example system diagram. Each of these data flow cards show high level information about the state of each data flow including an overall and individual downstream system status: _Healthy_, _Unhealthy_, or _Investigation Needed_ depending on the state the downstreams systems are reporting and the defined threseholds for status classifications (such as if data is still flowing, within acceptable error rates, etc).
 
-![data flora upstream card](@assets/images/data_mgmt/data_flora_upstream_card.png 'data flora upstream card')
+![data flora upstream card](./images/designing-data-systems-for-visibility/data-flora-upstream-card.png 'data flora upstream card')
 
 #### Upstream Details
 
 Clicking into the _Content Ingestion_ card takes us to the upstream information page.
 
-![data flora upstream info](@assets/images/data_mgmt/data_flora_upstream.png 'data flora upstream info screen')
+![data flora upstream info](./images/designing-data-systems-for-visibility/data-flora-upstream.png 'data flora upstream info screen')
 
 Here, we follow a similar paradigm for showing basic upstream data flow information including a document count summary, links to system diagrams/runbooks/contact channels, and a list of downstream system flows. These cards are the keys to the data flow health analysis. Each card represents the state of a downstream system that receives data from the upstream system we are viewing, _Content Ingestion_. We can see the overall status of that data flow: _Successful_, _In Progress_, or _Failed_, the timestamp of the last document received by that system, and simple charts to show the total counts of documents received, missing, or in error depending on the source vs destination document counts and various error metadata we are able to retrieve from our APIs. Hovering over the charts will show counts of documents in each represented state.
 
 #### Downstream Status
 
-![data flora downstream card](@assets/images/data_mgmt/data_flora_downstream_card.png 'data flora downstream card')
+![data flora downstream card](./images/designing-data-systems-for-visibility/data-flora-downstream-card.png 'data flora downstream card')
 
 We can see that the fourth card, _Metadata Storage_, is indicating that the data flow has failed. We can see that the flow expects 1500 documents, but has only received 1035. By hovering over the parts of the donut chart, can see that 115 documents are missing and 350 documents have been found to be in error. Since the last document was received some time ago, this data flow is marked as failed.
 
@@ -180,16 +180,16 @@ Let's drill into this data flow to see what is going on...
 
 #### Data Flow Errors
 
-![data flora downstream errors](@assets/images/data_mgmt/data_flora_downstream.png 'data flora downstream errors screen')
-![data flora downstream errors second half](@assets/images/data_mgmt/data_flora_downstream_2.png 'data flora downstream errors screen second half')
+![data flora downstream errors](./images/designing-data-systems-for-visibility/data-flora-downstream.png 'data flora downstream errors screen')
+![data flora downstream errors second half](./images/designing-data-systems-for-visibility/data-flora-downstream-2.png 'data flora downstream errors screen second half')
 
 The final page in this data flow example is the downstream error information page. At the top, we can see a few fields about the downstream system we are viewing followed by error detail charting and reporting as well as action buttons we can use to try to remedy issues in our data flows.
 
-![data flora downstream error chart](@assets/images/data_mgmt/data_flora_error_chart.png 'data flora downstream error chart')
+![data flora downstream error chart](./images/designing-data-systems-for-visibility/data-flora-error-chart.png 'data flora downstream error chart')
 
 The Error Details section is where we can gain critical insights into what is happening in our systems. We can see the data flow totals of expected vs received and in-error documents, the breakdown of data flow error types, as well as a table representing all of the data flow errors detected by document.
 
-![data flora downstream error table](@assets/images/data_mgmt/data_flora_error_table.png 'data flora downstream error table')
+![data flora downstream error table](./images/designing-data-systems-for-visibility/data-flora-error-table.png 'data flora downstream error table')
 
 The error detail table is sorted by the timestamp of the document error (descending) and contains the document id in question, its type (in this example, the error type is a Network error, but it could be anything), a link to the log event of this error (could be to Splunk, New Relic, Loki, your custom unicorn log aggregator, etc), the error event message, and the timestamp of the error. Although not shown in this UI, the table would ideally be searchable by fields such as document id and type.
 
@@ -199,15 +199,15 @@ Using this tool we can see that the 350 documents in error were caused by networ
 
 #### Taking Action
 
-![data flora action buttons](@assets/images/data_mgmt/data_flora_action_buttons.png 'data flora action buttons')
+![data flora action buttons](./images/designing-data-systems-for-visibility/data-flora-action-buttons.png 'data flora action buttons')
 
 Now that we have identified potential problem areas, we can take a couple actions directly from this screen.
 
-![data flora resync action button](@assets/images/data_mgmt/data_flora_resync_action.png 'data flora resync action button')
+![data flora resync action button](./images/designing-data-systems-for-visibility/data-flora-resync-action.png 'data flora resync action button')
 
 One of the actions is the one we just spoke of in our example: to initate a re-syncronization of the data flowing between this upstream and downstream. This can be especially handy when the engineering teams have resolved a bug in the data flow and we simply need to get the systems back in sync after its resolution. This action calls out the appropriate warning because resyncing data typically has network and storage cost implications.
 
-![data flora delete action button](@assets/images/data_mgmt/data_flora_delete_action.png 'data flora delete action button')
+![data flora delete action button](./images/designing-data-systems-for-visibility/data-flora-delete-action.png 'data flora delete action button')
 
 Another action we can take is to simply delete the data in this downstream system. This may or may not be useful in resolving an issue in the data flow, but it is very handly in exposing this functionality to authorized users (and potentially automation though APIs) to handle data cleanup tasks when a user requests that their data to be removed, deletes their account, or any other GDPR related request. Personally, I've found these simple actions to be extremely powerful when dealing with client data (and building systems on the engineering side).
 

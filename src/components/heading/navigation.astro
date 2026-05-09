@@ -19,7 +19,7 @@
 <nav id="main-nav" class="nav" aria-label="Main navigation">
   <ul class="nav-inner">
     <li>
-      <a href="/about" data-astro-prefetch>About Me</a>
+      <a href="/projects" data-astro-prefetch>Projects</a>
     </li>
     <li>
       <div class="read-write-group">
@@ -44,7 +44,7 @@
     background: none;
     border: none;
     cursor: pointer;
-    padding: 8px;
+    padding: var(--space-2);
     position: relative;
 
     @media (max-width: 684px) {
@@ -67,9 +67,9 @@
   .line {
     width: 100%;
     height: 2px;
-    background: var(--color);
+    background: var(--color-text-primary);
     border-radius: 2px;
-    transition: all 0.3s ease;
+    transition: all var(--duration-base) var(--ease-standard);
     transform-origin: center;
   }
 
@@ -92,11 +92,11 @@
       right: 0;
       width: 100%;
       max-width: 300px;
-      background: var(--background-header);
-      border-left: 1px solid var(--border-color);
-      box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+      background: var(--surface-default);
+      border-left: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-lg);
       transform: translateX(100%);
-      transition: transform 0.3s ease;
+      transition: transform var(--duration-base) var(--ease-standard);
       opacity: 0;
       visibility: hidden;
       height: calc(100vh - 60px);
@@ -118,24 +118,24 @@
     align-items: center;
     justify-content: flex-start;
     margin: 0;
-    padding: 0 7px;
-    font-size: 1rem;
+    padding: 0 var(--space-2);
+    font-size: var(--text-base);
     list-style: none;
-    gap: 1rem;
+    gap: var(--space-4);
 
     @media (max-width: 684px) {
       flex-direction: column;
       align-items: stretch;
-      padding: 20px;
+      padding: var(--space-5);
       gap: 0;
     }
 
     li {
-      margin: 0 4px;
+      margin: 0 var(--space-1);
 
       @media (max-width: 684px) {
         margin: 0;
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-subtle);
 
         &:last-child {
           border-bottom: none;
@@ -145,15 +145,16 @@
 
     a {
       display: inline-block;
-      margin-right: 15px;
+      margin-right: var(--space-4);
       text-decoration: none;
-      transition: color 0.2s ease;
+      color: inherit;
+      transition: color var(--duration-fast) var(--ease-standard);
 
       @media (max-width: 684px) {
         display: block;
         margin: 0;
-        padding: 16px 12px;
-        font-size: 1.1rem;
+        padding: var(--space-4) var(--space-3);
+        font-size: var(--text-md);
       }
 
       &:last-of-type {
@@ -162,10 +163,10 @@
 
       &:hover {
         text-decoration: underline;
+        color: var(--color-text-primary);
 
         @media (max-width: 684px) {
           text-decoration: none;
-          color: var(--color-variant);
         }
       }
     }
@@ -173,7 +174,7 @@
     .read-write-group {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: var(--space-2);
 
       @media (max-width: 684px) {
         flex-direction: row;
@@ -185,7 +186,7 @@
       }
 
       span {
-        color: var(--color);
+        color: var(--color-text-primary);
       }
     }
   }
@@ -205,7 +206,6 @@
       document.body.style.overflow = !isExpanded ? 'hidden' : '';
     });
 
-    // Close on click outside
     document.addEventListener('click', (event) => {
       const isClickInside =
         navToggle.contains(event.target) || mainNav.contains(event.target);
@@ -217,7 +217,6 @@
       }
     });
 
-    // Close on Escape key and return focus to toggle button
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && mainNav.classList.contains('nav-open')) {
         navToggle.setAttribute('aria-expanded', 'false');
@@ -227,7 +226,6 @@
       }
     });
 
-    // Close on link click
     const navLinks = mainNav.querySelectorAll('a');
     navLinks.forEach((link) => {
       link.addEventListener('click', () => {
@@ -237,7 +235,6 @@
       });
     });
 
-    // Close on resize to desktop
     window.addEventListener('resize', () => {
       if (window.innerWidth > 684 && mainNav.classList.contains('nav-open')) {
         navToggle.setAttribute('aria-expanded', 'false');

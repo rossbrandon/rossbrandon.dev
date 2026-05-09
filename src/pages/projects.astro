@@ -1,0 +1,293 @@
+---
+import { Breadcrumbs } from '@components/breadcrumbs';
+import {
+  FacetSidebar,
+  ProjectGrid,
+  ProjectToolbar,
+} from '@components/projects';
+import Base from '@layouts/base.astro';
+import { getProjectFacets, getProjects } from '@utils/content';
+
+const projects = await getProjects();
+const facets = getProjectFacets(projects);
+
+const title = 'Project Shop';
+const pageTitle = 'Projects :: Ross Brandon';
+const description =
+  'A collection of personal side projects and public professional work.';
+
+const collectionJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: title,
+  description,
+  url: new URL('/projects', Astro.site).href,
+};
+---
+
+<Base pageTitle={pageTitle} description={description}>
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(collectionJsonLd)}
+  />
+  <main class="plp-wrap">
+    <Breadcrumbs
+      crumbs={[{ label: 'Home', href: '/' }, { label: 'Projects' }]}
+    />
+
+    <div class="cat-banner">
+      <h1 class="cat-title">{title}</h1>
+      <p class="cat-tag">{description}</p>
+    </div>
+
+    <div class="plp-body">
+      <FacetSidebar facets={facets} />
+      <div class="results">
+        <ProjectToolbar totalCount={projects.length} />
+        <ProjectGrid projects={projects} />
+      </div>
+    </div>
+  </main>
+</Base>
+
+<style>
+  .plp-wrap {
+    max-width: var(--container-max);
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--space-8) var(--space-8) var(--space-12);
+    text-align: left;
+  }
+  @media (max-width: 760px) {
+    .plp-wrap {
+      padding: var(--space-6) var(--space-5) var(--space-10);
+    }
+  }
+
+  .cat-banner {
+    padding-bottom: var(--space-8);
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: var(--space-8);
+  }
+  .cat-title {
+    font-size: var(--text-4xl);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tighter);
+    margin: 0 0 var(--space-4);
+    line-height: var(--leading-tight);
+  }
+  .cat-tag {
+    font-size: var(--text-md);
+    color: var(--color-text-secondary);
+    margin: 0;
+    max-width: 56ch;
+    line-height: var(--leading-snug);
+  }
+
+  .plp-body {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: var(--space-8);
+    align-items: start;
+  }
+  @media (max-width: 960px) {
+    .plp-body {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-6);
+    }
+  }
+
+  .results {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+</style>
+
+<script>
+  const grid = document.getElementById('project-grid');
+  const cards = grid
+    ? Array.from(grid.querySelectorAll<HTMLElement>('.project-card'))
+    : [];
+  const searchInput = document.getElementById(
+    'project-search'
+  ) as HTMLInputElement | null;
+  const sortSelect = document.getElementById(
+    'project-sort'
+  ) as HTMLSelectElement | null;
+  const visibleCount = document.getElementById('visible-count');
+  const facetClear = document.getElementById('facet-clear');
+  const viewBtns = document.querySelectorAll<HTMLButtonElement>(
+    '.toolbar-view button'
+  );
+  const facetHeads =
+    document.querySelectorAll<HTMLButtonElement>('.facet-head');
+
+  function getChecked(name: string): string[] {
+    return Array.from(
+      document.querySelectorAll<HTMLInputElement>(
+        `input[name="${name}"]:checked`
+      )
+    ).map((el) => el.value);
+  }
+
+  function applyFilters() {
+    const query = searchInput?.value.toLowerCase().trim() ?? '';
+    const cats = getChecked('category');
+    const techs = getChecked('tech');
+    const roles = getChecked('role');
+
+    let count = 0;
+    for (const card of cards) {
+      const matchCat =
+        cats.length === 0 || cats.includes(card.dataset.category ?? '');
+      const cardTechs = (card.dataset.tech ?? '').split(',');
+      const matchTech =
+        techs.length === 0 || techs.some((t) => cardTechs.includes(t));
+      const matchRole =
+        roles.length === 0 || roles.includes(card.dataset.role ?? '');
+      const matchSearch =
+        !query ||
+        (card.dataset.title ?? '').includes(query) ||
+        (card.dataset.desc ?? '').includes(query);
+
+      const visible = matchCat && matchTech && matchRole && matchSearch;
+      card.style.display = visible ? '' : 'none';
+      if (visible) count++;
+    }
+
+    if (visibleCount) visibleCount.textContent = String(count);
+
+    const hasFilters =
+      cats.length > 0 ||
+      techs.length > 0 ||
+      roles.length > 0 ||
+      query.length > 0;
+    facetClear?.classList.toggle('hidden', !hasFilters);
+
+    updateUrl();
+  }
+
+  function applySort() {
+    const value = sortSelect?.value ?? 'newest';
+    const sorted = [...cards].sort((a, b) => {
+      const ya = parseInt(a.dataset.year ?? '0');
+      const yb = parseInt(b.dataset.year ?? '0');
+      const ta = a.dataset.title ?? '';
+      const tb = b.dataset.title ?? '';
+      switch (value) {
+        case 'oldest':
+          return ya - yb;
+        case 'az':
+          return ta.localeCompare(tb);
+        case 'za':
+          return tb.localeCompare(ta);
+        default:
+          return yb - ya;
+      }
+    });
+    for (const card of sorted) grid?.appendChild(card);
+  }
+
+  function updateUrl() {
+    const params = new URLSearchParams();
+    for (const name of ['category', 'tech', 'role']) {
+      const vals = getChecked(name);
+      if (vals.length) params.set(name, vals.join(','));
+    }
+    const q = searchInput?.value.trim();
+    if (q) params.set('q', q);
+    const sort = sortSelect?.value;
+    if (sort && sort !== 'newest') params.set('sort', sort);
+    const view = grid?.classList.contains('list-view') ? 'list' : '';
+    if (view) params.set('view', view);
+    const qs = params.toString();
+    history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
+  }
+
+  function restoreFromUrl() {
+    const params = new URLSearchParams(location.search);
+    for (const name of ['category', 'tech', 'role']) {
+      const vals = params.get(name)?.split(',') ?? [];
+      for (const val of vals) {
+        const cb = document.querySelector<HTMLInputElement>(
+          `input[name="${name}"][value="${val}"]`
+        );
+        if (cb) cb.checked = true;
+      }
+    }
+    const q = params.get('q');
+    if (q && searchInput) searchInput.value = q;
+    const sort = params.get('sort');
+    if (sort && sortSelect) sortSelect.value = sort;
+    if (params.get('view') === 'list') {
+      grid?.classList.add('list-view');
+      viewBtns.forEach((b) =>
+        b.setAttribute(
+          'aria-pressed',
+          b.dataset.view === 'list' ? 'true' : 'false'
+        )
+      );
+    }
+  }
+
+  // Facet toggle
+  facetHeads.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const facet = btn.closest('.facet');
+      if (!facet) return;
+      const isOpen = facet.getAttribute('data-open') !== 'false';
+      facet.setAttribute('data-open', isOpen ? 'false' : 'true');
+    });
+  });
+
+  // Filtering
+  document
+    .querySelectorAll<HTMLInputElement>('.facet-opt input')
+    .forEach((cb) => {
+      cb.addEventListener('change', () => {
+        applyFilters();
+      });
+    });
+  searchInput?.addEventListener('input', () => {
+    applyFilters();
+  });
+
+  // Sorting
+  sortSelect?.addEventListener('change', () => {
+    applySort();
+    applyFilters();
+  });
+
+  // View toggle
+  viewBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const view = btn.dataset.view;
+      viewBtns.forEach((b) =>
+        b.setAttribute(
+          'aria-pressed',
+          b.dataset.view === view ? 'true' : 'false'
+        )
+      );
+      grid?.classList.toggle('list-view', view === 'list');
+      updateUrl();
+    });
+  });
+
+  // Clear
+  facetClear?.addEventListener('click', () => {
+    document
+      .querySelectorAll<HTMLInputElement>('.facet-opt input:checked')
+      .forEach((cb) => {
+        cb.checked = false;
+      });
+    if (searchInput) searchInput.value = '';
+    applyFilters();
+  });
+
+  // Init
+  restoreFromUrl();
+  applySort();
+  applyFilters();
+</script>

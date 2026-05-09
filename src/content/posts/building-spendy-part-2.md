@@ -57,27 +57,27 @@ Tada! Already, the UX is leagues ahead of Spendy v1. Lets take a minute to go th
 
 The landing page below is what we would see if we were not already logged in. It provides a basic description of the application and a `Login` button. Authentication this time around is not managed by Spendy itself, but by [Auth0](https://auth0.com/).
 
-![spendy v2 landing](@assets/images/spendy/v2/landing.png 'Spendy v2 landing')
+![spendy v2 landing](./images/building-spendy-part-2/landing.png 'Spendy v2 landing')
 
 Multi-language support is built-in! Basic page translation can be set by clicking the flag in the top right corner and selecting our desired language from the local switcher:
 
-![spendy v2 locale switcher](@assets/images/spendy/v2/locale_switcher.png 'Spendy v2 locale switcher')
+![spendy v2 locale switcher](./images/building-spendy-part-2/locale-switcher.png 'Spendy v2 locale switcher')
 
 ### Dashboard
 
 We're in! After logging in via Auth0 (using Google, Apple, Facebook, Github, etc), we'll be redirected to the `Dashboard`. The view will default to the current month and show similar at-a-glace information as in Spendy v1: a percentage progress bar and numerical representation of total budget vs total amount spent and the amount left over for the given month.
 
-![spendy v2 dashboard](@assets/images/spendy/v2/dashboard.png 'Spendy v2 dashboard')
+![spendy v2 dashboard](./images/building-spendy-part-2/dashboard.png 'Spendy v2 dashboard')
 
 The currently viewed month can be switched by clicking the left and right arrows or by clicking the `Change Month` button and using the month selector modal:
 
-![spendy v2 month switcher](@assets/images/spendy/v2/month_switcher_modal.png 'Spendy v2 month switcher')
+![spendy v2 month switcher](./images/building-spendy-part-2/month-switcher-modal.png 'Spendy v2 month switcher')
 
 ### Expenses
 
 Clicking on a budget from the dashboard shows all expenses under that budget for the selected month:
 
-![spendy v2 budget view](@assets/images/spendy/v2/budget_view.png 'Spendy v2 budget view')
+![spendy v2 budget view](./images/building-spendy-part-2/budget-view.png 'Spendy v2 budget view')
 
 #### Add a new expense
 
@@ -92,13 +92,13 @@ Fields:
 - Reason: longer description of the expense
 - Tags: type and hit enter to add a list of tags used for categorizing and filtering
 
-![spendy v2 add expense](@assets/images/spendy/v2/add_expense_modal.png 'Spendy v2 add expense')
+![spendy v2 add expense](./images/building-spendy-part-2/add-expense-modal.png 'Spendy v2 add expense')
 
 #### Search all expenses
 
 View and search all expenses by clicking the user dropdown in the navbar and selecting `All Expenses` (this takes a lot of time to load as it pulls all data from the MongoDB collection and uses JS to search and sort the results locally):
 
-![spendy v2 all expenses](@assets/images/spendy/v2/all_expenses.png 'Spendy v2 all expenses')
+![spendy v2 all expenses](./images/building-spendy-part-2/all-expenses.png 'Spendy v2 all expenses')
 
 ### Budgets
 
@@ -106,11 +106,11 @@ View and manage your created budgets by clicking the user dropdown in the navbar
 
 User Dropdown:
 
-![spendy v2 user dropdown](@assets/images/spendy/v2/user_dropdown.png 'Spendy v2 user dropdown')
+![spendy v2 user dropdown](./images/building-spendy-part-2/user-dropdown.png 'Spendy v2 user dropdown')
 
 My Budgets:
 
-![spendy v2 all budgets](@assets/images/spendy/v2/all_budgets.png 'Spendy v2 all budgets')
+![spendy v2 all budgets](./images/building-spendy-part-2/all-budgets.png 'Spendy v2 all budgets')
 
 #### Create a new budget
 
@@ -123,13 +123,13 @@ Fields:
 - Sort Order: display order of the budget in the list
 - Show In Top Menu?: toggles whether or not this budget is displayed in the top menu nav bar.
 
-![spendy v2 create budget](@assets/images/spendy/v2/create_budget_modal.png 'Spendy v2 create budget')
+![spendy v2 create budget](./images/building-spendy-part-2/create-budget-modal.png 'Spendy v2 create budget')
 
 ### Trends
 
 View historical trends by clicking the user dropdown in the navbar and selecting `Trends`. This was my favorite feature to build. Using [MongoDB aggregations](https://www.mongodb.com/docs/manual/aggregation/) and [Apex Charts](https://apexcharts.com/) I was able to create some simple yet powerful data visualizations. _I am definitely a data nerd_.
 
-![spendy v2 trends](@assets/images/spendy/v2/trends.png 'Spendy v2 trends')
+![spendy v2 trends](./images/building-spendy-part-2/trends.png 'Spendy v2 trends')
 
 ## Do I Use It Today?
 

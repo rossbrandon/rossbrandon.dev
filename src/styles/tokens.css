@@ -1,0 +1,211 @@
+:root {
+  /* ───── Neutrals ───── */
+  --gray-0: #ffffff;
+  --gray-50: #f7f8f9;
+  --gray-100: #eef0f2;
+  --gray-200: #dfe2e6;
+  --gray-300: #c7ccd2;
+  --gray-400: #9aa1a9;
+  --gray-500: #6b7178;
+  --gray-600: #4a4f55;
+  --gray-700: #32363b;
+  --gray-800: #1f2225;
+  --gray-900: #141618;
+
+  /* ───── Signal accent (cyan-leaning instrumentation green) ───── */
+  --signal-50: #e6f7f0;
+  --signal-100: #c5ecdc;
+  --signal-200: #8fd7b6;
+  --signal-300: #52bf8d;
+  --signal-400: #2aa46c;
+  --signal-500: #17855a;
+  --signal-600: #106948;
+  --signal-700: #0c5239;
+  --signal-800: #0a412f;
+  --signal-900: #083426;
+
+  /* ───── Status — independent of accent ───── */
+  --green-400: #22c07a;
+  --green-500: #149a5d;
+  --green-600: #0e7a49;
+  --red-400: #f06b6b;
+  --red-500: #dc3b3b;
+  --red-600: #b62828;
+  --blue-400: #4d8ef7;
+  --blue-500: #2c6fe0;
+  --blue-600: #1f55b3;
+  --yellow-400: #f0c23b;
+  --yellow-500: #d6a411;
+  --yellow-600: #a6800a;
+
+  /* ───── Fonts ───── */
+  --font-sans: var(
+    --font-space-grotesk,
+    'Space Grotesk',
+    ui-sans-serif,
+    system-ui,
+    sans-serif
+  );
+  --font-display: var(
+    --font-space-grotesk,
+    'Space Grotesk',
+    ui-sans-serif,
+    system-ui,
+    sans-serif
+  );
+  --font-mono: var(
+    --font-jetbrains,
+    'JetBrains Mono',
+    ui-monospace,
+    Menlo,
+    monospace
+  );
+
+  /* ───── Type scale ───── */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.875rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: 3rem;
+  --text-5xl: 3.75rem;
+
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
+  --leading-normal: 1.55;
+  --leading-relaxed: 1.7;
+  --tracking-tighter: -0.02em;
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.04em;
+  --tracking-caps: 0.08em;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* ───── Spacing (4px base) ───── */
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* ───── Radii ───── */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* ───── Layout ───── */
+  --container-prose: 760px;
+  --container-wide: 1024px;
+  --container-max: 1280px;
+
+  /* ───── Motion ───── */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 320ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1.2);
+
+  /* ───── SEMANTIC : LIGHT (default) ───── */
+  --surface-canvas: #fff;
+  --surface-default: #fafafa;
+  --surface-subtle: var(--gray-50);
+  --surface-sunken: var(--gray-100);
+  --surface-raised: var(--gray-0);
+  --surface-inverse: var(--gray-900);
+
+  --color-text-primary: #222;
+  --color-text-secondary: #666;
+  --color-text-muted: var(--gray-500);
+  --color-text-inverse: var(--gray-0);
+
+  --border-subtle: var(--gray-200);
+  --border-default: var(--gray-300);
+  --border-strong: var(--gray-400);
+
+  --accent: var(--signal-500);
+  --accent-hover: var(--signal-600);
+  --accent-muted: var(--signal-50);
+  --accent-strong: var(--signal-700);
+  --accent-on: var(--gray-0);
+
+  --emphasis-italic: #0b90b4;
+  --emphasis-bold: #d94841;
+
+  --success-fg: var(--green-600);
+  --success-bg: color-mix(in oklab, var(--green-400) 15%, transparent);
+  --warning-fg: var(--yellow-600);
+  --warning-bg: color-mix(in oklab, var(--yellow-400) 20%, transparent);
+  --danger-fg: var(--red-600);
+  --danger-bg: color-mix(in oklab, var(--red-400) 15%, transparent);
+  --info-fg: var(--blue-600);
+  --info-bg: color-mix(in oklab, var(--blue-400) 15%, transparent);
+
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-sm:
+    0 1px 2px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.04);
+  --shadow-md:
+    0 4px 12px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-lg:
+    0 12px 32px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(15, 23, 42, 0.06);
+  --shadow-focus: 0 0 0 3px color-mix(in oklab, var(--accent) 40%, transparent);
+}
+
+/* ───── SEMANTIC : DARK ───── */
+:root[data-theme='dark'] {
+  --surface-canvas: #232425;
+  --surface-default: #1b1c1d;
+  --surface-subtle: #3b3d42;
+  --surface-sunken: #1b1c1d;
+  --surface-raised: var(--gray-700);
+  --surface-inverse: var(--gray-0);
+
+  --color-text-primary: #a9a9b3;
+  --color-text-secondary: #777;
+  --color-text-muted: var(--gray-400);
+  --color-text-inverse: var(--gray-900);
+
+  --border-subtle: #4e4e57;
+  --border-default: #4e4e57;
+  --border-strong: var(--gray-500);
+
+  --accent: var(--signal-400);
+  --accent-hover: var(--signal-300);
+  --accent-muted: color-mix(in oklab, var(--signal-400) 22%, transparent);
+  --accent-strong: var(--signal-200);
+  --accent-on: var(--gray-900);
+
+  --emphasis-italic: #33c3e6;
+  --emphasis-bold: #ff5a50;
+
+  --success-fg: var(--green-400);
+  --success-bg: color-mix(in oklab, var(--green-400) 18%, transparent);
+  --warning-fg: var(--yellow-400);
+  --warning-bg: color-mix(in oklab, var(--yellow-400) 18%, transparent);
+  --danger-fg: var(--red-400);
+  --danger-bg: color-mix(in oklab, var(--red-400) 18%, transparent);
+  --info-fg: var(--blue-400);
+  --info-bg: color-mix(in oklab, var(--blue-400) 20%, transparent);
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 14px 40px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.35);
+}

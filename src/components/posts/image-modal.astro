@@ -63,7 +63,9 @@
     modal.dataset.initialized = 'true';
 
     const articleImages = Array.from(
-      document.querySelectorAll<HTMLImageElement>('article img')
+      document.querySelectorAll<HTMLImageElement>(
+        'article img, .gallery-main img'
+      )
     ).filter((img) => !img.closest('#image-modal'));
 
     if (articleImages.length === 0) {
@@ -394,8 +396,9 @@
     outline-offset: 2px;
   }
 
-  article img.modal-enabled-image {
-    cursor: zoom-in;
+  :global(article img.modal-enabled-image),
+  :global(.gallery-main img.modal-enabled-image) {
+    cursor: pointer;
   }
 
   .modal-image {

@@ -42,11 +42,11 @@ First, find which Linux distro you wish to install. You can see the list of avai
 
 _Tip:_ Before installation, be sure you have [virtualization enabled](https://support.microsoft.com/en-us/windows/enable-virtualization-on-windows-11-pcs-c5578302-6e43-4b4b-a449-8ced115f58e1) in both Windows features and in your BIOS.
 
-![Enable Virtualization](@assets/images/enable_virtualization.png 'Enable virtualization in Windows features')
+![Enable Virtualization](./images/wsl-over-powershell/enable-virtualization.png 'Enable virtualization in Windows features')
 
 After installation, starting the VM is as simple as starting an Ubuntu terminal session or even opening up VSCode to a directory within the WSL filesystem.
 
-![Ubuntu terminal](@assets/images/terminal.png 'Ubuntu terminal')
+![Ubuntu terminal](./images/wsl-over-powershell/terminal.png 'Ubuntu terminal')
 
 From there, WSL behaves exactly like any other Linux virtual machine. I am able to use all of the tooling I am used to with other \*nix operating systems right within my Windows 11 desktop environment. And, for performance, it is super easy to turn off and on when I need it.
 

@@ -7,10 +7,8 @@ import ThemeToggle from './theme-toggle.astro';
 <header>
   <div class="inner">
     <Logo />
-
     <div class="right">
       <Navigation />
-
       <div class="theme-toggle not-selectable">
         <ThemeToggle />
       </div>
@@ -24,11 +22,11 @@ import ThemeToggle from './theme-toggle.astro';
     align-items: center;
     justify-content: center;
     position: relative;
-    padding: 20px;
-    background: var(--background-header);
+    padding: var(--space-5);
+    background: var(--surface-default);
 
     @media (max-width: 684px) {
-      padding: 15px 20px;
+      padding: var(--space-4) var(--space-5);
     }
   }
 
@@ -37,7 +35,7 @@ import ThemeToggle from './theme-toggle.astro';
     align-items: center;
     justify-content: space-between;
     margin: 0 auto;
-    width: var(--content-width);
+    width: var(--container-prose);
     max-width: 100%;
   }
 
@@ -45,7 +43,7 @@ import ThemeToggle from './theme-toggle.astro';
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 1rem;
+    gap: var(--space-4);
 
     @media (max-width: 684px) {
       flex-direction: row-reverse;

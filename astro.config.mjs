@@ -8,15 +8,24 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkReadingTime],
   },
+  build: {
+    inlineStylesheets: 'always',
+  },
   prefetch: true,
   fonts: [
     {
-      provider: fontProviders.fontsource(),
-      name: 'Inter',
-      cssVariable: '--font-inter',
-      weights: [400, 700],
-      styles: ['normal'],
-      fallbacks: ['sans-serif'],
+      provider: fontProviders.google(),
+      name: 'Space Grotesk',
+      cssVariable: '--font-space-grotesk',
+      weights: [400, 500, 600, 700],
+      fallbacks: ['ui-sans-serif', 'system-ui', 'sans-serif'],
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'JetBrains Mono',
+      cssVariable: '--font-jetbrains',
+      weights: [400, 500, 600],
+      fallbacks: ['ui-monospace', 'Menlo', 'monospace'],
     },
   ],
 });

@@ -25,29 +25,13 @@
 </style>
 
 <script is:inline>
-  // Only set data-theme if user has explicitly chosen a theme
-  const localStorageTheme = localStorage?.getItem('theme') ?? '';
-  if (['dark', 'light'].includes(localStorageTheme)) {
-    document.documentElement.setAttribute('data-theme', localStorageTheme);
-  }
-  // Otherwise, let CSS media queries handle it based on system preference
-
   const handleToggleClick = () => {
-    const element = document.documentElement;
-
-    // Determine current theme (from attribute or system preference)
-    let currentTheme = element.getAttribute('data-theme');
-    if (!currentTheme) {
-      currentTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light';
-    }
-
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-    // Set the attribute to override system preference
-    element.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
+    const el = document.documentElement;
+    const current = el.getAttribute('data-theme') || 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+    el.setAttribute('data-theme', next);
+    el.style.colorScheme = next;
+    localStorage.setItem('theme', next);
   };
 
   document

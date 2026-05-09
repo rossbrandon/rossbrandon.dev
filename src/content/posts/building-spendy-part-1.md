@@ -41,7 +41,7 @@ For reporting, all I wanted to see was my progress through the month. How much o
 
 This is the basic UX I ended up with:
 
-![spendy v1 dashboard](@assets/images/spendy/v1/dashboard.png 'Spendy v1 dashboard')
+![spendy v1 dashboard](./images/building-spendy-part-1/dashboard.png 'Spendy v1 dashboard')
 
 ### Functionality
 

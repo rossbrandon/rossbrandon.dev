@@ -32,6 +32,34 @@ const posts = defineCollection({
   }),
 });
 
+const projects = defineCollection({
+  loader: glob({
+    pattern: '*.md',
+    base: './src/content/projects',
+  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      category: z.enum(['professional', 'personal']),
+      year: z.number(),
+      role: z.string(),
+      tech: z.array(z.string()),
+      cover: image(),
+      hidden: z.boolean().default(false),
+      links: z
+        .object({
+          repo: z.string().optional(),
+          repoFrontend: z.string().optional(),
+          repoBackend: z.string().optional(),
+          site: z.string().optional(),
+          docs: z.string().optional(),
+        })
+        .optional(),
+      posts: z.array(z.string()).optional(),
+    }),
+});
+
 const reading = defineCollection({
   loader: glob({
     pattern: '*.md',
@@ -51,4 +79,4 @@ const reading = defineCollection({
     }),
 });
 
-export const collections = { pages, posts, reading };
+export const collections = { pages, posts, projects, reading };

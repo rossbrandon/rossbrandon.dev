@@ -27,7 +27,7 @@ const personJsonLd = {
   />
   <main>
     <h1>Ross Brandon</h1>
-    <p>Software Engineer // Architect</p>
+    <p class="subtitle">Software Engineer // Architect</p>
 
     <div class="social-icons">
       <a
@@ -71,40 +71,48 @@ const personJsonLd = {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 20px;
+    padding: var(--space-5);
 
     @media (max-width: 684px) {
-      padding: 20px 30px;
+      padding: var(--space-5) var(--space-8);
     }
   }
 
   h1 {
-    margin-bottom: 1rem;
-    font-weight: 700;
+    margin-bottom: var(--space-4);
 
     @media (max-width: 684px) {
-      font-size: 2rem;
+      font-size: var(--text-2xl);
     }
+  }
+
+  .subtitle {
+    color: var(--color-text-secondary);
   }
 
   .social-icons {
     display: flex;
-    gap: 1.5rem;
+    gap: var(--space-6);
     align-items: center;
     justify-content: center;
+    margin-top: var(--space-6);
   }
 
   .social-icons a {
     display: inline-flex;
+    color: var(--color-text-secondary);
     text-decoration: none;
-    transition: transform 0.2s ease;
+    transition:
+      transform var(--duration-fast) var(--ease-standard),
+      color var(--duration-fast) var(--ease-standard);
   }
 
   .social-icons a:hover {
     transform: translateY(-2px);
+    color: var(--accent);
   }
 
-  .social-icons svg {
+  .social-icons :global(svg) {
     width: 24px;
     height: 24px;
   }

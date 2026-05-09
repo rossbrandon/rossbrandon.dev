@@ -1,0 +1,200 @@
+---
+import { GridIcon, ListIcon } from '@components/icons';
+
+interface Props {
+  totalCount: number;
+}
+
+const { totalCount } = Astro.props;
+---
+
+<div class="toolbar" id="toolbar">
+  <div class="toolbar-search">
+    <label for="project-search" class="screen-reader-text"
+      >Search projects</label
+    >
+    <input
+      type="search"
+      id="project-search"
+      placeholder="Search projects…"
+      autocomplete="off"
+    />
+  </div>
+  <div class="toolbar-count">
+    <strong id="visible-count">{totalCount}</strong>
+    <span>of {totalCount}</span>
+    <button class="toolbar-clear hidden" id="facet-clear" type="button"
+      >Clear filters</button
+    >
+  </div>
+  <div class="toolbar-display">
+    <div class="toolbar-sort">
+      <span class="lbl">Sort</span>
+      <select id="project-sort">
+        <option value="newest" selected>Newest</option>
+        <option value="oldest">Oldest</option>
+        <option value="az">A–Z</option>
+        <option value="za">Z–A</option>
+      </select>
+    </div>
+    <div class="toolbar-view">
+      <button
+        type="button"
+        data-view="grid"
+        aria-pressed="true"
+        title="Grid view"
+      >
+        <GridIcon />
+      </button>
+      <button
+        type="button"
+        data-view="list"
+        aria-pressed="false"
+        title="List view"
+      >
+        <ListIcon />
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .toolbar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: var(--space-6);
+    flex-wrap: wrap;
+  }
+
+  .toolbar-search {
+    flex: 1 1 240px;
+    max-width: 360px;
+    min-width: 200px;
+  }
+  @media (max-width: 760px) {
+    .toolbar-search {
+      flex-basis: 100%;
+      max-width: 100%;
+    }
+  }
+  .toolbar-search input {
+    width: 100%;
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--surface-default);
+    color: var(--color-text-primary);
+  }
+  .toolbar-search input::placeholder {
+    color: var(--color-text-muted);
+  }
+  .toolbar-search input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: var(--shadow-focus);
+  }
+
+  .toolbar-count {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+  }
+  .toolbar-count strong {
+    color: var(--color-text-primary);
+    font-weight: var(--weight-semibold);
+  }
+  .toolbar-clear {
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-color: var(--border-default);
+    text-underline-offset: 2px;
+    transition: color var(--duration-fast);
+  }
+  .toolbar-clear:hover {
+    color: var(--accent);
+  }
+  .toolbar-clear.hidden {
+    display: none;
+  }
+
+  .toolbar-display {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-left: auto;
+  }
+
+  .toolbar-sort {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+  .toolbar-sort .lbl {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+  .toolbar-sort select {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    padding: var(--space-2) var(--space-8) var(--space-2) var(--space-3);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--surface-default);
+    color: var(--color-text-primary);
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%239aa1a9' stroke-width='2.5'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right var(--space-3) center;
+  }
+
+  .toolbar-view {
+    display: inline-flex;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+  @media (max-width: 540px) {
+    .toolbar-view {
+      display: none;
+    }
+  }
+  .toolbar-view button {
+    background: var(--surface-default);
+    border: 0;
+    padding: var(--space-2) var(--space-3);
+    cursor: pointer;
+    color: var(--color-text-muted);
+    display: grid;
+    place-items: center;
+  }
+  .toolbar-view button + button {
+    border-left: 1px solid var(--border-subtle);
+  }
+  .toolbar-view button[aria-pressed='true'] {
+    background: var(--surface-subtle);
+    color: var(--color-text-primary);
+  }
+  .toolbar-view svg {
+    width: 14px;
+    height: 14px;
+  }
+</style>

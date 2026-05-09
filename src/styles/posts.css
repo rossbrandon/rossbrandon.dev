@@ -8,7 +8,7 @@
 
 .posts-group {
   display: flex;
-  margin-bottom: 1.9em;
+  margin-bottom: var(--space-8);
   line-height: normal;
 
   @media (max-width: 900px) {
@@ -24,38 +24,49 @@
 }
 
 .post-title {
-  font-size: 1rem;
-  margin: 5px 0 5px 0;
+  font-size: 1.1rem;
+  margin: var(--space-1) 0;
 }
 
 .post-year {
   flex: 0 0 6.5rem;
-  padding-top: 6px;
-  margin-right: 1.8em;
-  font-size: 1.6em;
-  opacity: 0.5;
+  padding-top: var(--space-2);
+  margin-right: var(--space-8);
+  font-size: var(--text-xl);
+  color: var(--color-text-muted);
   white-space: nowrap;
 
   @media (max-width: 900px) {
     flex: none;
-    margin: -6px 0 4px;
+    margin: calc(-1 * var(--space-2)) 0 var(--space-1);
   }
 }
 
 .post-item {
-  border-bottom: 1px grey dashed;
+  border-bottom: 1px dashed var(--border-subtle);
 }
 
 .post-item-inner {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 12px 0;
+  padding: var(--space-3) 0;
   text-decoration: none;
+  color: inherit;
+}
+
+.post-item-inner:hover {
+  text-decoration: none;
+}
+
+.post-item-inner:hover .post-title {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
 }
 
 .post-day {
   flex-shrink: 0;
-  margin-left: 1em;
-  opacity: 0.5;
+  margin-left: var(--space-4);
+  color: var(--color-text-muted);
 }

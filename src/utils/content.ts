@@ -115,9 +115,57 @@ const getReadingData = async (): Promise<CollectionEntry<'reading'>[]> => {
     });
 };
 
+const getProjects = async (): Promise<CollectionEntry<'projects'>[]> =>
+  (await getCollection('projects'))
+    .filter((p) => !p.data.hidden)
+    .sort((a, b) => b.data.year - a.data.year);
+
+interface FacetOption {
+  value: string;
+  count: number;
+}
+
+interface FacetGroup {
+  key: string;
+  label: string;
+  options: FacetOption[];
+}
+
+const getProjectFacets = (
+  projects: CollectionEntry<'projects'>[]
+): FacetGroup[] => {
+  const categoryMap = new Map<string, number>();
+  const techMap = new Map<string, number>();
+  const roleMap = new Map<string, number>();
+
+  for (const p of projects) {
+    categoryMap.set(
+      p.data.category,
+      (categoryMap.get(p.data.category) ?? 0) + 1
+    );
+    roleMap.set(p.data.role, (roleMap.get(p.data.role) ?? 0) + 1);
+    for (const t of p.data.tech) {
+      techMap.set(t, (techMap.get(t) ?? 0) + 1);
+    }
+  }
+
+  const toOptions = (map: Map<string, number>): FacetOption[] =>
+    [...map.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .map(([value, count]) => ({ value, count }));
+
+  return [
+    { key: 'category', label: 'Type', options: toOptions(categoryMap) },
+    { key: 'tech', label: 'Technology', options: toOptions(techMap) },
+    { key: 'role', label: 'Role', options: toOptions(roleMap) },
+  ];
+};
+
 export {
   getAllCategories,
   getAllTags,
+  getProjectFacets,
+  getProjects,
   getReadingData,
   getSortedPosts,
   getSortedYears,

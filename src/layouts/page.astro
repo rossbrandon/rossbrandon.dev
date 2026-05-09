@@ -48,16 +48,33 @@ const description = propDescription ?? frontmatter?.description;
 
 <style>
   .page-content {
-    width: var(--content-width);
+    width: var(--container-prose);
+    max-width: 100%;
     margin: 0 auto;
-    padding-top: 2rem;
+    padding-top: 3rem;
     padding-bottom: 3rem;
     text-align: left;
 
     @media (max-width: 684px) {
       width: 100%;
-      padding: 1rem 2rem;
+      padding: 1.5rem 2rem;
     }
+  }
+
+  .page-content :global(img) {
+    margin: 2rem auto;
+  }
+
+  .page-content.image-align-left
+    :global(img:not(.left):not(.center):not(.right)) {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .page-content.image-align-right
+    :global(img:not(.left):not(.center):not(.right)) {
+    margin-left: auto;
+    margin-right: 0;
   }
 
   article {
@@ -78,7 +95,7 @@ const description = propDescription ?? frontmatter?.description;
   }
 
   time {
-    color: var(--color-secondary);
+    color: var(--color-text-secondary);
     font-size: 0.9rem;
   }
 </style>

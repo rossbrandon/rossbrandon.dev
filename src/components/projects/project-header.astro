@@ -1,0 +1,115 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Button } from '@components/button';
+import { ExternalLinkIcon, FileTextIcon, GitHubIcon } from '@components/icons';
+import { Tag } from '@components/tag';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+type LinkKind = 'repo' | 'repoFrontend' | 'repoBackend' | 'docs' | 'site';
+
+const LINK_ORDER: { key: LinkKind; label: string }[] = [
+  { key: 'repo', label: 'Repo' },
+  { key: 'repoFrontend', label: 'Frontend' },
+  { key: 'repoBackend', label: 'Backend' },
+  { key: 'docs', label: 'Docs' },
+  { key: 'site', label: 'Site' },
+];
+
+const { project } = Astro.props;
+const { title, description, category, year, tech, links } = project.data;
+
+const renderedLinks = links
+  ? LINK_ORDER.flatMap(({ key, label }) => {
+      const href = links[key];
+      return href ? [{ key, label, href }] : [];
+    })
+  : [];
+---
+
+<div class="project-header">
+  <div class="eyebrow">
+    <span class="cat">{category}</span>
+    <span class="sep">&middot;</span>
+    <span>{year}</span>
+  </div>
+  <h1 class="pdp-title">{title}</h1>
+  <p class="pdp-desc">{description}</p>
+
+  <div class="pdp-tech">
+    {tech.map((t) => <Tag>{t}</Tag>)}
+  </div>
+
+  {
+    renderedLinks.length > 0 && (
+      <div class="pdp-links">
+        {renderedLinks.map(({ key, label, href }) => (
+          <Button href={href} target="_blank" rel="noopener noreferrer">
+            {(key === 'repo' ||
+              key === 'repoFrontend' ||
+              key === 'repoBackend') && <GitHubIcon />}
+            {key === 'docs' && <FileTextIcon />}
+            {key === 'site' && <ExternalLinkIcon />}
+            {label}
+          </Button>
+        ))}
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .project-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+  .eyebrow .cat {
+    color: var(--accent-strong);
+    font-weight: var(--weight-semibold);
+  }
+  .eyebrow .sep {
+    opacity: 0.4;
+  }
+
+  .pdp-title {
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-text-primary);
+    line-height: var(--leading-tight);
+    margin: 0;
+  }
+  .pdp-desc {
+    font-size: var(--text-md);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-snug);
+    margin: 0;
+  }
+
+  .pdp-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .pdp-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    padding-top: var(--space-2);
+  }
+</style>

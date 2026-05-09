@@ -143,14 +143,14 @@ const blogPostingJsonLd = {
 
 <style>
   hr {
-    margin: 2rem 0;
+    margin: var(--space-8) 0;
   }
 
   .post-info {
-    margin-top: 30px;
-    font-size: 0.8rem;
+    margin-top: var(--space-8);
+    font-size: var(--text-xs);
     line-height: normal;
-    opacity: 0.5;
+    color: var(--color-text-muted);
   }
 
   .post-info p {
@@ -170,7 +170,7 @@ const blogPostingJsonLd = {
   }
 
   .post-info .tag {
-    margin-right: 0.5em;
+    margin-right: var(--space-2);
   }
 
   .post-info .tag::before {
@@ -185,7 +185,7 @@ const blogPostingJsonLd = {
   }
 
   .pagination {
-    margin-top: 2rem;
+    margin-top: var(--space-8);
   }
 
   .pagination__buttons {
@@ -195,13 +195,13 @@ const blogPostingJsonLd = {
 
     @media (max-width: 684px) {
       flex-direction: column;
-      gap: 10px;
+      gap: var(--space-3);
     }
   }
 
   .pagination__buttons a {
     text-decoration: none;
-    font-weight: bold;
+    font-weight: var(--weight-bold);
   }
 
   .button {
@@ -209,14 +209,14 @@ const blogPostingJsonLd = {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 8px;
+    font-size: var(--text-base);
+    font-weight: var(--weight-semibold);
+    border-radius: var(--radius-md);
     max-width: 40%;
     padding: 0;
     cursor: pointer;
     appearance: none;
-    background: var(--background-secondary);
+    background: var(--surface-subtle);
 
     @media (max-width: 684px) {
       max-width: 100%;
@@ -224,7 +224,7 @@ const blogPostingJsonLd = {
   }
 
   .button + .button {
-    margin-left: 10px;
+    margin-left: var(--space-3);
 
     @media (max-width: 684px) {
       margin-left: 0;
@@ -233,7 +233,7 @@ const blogPostingJsonLd = {
 
   .button a {
     display: flex;
-    padding: 8px 16px;
+    padding: var(--space-2) var(--space-4);
     text-decoration: none;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -247,10 +247,10 @@ const blogPostingJsonLd = {
   }
 
   .button.next .button__icon {
-    margin-left: 8px;
+    margin-left: var(--space-2);
   }
 
   .button.previous .button__icon {
-    margin-right: 8px;
+    margin-right: var(--space-2);
   }
 </style>

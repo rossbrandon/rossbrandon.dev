@@ -1,0 +1,61 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+import ProjectCard from './project-card.astro';
+
+interface Props {
+  projects: CollectionEntry<'projects'>[];
+}
+
+const { projects } = Astro.props;
+---
+
+<div class="project-grid" id="project-grid">
+  {projects.map((project) => <ProjectCard project={project} />)}
+</div>
+
+<style>
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+  @media (max-width: 1100px) {
+    .project-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 540px) {
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .project-grid:global(.list-view) {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+  .project-grid:global(.list-view) :global(.project-card) {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .project-grid:global(.list-view) :global(.project-cover) {
+    width: 200px;
+    min-width: 200px;
+    aspect-ratio: auto;
+    border-bottom: none;
+    border-right: 1px solid var(--border-subtle);
+  }
+  @media (max-width: 540px) {
+    .project-grid:global(.list-view) :global(.project-card) {
+      flex-direction: column;
+    }
+    .project-grid:global(.list-view) :global(.project-cover) {
+      width: 100%;
+      min-width: 0;
+      aspect-ratio: 16 / 10;
+      border-right: none;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+  }
+</style>

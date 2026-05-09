@@ -73,7 +73,7 @@ The UI is an SSR Astro application. All heavy and critical rendering happens on 
 
 The Go API and Postgres database both live on Railway's hobby plan which gives me 8GB RAM, 8 vCPUs, and 5GB of storage. More than enough for what I need with the exception of a small issue with shared disk I/O constraints during heavy Postgres read operations. Honestly, the Railway experience has been fantastic. The UI is simple and easy to deploy your desired architecture and the management/logging capabilities are enough for a hobby project like this one.
 
-![The Railway UI architecture view.](@assets/images/minimovie/railway_architecture.png 'The Railway UI architecture view.')
+![The Railway UI architecture view.](./images/minimovie-a-simple-unoriginal-twist/railway-architecture.png 'The Railway UI architecture view.')
 
 The frontend is deployed on Cloudflare Workers using the [@astrojs/cloudflare](https://docs.astro.build/en/guides/integrations-guide/cloudflare/) adapter. As always, Cloudflare makes deployments easy and the Astro integration is dead simple. All I really had to do was configure a `wrangler.toml` file, link my repo to my Cloudflare owned domain, and let Cloudflare build and deploy on merge to `main`.
 
@@ -120,9 +120,9 @@ The landing page is intentionally minimal: a centered search box with basic bran
 
 <div style="display: flex; gap: 1rem; align-items: start;">
 
-![The MiniMovie landing page.](@assets/images/minimovie/landing.png 'The MiniMovie landing page.')
+![The MiniMovie landing page.](./images/minimovie-a-simple-unoriginal-twist/landing.png 'The MiniMovie landing page.')
 
-![The MiniMovie landing page in dark mode.](@assets/images/minimovie/landing_dark.png 'The MiniMovie landing page in dark mode.')
+![The MiniMovie landing page in dark mode.](./images/minimovie-a-simple-unoriginal-twist/landing-dark.png 'The MiniMovie landing page in dark mode.')
 
 </div>
 
@@ -132,13 +132,13 @@ Discovery is always the most important part of an application like this. Users w
 
 **Desktop**
 
-![The MiniMovie search results page.](@assets/images/minimovie/search.png 'The MiniMovie search results page.')
+![The MiniMovie search results page.](./images/minimovie-a-simple-unoriginal-twist/search.png 'The MiniMovie search results page.')
 
 **Mobile**
 
 <div style="max-width: 350px; margin: 0 auto;">
 
-![The MiniMovie search results page in a mobile view.](@assets/images/minimovie/search_mobile.png 'The MiniMovie search results page in a mobile view.')
+![The MiniMovie search results page in a mobile view.](./images/minimovie-a-simple-unoriginal-twist/search-mobile.png 'The MiniMovie search results page in a mobile view.')
 
 </div>
 
@@ -156,23 +156,23 @@ Key crew members such as the creator, writer, director, and producer are shown r
 
 On mobile views these tabs respond to touch gestures so you can swipe left and right between them. The URL also tracks the state of the open tab for deep linking via a `?tab=where-to-watch` search param.
 
-![The series detail page for the TV show Mr. Robot.](@assets/images/minimovie/tv_series.png 'The series detail page for the TV show Mr. Robot.')
+![The series detail page for the TV show Mr. Robot.](./images/minimovie-a-simple-unoriginal-twist/tv-series.png 'The series detail page for the TV show Mr. Robot.')
 
-![The movie detail page for Star Wars showing the Where to Watch tab.](@assets/images/minimovie/where_to_watch.png 'The movie detail page for Star Wars showing the Where to Watch tab.')
+![The movie detail page for Star Wars showing the Where to Watch tab.](./images/minimovie-a-simple-unoriginal-twist/where-to-watch.png 'The movie detail page for Star Wars showing the Where to Watch tab.')
 
 ### People
 
 People pages show a combined filmography across movies and series highlighting the top eight things they are known for (using a custom algorithm based on TMDB rating, relevancy scores, and calculated role significance). If the person is part of a series, you can click through to see their episode-level appearance breakdown across all seasons. The _Interesting Info_ section provides data found on the web for the person's estimated net worth, family tree, and an interesting fact about them.
 
-![The person detail page for actress Natalie Portman.](@assets/images/minimovie/person.png 'The person detail page for actress Natalie Portman.')
+![The person detail page for actress Natalie Portman.](./images/minimovie-a-simple-unoriginal-twist/person.png 'The person detail page for actress Natalie Portman.')
 
-![The person episodes page showing Rami Malek in Mr. Robot.](@assets/images/minimovie/person_episodes.png 'The person episodes page showing Rami Malek in Mr. Robot.')
+![The person episodes page showing Rami Malek in Mr. Robot.](./images/minimovie-a-simple-unoriginal-twist/person-episodes.png 'The person episodes page showing Rami Malek in Mr. Robot.')
 
 #### The Age Enrichment
 
 One of the key features I wanted MiniMovie to have was the ability to show the age an actor was when a film was released vs how old they are today. When you look up a movie or show, the API fetches credits from TMDB and then enriches each cast and crew member with their age at the time of release, comparing it to their current age (or age at their time of death) to display a simple line of text: _"Age 34 (now 83)"_. For me, this is such a common question I ask while watching basically anything and developing this feature was surprisingly complex.
 
-![Mark Hamill, Harrison Ford, and Carrie Fisher person cards demonstrating the age enrichment display.](@assets/images/minimovie/age_enrichment.png 'Mark Hamill, Harrison Ford, and Carrie Fisher person cards demonstrating the age enrichment display.')
+![Mark Hamill, Harrison Ford, and Carrie Fisher person cards demonstrating the age enrichment display.](./images/minimovie-a-simple-unoriginal-twist/age-enrichment.png 'Mark Hamill, Harrison Ford, and Carrie Fisher person cards demonstrating the age enrichment display.')
 
 The data required to display this information in various views (for example, for every cast member of a movie or for every credit a person has) could potentially involve thousands of API calls to TMDB and expensive lookups. To account for this, I needed to cache key pieces of this information on my end.
 
@@ -266,7 +266,7 @@ _I am still a data nerd_ so designing Augur to produce structured, source-cited 
 
 <div style="max-width: 350px; margin: 0 auto;">
 
-![The Interesting Info tab for actress Natalie Portman in a mobile view.](@assets/images/minimovie/interesting_info_mobile.png 'The Interesting Info tab for actress Natalie Portman in a mobile view.')
+![The Interesting Info tab for actress Natalie Portman in a mobile view.](./images/minimovie-a-simple-unoriginal-twist/interesting-info-mobile.png 'The Interesting Info tab for actress Natalie Portman in a mobile view.')
 
 </div>
 

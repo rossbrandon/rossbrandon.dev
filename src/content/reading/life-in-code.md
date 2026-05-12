@@ -7,5 +7,6 @@ tags:
   - programming
   - software
   - life
-status: Reading
+status: Finished
+finishedDate: 2026-05-12T11:00:00-06:00
 ---

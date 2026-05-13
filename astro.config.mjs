@@ -4,6 +4,7 @@ import { remarkReadingTime } from './plugins/remark-reading-time.mjs';
 
 export default defineConfig({
   site: 'https://rossbrandon.dev',
+  trailingSlash: 'never',
   integrations: [sitemap()],
   markdown: {
     remarkPlugins: [remarkReadingTime],

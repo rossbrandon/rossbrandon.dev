@@ -17,7 +17,7 @@ const {
 
 const pageTitle = propPageTitle ?? 'Ross Brandon';
 const description = propDescription ?? defaultDescription;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+const canonicalURL = `${Astro.site!.origin}${Astro.url.pathname.replace(/\/$/, '')}`;
 ---
 
 <!doctype html>

@@ -7,7 +7,10 @@ role: Solo
 tech:
   - Go
   - AI
-cover: ./images/augur.png
+cover: ./images/augur-cover.png
+images:
+  - path: ./images/augur.png
+    alt: 'Augur: Structured data from LLMs'
 links:
   repo: https://github.com/rossbrandon/augur-go
 posts:

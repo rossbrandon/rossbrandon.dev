@@ -46,6 +46,14 @@ const projects = defineCollection({
       role: z.string(),
       tech: z.array(z.string()),
       cover: image(),
+      images: z
+        .array(
+          z.object({
+            path: image(),
+            alt: z.string(),
+          })
+        )
+        .optional(),
       hidden: z.boolean().default(false),
       links: z
         .object({

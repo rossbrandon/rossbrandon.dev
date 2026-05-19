@@ -36,6 +36,7 @@
     "eslint-plugin-simple-import-sort": "^13.0.0",
     "prettier": "3.8.3",
     "prettier-plugin-astro": "0.14.1",
+    "rehype-external-links": "^3.0.0",
     "sharp": "^0.34.5",
     "wrangler": "^4.90.1"
   }

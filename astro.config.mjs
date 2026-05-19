@@ -1,5 +1,6 @@
 import { defineConfig, fontProviders } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import rehypeExternalLinks from 'rehype-external-links';
 import { remarkReadingTime } from './plugins/remark-reading-time.mjs';
 
 export default defineConfig({
@@ -8,6 +9,12 @@ export default defineConfig({
   integrations: [sitemap()],
   markdown: {
     remarkPlugins: [remarkReadingTime],
+    rehypePlugins: [
+      [
+        rehypeExternalLinks,
+        { target: '_blank', rel: ['noopener', 'noreferrer'] },
+      ],
+    ],
   },
   build: {
     inlineStylesheets: 'always',

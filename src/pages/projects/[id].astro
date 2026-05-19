@@ -2,7 +2,7 @@
 import { getEntry, render } from 'astro:content';
 import { Breadcrumbs } from '@components/breadcrumbs';
 import { ImageModal } from '@components/posts';
-import { ProjectHeader, ProjectHero } from '@components/projects';
+import { ProjectGallery, ProjectHeader } from '@components/projects';
 import Base from '@layouts/base.astro';
 import { getProjects } from '@utils/content';
 import { formatDate } from '@utils/date';
@@ -45,7 +45,7 @@ const relatedPosts = (
     />
 
     <div class="pdp-hero">
-      <ProjectHero project={project} />
+      <ProjectGallery project={project} />
       <ProjectHeader project={project} />
     </div>
 

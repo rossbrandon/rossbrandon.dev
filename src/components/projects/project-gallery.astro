@@ -1,0 +1,356 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { cover, images, title } = project.data;
+
+const slides =
+  images && images.length > 0
+    ? images
+    : [{ path: cover, alt: `${title} — project screenshot` }];
+const hasCarousel = slides.length >= 2;
+---
+
+<section
+  class="gallery"
+  aria-roledescription="carousel"
+  aria-label={`${title} screenshots`}
+>
+  <div class="gallery-frame">
+    <div class="gallery-track" data-gallery-track>
+      {
+        slides.map((slide, i) => (
+          <div
+            class="gallery-slide"
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`Image ${i + 1} of ${slides.length}: ${slide.alt}`}
+            data-slide-index={i}
+          >
+            <div class="gallery-main">
+              <Image
+                src={slide.path}
+                alt={slide.alt}
+                widths={[480, 960, 1440]}
+                sizes="(min-width: 1024px) 760px, 100vw"
+                loading={i === 0 ? 'eager' : 'lazy'}
+                decoding={i === 0 ? 'auto' : 'async'}
+              />
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    {
+      hasCarousel && (
+        <>
+          <button
+            type="button"
+            class="gallery-nav gallery-nav-prev"
+            data-gallery-prev
+            aria-label="Previous image"
+          >
+            &#8249;
+          </button>
+          <button
+            type="button"
+            class="gallery-nav gallery-nav-next"
+            data-gallery-next
+            aria-label="Next image"
+          >
+            &#8250;
+          </button>
+        </>
+      )
+    }
+  </div>
+
+  {
+    hasCarousel && (
+      <div class="gallery-dots" role="group" aria-label="Choose image">
+        {slides.map((_, i) => (
+          <button
+            type="button"
+            class="gallery-dot"
+            data-gallery-dot={i}
+            aria-label={`Go to image ${i + 1}`}
+            aria-current={i === 0 ? 'true' : 'false'}
+          />
+        ))}
+      </div>
+    )
+  }
+
+  <div class="gallery-live visually-hidden" aria-live="polite"></div>
+</section>
+
+<script>
+  function initGallery(root: HTMLElement) {
+    if (root.dataset.initialized === 'true') {
+      return;
+    }
+
+    const track = root.querySelector<HTMLElement>('[data-gallery-track]');
+    if (!track) {
+      return;
+    }
+
+    const slides = Array.from(
+      track.querySelectorAll<HTMLElement>('.gallery-slide')
+    );
+    if (slides.length < 2) {
+      return;
+    }
+
+    const prevButton = root.querySelector<HTMLButtonElement>(
+      '[data-gallery-prev]'
+    );
+    const nextButton = root.querySelector<HTMLButtonElement>(
+      '[data-gallery-next]'
+    );
+    const dots = Array.from(
+      root.querySelectorAll<HTMLButtonElement>('[data-gallery-dot]')
+    );
+    const live = root.querySelector<HTMLElement>('.gallery-live');
+
+    if (!prevButton || !nextButton || dots.length === 0) {
+      return;
+    }
+
+    root.dataset.initialized = 'true';
+
+    const lastIndex = slides.length - 1;
+    let currentIndex = 0;
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    const scrollToIndex = (index: number, smooth = true) => {
+      track.scrollTo({
+        left: slides[index].offsetLeft,
+        behavior: !smooth || prefersReducedMotion ? 'auto' : 'smooth',
+      });
+    };
+
+    const setActive = (index: number) => {
+      currentIndex = index;
+
+      dots.forEach((dot, i) => {
+        dot.setAttribute('aria-current', i === index ? 'true' : 'false');
+      });
+
+      if (live) {
+        live.textContent = `Image ${index + 1} of ${slides.length}`;
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        let bestEntry: IntersectionObserverEntry | null = null;
+        for (const entry of entries) {
+          if (entry.intersectionRatio < 0.5) {
+            continue;
+          }
+          if (
+            !bestEntry ||
+            entry.intersectionRatio > bestEntry.intersectionRatio
+          ) {
+            bestEntry = entry;
+          }
+        }
+        if (!bestEntry) {
+          return;
+        }
+        const index = Number(
+          (bestEntry.target as HTMLElement).dataset.slideIndex
+        );
+        if (!Number.isNaN(index) && index !== currentIndex) {
+          setActive(index);
+        }
+      },
+      {
+        root: track,
+        threshold: [0.5, 0.75, 1.0],
+      }
+    );
+
+    slides.forEach((slide) => observer.observe(slide));
+
+    prevButton.addEventListener('click', () => {
+      if (currentIndex === 0) {
+        scrollToIndex(lastIndex, false);
+      } else {
+        scrollToIndex(currentIndex - 1);
+      }
+    });
+    nextButton.addEventListener('click', () => {
+      if (currentIndex === lastIndex) {
+        scrollToIndex(0, false);
+      } else {
+        scrollToIndex(currentIndex + 1);
+      }
+    });
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const index = Number(dot.dataset.galleryDot);
+        if (!Number.isNaN(index)) {
+          scrollToIndex(index);
+        }
+      });
+    });
+
+    setActive(0);
+  }
+
+  function initAllGalleries() {
+    document
+      .querySelectorAll<HTMLElement>('.gallery')
+      .forEach((root) => initGallery(root));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAllGalleries);
+  } else {
+    initAllGalleries();
+  }
+</script>
+
+<style>
+  .gallery {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .gallery-frame {
+    position: relative;
+  }
+
+  .gallery-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .gallery-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-slide {
+    flex: 0 0 100%;
+    min-width: 0;
+    scroll-snap-align: start;
+  }
+
+  .gallery-main {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    background: var(--surface-subtle);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .gallery-main :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    margin: 0;
+  }
+
+  .gallery-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem 0.5rem;
+    border: none;
+    background: none;
+    color: white;
+    font-size: 3.25rem;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.85;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+    transition: opacity var(--duration-fast) var(--ease-standard);
+    z-index: 2;
+  }
+
+  .gallery-nav:hover {
+    opacity: 1;
+  }
+
+  .gallery-nav:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
+  }
+
+  .gallery-nav-prev {
+    left: var(--space-2);
+  }
+
+  .gallery-nav-next {
+    right: var(--space-2);
+  }
+
+  .gallery-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .gallery-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: var(--radius-full);
+    background: var(--border-default);
+    cursor: pointer;
+    transition: background var(--duration-fast) var(--ease-standard);
+  }
+
+  .gallery-dot:hover {
+    background: var(--color-text-muted);
+  }
+
+  .gallery-dot[aria-current='true'] {
+    background: var(--accent);
+  }
+
+  .gallery-dot:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-track {
+      scroll-behavior: auto;
+    }
+  }
+</style>

@@ -7,5 +7,6 @@ tags:
   - programming
   - software
   - work
-status: Reading
+status: Finished
+finishedDate: 2026-06-18T12:00:00-06:00
 ---

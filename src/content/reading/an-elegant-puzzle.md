@@ -6,5 +6,6 @@ link: https://www.goodreads.com/book/show/45303387-an-elegant-puzzle
 tags:
   - programming
   - software
-status: To Read
+  - work
+status: Reading
 ---

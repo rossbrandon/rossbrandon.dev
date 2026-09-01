@@ -1,6 +1,6 @@
 ---
 title: Adobe Commerce Optimizer
-description: Extreme-scale commerce.
+description: Composable commerce.
 category: professional
 year: 2025
 role: Architect
@@ -20,7 +20,7 @@ links:
 
 ## What Is It?
 
-Adobe Commerce Optimizer, affectionately known as ACO, is an extreme-scale e-commerce platform that has been designed from the ground up to support and modernize large, complex multi-store and multi-region e-commerce needs without having to completely re-platform. Leveraging [AEM Edge Delivery Services (EDS)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/overview), ACO can increase traffic growth and converstion rates with fast, engaging, and intelligently personalized shopper experiences.
+Adobe Commerce Optimizer, affectionately known as ACO, is an extreme-scale, composable e-commerce platform that has been designed from the ground up to support and modernize large, complex multi-store and multi-region e-commerce needs without having to completely re-platform. Leveraging [AEM Edge Delivery Services (EDS)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/edge-delivery/overview), ACO can increase traffic growth and converstion rates with fast, engaging, and intelligently personalized shopper experiences.
 
 ## What Did I Do?
 
